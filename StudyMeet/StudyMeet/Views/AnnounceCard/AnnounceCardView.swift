@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AnnounceCardView: View {
     let announce: Announcement
-    
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
