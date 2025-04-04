@@ -11,7 +11,7 @@ final class ApiPerformer: ApiPerformerProtocol {
         self.urlSession = urlSession
     }
     
-    func performRequest<T: Decodable>(method: String, path: String, query: [String: String?]? = nil, body: Encodable? = nil, headers: [String: String]? = nil) async throws -> T {
+    func performRequest<T: Decodable>(method: String, path: String? = nil, query: [String: String?]? = nil, body: Encodable? = nil, headers: [String: String]? = nil) async throws -> T {
         
         let request = try makeRequest(method: method, path: path, query: query, body: body, headers: headers)
         
@@ -32,7 +32,7 @@ final class ApiPerformer: ApiPerformerProtocol {
         }
     }
     
-    func performRequest(method: String, path: String, query: [String: String?]? = nil, body: Encodable? = nil, headers: [String: String]? = nil) async throws {
+    func performRequest(method: String, path: String? = nil, query: [String: String?]? = nil, body: Encodable? = nil, headers: [String: String]? = nil) async throws {
         
         let request = try makeRequest(method: method, path: path, query: query, body: body, headers: headers)
         
@@ -48,9 +48,9 @@ final class ApiPerformer: ApiPerformerProtocol {
     }
     
     
-    private func makeRequest(method: String, path: String, query: [String: String?]?, body: Encodable?, headers: [String: String]?) throws -> URLRequest {
+    private func makeRequest(method: String, path: String?, query: [String: String?]?, body: Encodable?, headers: [String: String]?) throws -> URLRequest {
         
-        guard var urlComponents = URLComponents(string: baseURL + path) else {
+        guard var urlComponents = URLComponents(string: baseURL + (path ?? "")) else {
             throw ApiPerformerError.badURL
         }
         
