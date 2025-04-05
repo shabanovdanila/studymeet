@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FavoriteClient {
+final class FavoriteClient {
     
     private let requestHandler = RequestHandler()
     

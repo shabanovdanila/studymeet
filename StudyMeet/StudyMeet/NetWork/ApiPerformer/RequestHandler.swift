@@ -1,6 +1,6 @@
 import Foundation
 
-struct RequestHandler {
+final class RequestHandler {
     private let apiPerformer: ApiPerformer
     
     init(baseURL: String = "https://studymate-backend-k56p.onrender.com/api") {

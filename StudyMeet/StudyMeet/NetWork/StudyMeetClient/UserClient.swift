@@ -1,6 +1,6 @@
 import Foundation
 
-struct UserClient {
+final class UserClient {
     
     private let requestHandler = RequestHandler(baseURL: "https://studymate-backend-k56p.onrender.com/api/user/")
     

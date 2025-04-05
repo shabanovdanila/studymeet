@@ -19,8 +19,7 @@
 		6494509E2D994A1E0021E6BF /* AnnouncementListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494509D2D994A1E0021E6BF /* AnnouncementListViewModel.swift */; };
 		649450A02D994EB80021E6BF /* Color+RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494509F2D994EB80021E6BF /* Color+RGB.swift */; };
 		649450A22D9951590021E6BF /* Color+HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450A12D9951590021E6BF /* Color+HSL.swift */; };
-		649450A72D9EE63D0021E6BF /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450A62D9EE63D0021E6BF /* AuthModels.swift */; };
-		649450A92D9EE6BE0021E6BF /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450A82D9EE6BE0021E6BF /* AuthService.swift */; };
+		649450A92D9EE6BE0021E6BF /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450A82D9EE6BE0021E6BF /* AuthError.swift */; };
 		649450AB2D9EE7340021E6BF /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450AA2D9EE7340021E6BF /* AuthClient.swift */; };
 		649856BC2D6B1A67001AE27E /* StudyMateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649856BB2D6B1A67001AE27E /* StudyMateApp.swift */; };
 		649856BE2D6B1A67001AE27E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649856BD2D6B1A67001AE27E /* ContentView.swift */; };
@@ -43,6 +42,10 @@
 		64C2E3E72D7A159A0027DBB9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C2E3E62D7A159A0027DBB9 /* User.swift */; };
 		64DA8A5C2D705D2E004C6C89 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DA8A5B2D705D2E004C6C89 /* UserPageView.swift */; };
 		64DA8A5E2D705DFF004C6C89 /* UserDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DA8A5D2D705DFF004C6C89 /* UserDescriptionView.swift */; };
+		64F3AD872DA1BE9900F1AD24 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3AD862DA1BE9900F1AD24 /* Response.swift */; };
+		64F3AD892DA1BEF000F1AD24 /* ResponseClient .swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3AD882DA1BEF000F1AD24 /* ResponseClient .swift */; };
+		64F3AD8B2DA1C0FB00F1AD24 /* TagClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3AD8A2DA1C0FB00F1AD24 /* TagClient.swift */; };
+		64F3AD8D2DA1C25500F1AD24 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3AD8C2DA1C25500F1AD24 /* Auth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,8 +61,7 @@
 		6494509D2D994A1E0021E6BF /* AnnouncementListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementListViewModel.swift; sourceTree = "<group>"; };
 		6494509F2D994EB80021E6BF /* Color+RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RGB.swift"; sourceTree = "<group>"; };
 		649450A12D9951590021E6BF /* Color+HSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HSL.swift"; sourceTree = "<group>"; };
-		649450A62D9EE63D0021E6BF /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
-		649450A82D9EE6BE0021E6BF /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		649450A82D9EE6BE0021E6BF /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		649450AA2D9EE7340021E6BF /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		649856B82D6B1A67001AE27E /* StudyMeet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StudyMeet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		649856BB2D6B1A67001AE27E /* StudyMateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMateApp.swift; sourceTree = "<group>"; };
@@ -84,6 +86,10 @@
 		64C2E3E62D7A159A0027DBB9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		64DA8A5B2D705D2E004C6C89 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
 		64DA8A5D2D705DFF004C6C89 /* UserDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDescriptionView.swift; sourceTree = "<group>"; };
+		64F3AD862DA1BE9900F1AD24 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		64F3AD882DA1BEF000F1AD24 /* ResponseClient .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseClient .swift"; sourceTree = "<group>"; };
+		64F3AD8A2DA1C0FB00F1AD24 /* TagClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagClient.swift; sourceTree = "<group>"; };
+		64F3AD8C2DA1C25500F1AD24 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,14 +158,13 @@
 			path = AnnounceCard;
 			sourceTree = "<group>";
 		};
-		649450A52D9EE6100021E6BF /* Auth */ = {
+		649450A52D9EE6100021E6BF /* AuthClient */ = {
 			isa = PBXGroup;
 			children = (
-				649450A62D9EE63D0021E6BF /* AuthModels.swift */,
-				649450A82D9EE6BE0021E6BF /* AuthService.swift */,
+				649450A82D9EE6BE0021E6BF /* AuthError.swift */,
 				649450AA2D9EE7340021E6BF /* AuthClient.swift */,
 			);
-			path = Auth;
+			path = AuthClient;
 			sourceTree = "<group>";
 		};
 		649856AF2D6B1A67001AE27E = {
@@ -231,7 +236,7 @@
 		64C2E3D82D7A13500027DBB9 /* NetWork */ = {
 			isa = PBXGroup;
 			children = (
-				649450A52D9EE6100021E6BF /* Auth */,
+				649450A52D9EE6100021E6BF /* AuthClient */,
 				64C2E3E22D7A14AB0027DBB9 /* StudyMeetClient */,
 				64C2E3D92D7A13B10027DBB9 /* ApiPerformer */,
 			);
@@ -255,6 +260,8 @@
 				64C2E3E32D7A14C10027DBB9 /* UserClient.swift */,
 				649450952D92A6630021E6BF /* AnnouncClient.swift */,
 				6427E56A2DA073F4002379F7 /* FavoriteClient.swift */,
+				64F3AD882DA1BEF000F1AD24 /* ResponseClient .swift */,
+				64F3AD8A2DA1C0FB00F1AD24 /* TagClient.swift */,
 			);
 			path = StudyMeetClient;
 			sourceTree = "<group>";
@@ -265,6 +272,8 @@
 				64C2E3E62D7A159A0027DBB9 /* User.swift */,
 				649450972D92A6D10021E6BF /* Announcement.swift */,
 				649450992D92AA8C0021E6BF /* Tag.swift */,
+				64F3AD862DA1BE9900F1AD24 /* Response.swift */,
+				64F3AD8C2DA1C25500F1AD24 /* Auth.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -349,12 +358,12 @@
 				64A8FAC42D6C567D008863FE /* AnnounceCardView.swift in Sources */,
 				649856BE2D6B1A67001AE27E /* ContentView.swift in Sources */,
 				6494509A2D92AA8C0021E6BF /* Tag.swift in Sources */,
-				649450A72D9EE63D0021E6BF /* AuthModels.swift in Sources */,
 				64DA8A5E2D705DFF004C6C89 /* UserDescriptionView.swift in Sources */,
 				64C2E3DB2D7A13C80027DBB9 /* ApiPerformerProtocol.swift in Sources */,
 				649450912D8D46770021E6BF /* RegistrationView.swift in Sources */,
 				649450942D91D8FD0021E6BF /* UIApplication.swift in Sources */,
 				64DA8A5C2D705D2E004C6C89 /* UserPageView.swift in Sources */,
+				64F3AD892DA1BEF000F1AD24 /* ResponseClient .swift in Sources */,
 				649450A02D994EB80021E6BF /* Color+RGB.swift in Sources */,
 				649450982D92A6D10021E6BF /* Announcement.swift in Sources */,
 				649450A22D9951590021E6BF /* Color+HSL.swift in Sources */,
@@ -364,11 +373,14 @@
 				6494509E2D994A1E0021E6BF /* AnnouncementListViewModel.swift in Sources */,
 				649856BC2D6B1A67001AE27E /* StudyMateApp.swift in Sources */,
 				64A8FAC62D6C56C2008863FE /* BottomBarView.swift in Sources */,
+				64F3AD872DA1BE9900F1AD24 /* Response.swift in Sources */,
 				649450AB2D9EE7340021E6BF /* AuthClient.swift in Sources */,
-				649450A92D9EE6BE0021E6BF /* AuthService.swift in Sources */,
+				649450A92D9EE6BE0021E6BF /* AuthError.swift in Sources */,
+				64F3AD8D2DA1C25500F1AD24 /* Auth.swift in Sources */,
 				64A8FAC22D6C558C008863FE /* TopBarView.swift in Sources */,
 				64C2E3E42D7A14C10027DBB9 /* UserClient.swift in Sources */,
 				649450872D8B4A1C0021E6BF /* SegmentUserView.swift in Sources */,
+				64F3AD8B2DA1C0FB00F1AD24 /* TagClient.swift in Sources */,
 				64A8FAC02D6C5548008863FE /* SearcherView.swift in Sources */,
 				64C2E3DD2D7A13E00027DBB9 /* ApiPerformer.swift in Sources */,
 				6427E56B2DA073F4002379F7 /* FavoriteClient.swift in Sources */,

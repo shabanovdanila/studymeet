@@ -13,3 +13,7 @@ struct Tag: Codable, Identifiable {
     let color: String?
 }
 //"hsl(350, 98%, 79%)"
+
+struct AllTag: Codable {
+    let tags: [Tag]
+}
