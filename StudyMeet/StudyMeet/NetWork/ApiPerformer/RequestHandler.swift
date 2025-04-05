@@ -3,7 +3,7 @@ import Foundation
 struct RequestHandler {
     private let apiPerformer: ApiPerformer
     
-    init(baseURL: String) {
+    init(baseURL: String = "https://studymate-backend-k56p.onrender.com/api") {
         self.apiPerformer = ApiPerformer(baseURL: baseURL)
     }
     

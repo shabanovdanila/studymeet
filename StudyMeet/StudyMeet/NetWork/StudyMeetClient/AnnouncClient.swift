@@ -9,7 +9,7 @@ import Foundation
 
 struct AnnouncClient {
     
-    private let requestHandler = RequestHandler(baseURL: "https://studymate-backend-k56p.onrender.com/api")
+    private let requestHandler = RequestHandler()
     
     func createAnnouncement(title: String, description: String?, userId: Int, bgColor: String?,
                             tags: [(name: String, color: String)]) async throws {
@@ -18,7 +18,7 @@ struct AnnouncClient {
         
         let request = CreateAnnouncementRequest(title: title, description: description, user_id: userId, bg_color: bgColor, tags: tagRequests)
         
-        try await requestHandler.post(path: "/announcement/", body: request)
+        try await requestHandler.post(path: "/announcement", body: request)
     }
     
     func getAllAnnouncements(limit: String, page: String) async throws -> AllAnnouncements {

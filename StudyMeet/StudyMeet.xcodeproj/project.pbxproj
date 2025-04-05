@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6427E5692DA0712F002379F7 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6427E5682DA0712F002379F7 /* Favorite.swift */; };
 		6427E56B2DA073F4002379F7 /* FavoriteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6427E56A2DA073F4002379F7 /* FavoriteClient.swift */; };
 		649450872D8B4A1C0021E6BF /* SegmentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450862D8B4A1C0021E6BF /* SegmentUserView.swift */; };
 		6494508D2D8C82890021E6BF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494508C2D8C82890021E6BF /* LoginView.swift */; };
@@ -47,7 +46,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6427E5682DA0712F002379F7 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		6427E56A2DA073F4002379F7 /* FavoriteClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteClient.swift; sourceTree = "<group>"; };
 		649450862D8B4A1C0021E6BF /* SegmentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentUserView.swift; sourceTree = "<group>"; };
 		6494508C2D8C82890021E6BF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -234,7 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				649450A52D9EE6100021E6BF /* Auth */,
-				64C2E3E22D7A14AB0027DBB9 /* StudyMateClient */,
+				64C2E3E22D7A14AB0027DBB9 /* StudyMeetClient */,
 				64C2E3D92D7A13B10027DBB9 /* ApiPerformer */,
 			);
 			path = NetWork;
@@ -251,14 +249,14 @@
 			path = ApiPerformer;
 			sourceTree = "<group>";
 		};
-		64C2E3E22D7A14AB0027DBB9 /* StudyMateClient */ = {
+		64C2E3E22D7A14AB0027DBB9 /* StudyMeetClient */ = {
 			isa = PBXGroup;
 			children = (
 				64C2E3E32D7A14C10027DBB9 /* UserClient.swift */,
 				649450952D92A6630021E6BF /* AnnouncClient.swift */,
 				6427E56A2DA073F4002379F7 /* FavoriteClient.swift */,
 			);
-			path = StudyMateClient;
+			path = StudyMeetClient;
 			sourceTree = "<group>";
 		};
 		64C2E3E52D7A158C0027DBB9 /* Models */ = {
@@ -267,7 +265,6 @@
 				64C2E3E62D7A159A0027DBB9 /* User.swift */,
 				649450972D92A6D10021E6BF /* Announcement.swift */,
 				649450992D92AA8C0021E6BF /* Tag.swift */,
-				6427E5682DA0712F002379F7 /* Favorite.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -349,7 +346,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				64C2E3DF2D7A14090027DBB9 /* ApiPerformerError.swift in Sources */,
-				6427E5692DA0712F002379F7 /* Favorite.swift in Sources */,
 				64A8FAC42D6C567D008863FE /* AnnounceCardView.swift in Sources */,
 				649856BE2D6B1A67001AE27E /* ContentView.swift in Sources */,
 				6494509A2D92AA8C0021E6BF /* Tag.swift in Sources */,
