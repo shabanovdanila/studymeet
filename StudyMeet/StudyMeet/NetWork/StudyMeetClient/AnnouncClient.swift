@@ -21,19 +21,20 @@ final class AnnouncClient {
         try await requestHandler.post(path: "/announcement", body: request)
     }
     
-    func getAllAnnouncements(limit: String, page: String) async throws -> AllAnnouncements {
-        return try await requestHandler.get(path: "/announcement", query: ["limit" : limit, "page": page])
+    func getAllAnnouncements(limit: String, page: String) async throws -> [Announcement] {
+        let data: [ServerAnnouncement] = try await requestHandler.get(path: "/announcement", query: ["limit" : limit, "page": page])
+        return data.map(Announcement.init)
     }
     
     func getShortAnnouncementById(id: Int) async throws -> Announcement {
-        return try await requestHandler.get(path: "/announcement/short-info/\(id)")
+        try await requestHandler.get(path: "/announcement/short-info/\(id)")
     }
     
     func getFullAnnouncementById(id: Int) async throws -> Announcement {
-        return try await requestHandler.get(path: "/announcement/full-info/\(id)")
+        try await requestHandler.get(path: "/announcement/full-info/\(id)")
     }
     
-    func getAllAnnouncementsByUserId(userId: Int, limit: String, page: String) async throws -> AllAnnouncements {
+    func getAllAnnouncementsByUserId(userId: Int, limit: String, page: String) async throws -> [Announcement] {
         return try await requestHandler.get(path: "/announcement/user/\(userId)", query: ["limit" : limit, "page": page])
     }
     

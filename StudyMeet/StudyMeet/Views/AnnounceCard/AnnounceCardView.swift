@@ -14,7 +14,7 @@ struct AnnounceCardView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text(announce.title)
+                Text(announce.title ?? "")
                     .lineLimit(2)
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 16))
@@ -36,7 +36,7 @@ struct AnnounceCardView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(width: 363, height: 89)
-            .background(Color.purple)
+            .background(getHslColor(colorhsl: announce.bg_color ?? ""))
             .clipShape(.rect(
                 topLeadingRadius: 20,
                 bottomLeadingRadius: 0,
@@ -55,7 +55,7 @@ struct AnnounceCardView: View {
                             .font(.custom("Montserrat-Regular", size: 10))
                             .padding([.top, .bottom], 3)
                             .padding([.trailing, .leading], 6)
-                            .background(tag.colorHSL)
+                            .background(getHslColor(colorhsl: tag.color ?? ""))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 }
@@ -73,21 +73,17 @@ struct AnnounceCardView: View {
     }
 }
 
-private extension Tag {
-    var colorHSL: Color {
-        if let colorhsl = color {
-            let trimmedString = colorhsl.replacingOccurrences(of: "hsl(", with: "").replacingOccurrences(of: ")", with: "")
-            
-            let components = trimmedString.components(separatedBy: ",")
-            
-            if components.count == 3,
-               let hue = Double(components[0]),
-               let saturation = Double(components[1].replacingOccurrences(of: "%", with: "")),
-               let lightness = Double(components[2].replacingOccurrences(of: "%", with: "")) {
-                
-                return Color(hue: hue, saturation: saturation, lightness: lightness)
-            }
-        }
-        return Color(r: 0, g: 0, b: 0)
+private func getHslColor(colorhsl: String) -> Color {
+    let trimmedString = colorhsl.replacingOccurrences(of: "hsl(", with: "").replacingOccurrences(of: ")", with: "")
+    print(trimmedString)
+    let components = trimmedString.components(separatedBy: ", ")
+    
+    print(components, components.count)
+    if components.count == 3 {
+        let hue = Double(components[0])!
+        let saturation = Double(components[1].replacingOccurrences(of: "%", with: ""))!
+        let lightness = Double(components[2].replacingOccurrences(of: "%", with: ""))!
+        return Color(hue: hue, saturation: (saturation / 100), lightness: (lightness / 100))
     }
+    return Color(r: 0, g: 0, b: 0)
 }

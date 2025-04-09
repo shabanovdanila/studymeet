@@ -2,11 +2,11 @@
 import SwiftUI
 
 struct TopBarView: View {
-    @State var isLogin: Bool
+    @Binding var isLogin: Bool
     
     //TODO
     //check is correct realiz
-    @State var isInUserPageView: Bool = false
+    @Binding var isInUserPageView: Bool
     
     
     var body: some View {

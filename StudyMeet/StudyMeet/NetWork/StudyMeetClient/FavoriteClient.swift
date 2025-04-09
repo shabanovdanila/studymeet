@@ -15,7 +15,7 @@ final class FavoriteClient {
         try await requestHandler.post(path: "/favorites", body: announcement_id)
     }
     
-    func getFavoritesByUserId(user_id: Int, limit: String, page: String) async throws -> AllAnnouncements {
+    func getFavoritesByUserId(user_id: Int, limit: String, page: String) async throws -> [Announcement] {
         return try await requestHandler.get(path: "/favorites/user/\(user_id)", query: ["limit" : limit, "page": page])
     }
     

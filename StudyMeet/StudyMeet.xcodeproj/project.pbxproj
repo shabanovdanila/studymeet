@@ -46,6 +46,7 @@
 		64F3AD892DA1BEF000F1AD24 /* ResponseClient .swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3AD882DA1BEF000F1AD24 /* ResponseClient .swift */; };
 		64F3AD8B2DA1C0FB00F1AD24 /* TagClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3AD8A2DA1C0FB00F1AD24 /* TagClient.swift */; };
 		64F3AD8D2DA1C25500F1AD24 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3AD8C2DA1C25500F1AD24 /* Auth.swift */; };
+		64F3AD8F2DA5B1F700F1AD24 /* AnnouncementsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F3AD8E2DA5B1F700F1AD24 /* AnnouncementsScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		64F3AD882DA1BEF000F1AD24 /* ResponseClient .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResponseClient .swift"; sourceTree = "<group>"; };
 		64F3AD8A2DA1C0FB00F1AD24 /* TagClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagClient.swift; sourceTree = "<group>"; };
 		64F3AD8C2DA1C25500F1AD24 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		64F3AD8E2DA5B1F700F1AD24 /* AnnouncementsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementsScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				64A8FABF2D6C5548008863FE /* SearcherView.swift */,
 				64A8FAC12D6C558C008863FE /* TopBarView.swift */,
 				64A8FAC52D6C56C2008863FE /* BottomBarView.swift */,
+				64F3AD8E2DA5B1F700F1AD24 /* AnnouncementsScrollView.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64F3AD8F2DA5B1F700F1AD24 /* AnnouncementsScrollView.swift in Sources */,
 				64C2E3DF2D7A14090027DBB9 /* ApiPerformerError.swift in Sources */,
 				64A8FAC42D6C567D008863FE /* AnnounceCardView.swift in Sources */,
 				649856BE2D6B1A67001AE27E /* ContentView.swift in Sources */,

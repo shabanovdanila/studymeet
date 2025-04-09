@@ -76,7 +76,6 @@ final class ApiPerformer: ApiPerformerProtocol {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = try JSONEncoder().encode(body)
         }
-        
         return request
     }
 }

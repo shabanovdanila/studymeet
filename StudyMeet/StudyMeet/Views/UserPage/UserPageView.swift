@@ -12,11 +12,13 @@ struct UserPageView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var selection: Option = .second
+    @State var isLogin: Bool = true
+    @State var isInUserPageView: Bool = true
     
     var body: some View {
         
         VStack(spacing: 0) {
-            TopBarView(isLogin: true, isInUserPageView: true)
+            TopBarView(isLogin: $isLogin, isInUserPageView: $isInUserPageView)
                 .frame(width: 393, height: 50)
                 .background(Color.white)
             
