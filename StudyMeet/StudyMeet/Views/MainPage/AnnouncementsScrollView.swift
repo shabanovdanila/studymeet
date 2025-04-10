@@ -6,36 +6,9 @@
 //
 
 import SwiftUI
-//
-//struct AnnouncementsScrollView: View {
-//    
-//    @StateObject private var annoncewViewModel: AnnouncementListViewModel
-//    @Binding var searchText: String
-//    
-//    init(annoncewViewModel: AnnouncementListViewModel, searchText: Binding<String>) {
-//        self._annoncewViewModel = .init(wrappedValue: annoncewViewModel)
-//        self._searchText = searchText
-//    }
-//    
-//    var body: some View {
-//        ScrollView(showsIndicators: false) {
-//            VStack {
-//                SearcherView(searchText: $searchText)
-//                    .padding(.top, 15)
-//                
-//                
-//                
-//                ForEach(0..<6) {_ in
-//                    AnnounceCardView(announce: Announcement(id: 1, title: "Ищу по англу", bg_color: "hsl(350, 98%, 79%)", user_id: 1, user_name: "Emilia lin", description: "Hi everyyy", tags: [Tag(id: 1, name: "English", color: "hsl(350, 98%, 79%)")], liked: false))
-//                        .padding(.top, 15)
-//                }
-//            }
-//            .padding(.bottom, 12)
-//        }
-//    }
-//}
 
 struct AnnouncementsScrollView: View {
+    
     @StateObject private var viewModel: AnnouncementListViewModel
     @Binding var searchText: String
     
@@ -54,7 +27,6 @@ struct AnnouncementsScrollView: View {
                         AnnounceCardView(announce: announce)
                             .padding(.top, 15)
                             .onAppear {
-                                // Загружаем следующую страницу, когда пользователь доскроллил до последнего элемента
                                 if announce.id == viewModel.announces.last?.id {
                                     viewModel.loadNextPage()
                                 }

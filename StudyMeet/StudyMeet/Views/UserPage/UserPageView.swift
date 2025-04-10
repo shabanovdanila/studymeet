@@ -9,21 +9,22 @@ import SwiftUI
 
 struct UserPageView: View {
     
-    @Environment(\.dismiss) var dismiss
+    @Binding var path: NavigationPath
+    @Binding var currentScreen: CurrentScreen
     
     @State private var selection: Option = .second
-    @State var isLogin: Bool = true
-    @State var isInUserPageView: Bool = true
+    @Binding var isLogin: Bool
+
+
     
     var body: some View {
         
         VStack(spacing: 0) {
-            TopBarView(isLogin: $isLogin, isInUserPageView: $isInUserPageView)
+            
+            TopBarView(path: $path, isLogin: $isLogin, currentScreen: $currentScreen)
                 .frame(width: 393, height: 50)
                 .background(Color.white)
             
-            
-            NavigationStack {
                 ScrollView(showsIndicators: false) {
                     UserDescriptionView(user: User(id: 1, email: "", password: "", name: "", username: "", description: "", location: "", gender: true, birthday: "", created_at: ""))
                         .padding(.top, 15)
@@ -52,12 +53,14 @@ struct UserPageView: View {
                 if true {
                     BottomBarView(page1: true)
                 }
-            }
         }
         .background(Color.white)
+        .navigationBarBackButtonHidden(true)
+        .onAppear() {
+            currentScreen = .user
+        }
     }
 }
 
-#Preview {
-    UserPageView()
-}
+
+

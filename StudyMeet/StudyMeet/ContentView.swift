@@ -1,10 +1,20 @@
 import SwiftUI
 
+
+enum Path: Hashable {
+    case main
+    case user
+}
+
+enum CurrentScreen {
+    case main
+    case user
+}
+
 struct ContentView: View {
 
-    @State var isLogin: Bool = true
-    @State var isInUserPageView: Bool = false
-    @State var page1: Bool = true
+    //RegistrationView(login: login, password: password, checkPassword: checkPassword, name_surname: name_surname, email: email, selectionCheckBox: selectionCheckBox)
+    //LoginView(login: login, password: password)
     
     @State var login: String = ""
     @State var password: String = ""
@@ -15,26 +25,26 @@ struct ContentView: View {
     
     @State var selectionCheckBox: Bool = false
     
-    private var userClient = UserClient()
+    
+    //
+    @State var path = NavigationPath()
+    @State private var currentScreen: CurrentScreen = .main
+    
+    
+    
+    @State var isLogin: Bool = true
     
     var body: some View {
-        
-        //RegistrationView(login: login, password: password, checkPassword: checkPassword, name_surname: name_surname, email: email, selectionCheckBox: selectionCheckBox)
-        //LoginView(login: login, password: password)
-        VStack(spacing: 0) {
-            NavigationStack {
-                TopBarView(isLogin: $isLogin, isInUserPageView: $isInUserPageView)
-                .background(Color.white)
-                
-                AnnouncementsScrollView(viewModel: .init(client: AnnouncClient()), searchText: $searchText)
-                
-                .frame(maxWidth: .infinity)
-                
-                if isLogin {
-                    BottomBarView(page1: page1)
-                }
+            NavigationStack(path: $path) {
+                MainPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
+                    .navigationDestination(for: Path.self) { route in
+                        switch route {
+                        case .main:
+                            MainPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
+                        case .user:
+                            UserPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
+                        }
+                    }
             }
         }
-        .background(Color.white)
-    }
 }

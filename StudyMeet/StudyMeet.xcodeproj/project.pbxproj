@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6427E56B2DA073F4002379F7 /* FavoriteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6427E56A2DA073F4002379F7 /* FavoriteClient.swift */; };
+		64687BE62DA79F4F00CB99FA /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64687BE52DA79F4F00CB99FA /* MainPageView.swift */; };
 		649450872D8B4A1C0021E6BF /* SegmentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450862D8B4A1C0021E6BF /* SegmentUserView.swift */; };
 		6494508D2D8C82890021E6BF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494508C2D8C82890021E6BF /* LoginView.swift */; };
 		6494508F2D8C86700021E6BF /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		6427E56A2DA073F4002379F7 /* FavoriteClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteClient.swift; sourceTree = "<group>"; };
+		64687BE52DA79F4F00CB99FA /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		649450862D8B4A1C0021E6BF /* SegmentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentUserView.swift; sourceTree = "<group>"; };
 		6494508C2D8C82890021E6BF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				64A8FAC12D6C558C008863FE /* TopBarView.swift */,
 				64A8FAC52D6C56C2008863FE /* BottomBarView.swift */,
 				64F3AD8E2DA5B1F700F1AD24 /* AnnouncementsScrollView.swift */,
+				64687BE52DA79F4F00CB99FA /* MainPageView.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				64C2E3E12D7A141C0027DBB9 /* RequestHandler.swift in Sources */,
 				6494508D2D8C82890021E6BF /* LoginView.swift in Sources */,
 				64C2E3E72D7A159A0027DBB9 /* User.swift in Sources */,
+				64687BE62DA79F4F00CB99FA /* MainPageView.swift in Sources */,
 				6494509E2D994A1E0021E6BF /* AnnouncementListViewModel.swift in Sources */,
 				649856BC2D6B1A67001AE27E /* StudyMateApp.swift in Sources */,
 				64A8FAC62D6C56C2008863FE /* BottomBarView.swift in Sources */,

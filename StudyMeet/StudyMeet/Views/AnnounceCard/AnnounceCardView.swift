@@ -14,7 +14,7 @@ struct AnnounceCardView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text(announce.title ?? "")
+                Text(announce.title)
                     .lineLimit(2)
                     .foregroundColor(.black)
                     .font(.custom("Montserrat-SemiBold", size: 16))
@@ -50,7 +50,7 @@ struct AnnounceCardView: View {
                     .font(.custom("Montserrat-Regular", size: 10))
                 HStack {
                     ForEach(announce.tags) {tag in
-                        Text(tag.name ?? "")
+                        Text("#" + (tag.name ?? ""))
                             .foregroundColor(Color.black)
                             .font(.custom("Montserrat-Regular", size: 10))
                             .padding([.top, .bottom], 3)
