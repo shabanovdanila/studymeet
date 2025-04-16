@@ -7,12 +7,10 @@ struct TopBarView: View {
     @Binding var isLogin: Bool
     @Binding var currentScreen: CurrentScreen
     
-    //var tapOnLogo: () -> Void
-    //var tapOnAvatar: () -> Void
     
     private var isOnMainPage: Bool {
         currentScreen == .main
-        }
+    }
     
     private var isOnUserPage: Bool {
         currentScreen == .user

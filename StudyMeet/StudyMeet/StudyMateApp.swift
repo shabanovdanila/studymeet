@@ -11,7 +11,8 @@ import SwiftUI
 struct StudyMateApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FiltersView()
+            //ContentView()
         }
     }
 }
