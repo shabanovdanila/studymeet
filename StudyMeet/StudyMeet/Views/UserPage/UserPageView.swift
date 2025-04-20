@@ -26,7 +26,7 @@ struct UserPageView: View {
                 .background(Color.white)
             
                 ScrollView(showsIndicators: false) {
-                    UserDescriptionView(user: User(id: 1, email: "", password: "", name: "", username: "", description: "", location: "", gender: true, birthday: "", created_at: ""))
+                    UserDescriptionView(user: User(id: 1, email: "", name: "", username: "", description: "", location: "", gender: true, birthday: "", created_at: ""))
                         .padding(.top, 15)
                     
                     SegmentUserView(selection: $selection)

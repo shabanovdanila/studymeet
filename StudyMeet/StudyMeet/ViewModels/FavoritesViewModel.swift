@@ -19,7 +19,7 @@ class FavoritesViewModel: ObservableObject {
     @Published var limit: Int
     @Published var isLoading: Bool
     
-    init(client: FavoriteClient, user_id: Int) {
+    init(client: FavoriteClient = FavoriteClient(), user_id: Int) {
         self.client = client
         self.favorites = []
         self.currentPage = 1

@@ -17,7 +17,7 @@ class AnnouncementListViewModel: ObservableObject {
     @Published var limit: Int
     @Published var isLoading: Bool
     
-    init(client: AnnouncClient) {
+    init(client: AnnouncClient = AnnouncClient()) {
         self.client = client
         self.announces = []
         self.currentPage = 1

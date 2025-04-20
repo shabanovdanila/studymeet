@@ -1,137 +1,127 @@
 import SwiftUI
 
+import SwiftUI
+
 struct RegistrationView: View {
-    @State var login: String
-    @State var password: String
-    @State var checkPassword: String
-    @State var name_surname: String
-    @State var email: String
-    
-    @State var selectionCheckBox: Bool
+    @StateObject private var viewModel = RegistrationViewModel()
     
     var body: some View {
         NavigationStack {
-            RegistrationWindowView(login: $login, password: $password, checkPassword: $checkPassword, name_surname: $name_surname, email: $email, selectionCheckBox: $selectionCheckBox)
+            RegistrationWindowView(viewModel: viewModel)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(red: 219 / 255, green: 234 / 255, blue: 254 / 255))
+                .background(Color(red: 219/255, green: 234/255, blue: 254/255))
+                .alert(isPresented: .constant(viewModel.error != nil)) {
+                    Alert(
+                        title: Text("Ошибка"),
+                        message: Text(viewModel.error?.localizedDescription ?? "Неизвестная ошибка"),
+                        dismissButton: .default(Text("OK")) {
+                            viewModel.error = nil
+                        }
+                    )
+                }
         }
     }
 }
 
 private struct RegistrationWindowView: View {
-    
-    @Binding var login: String
-    @Binding var password: String
-    @Binding var checkPassword: String
-    @Binding var name_surname: String
-    @Binding var email: String
-    
-    @Binding var selectionCheckBox: Bool
-    
+    @ObservedObject var viewModel: RegistrationViewModel
     
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            HStack{
-                (Text("Study")
-                    .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
-                    .font(.custom("MontserratAlternates-Bold", size: 20))
-                 + Text("Mate")
-                    .foregroundColor(Color(red: 59 / 255, green: 130 / 255, blue: 246 / 255))
-                    .font(.custom("MontserratAlternates-Bold", size: 20)))
-            }
-            .padding(.top, 30)
-            
-            Text("Регистрация")
-                .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
-                .font(.custom("Montserrat-Bold", size: 18))
-                .padding(.top, 29)
-            
-            TextField("Логин", text: $login)
-                .padding()
-                .frame(width: 323, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                        .strokeBorder(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255), lineWidth: 1)
-                    }
-                .padding(.top, 15)
-            
-            TextField("Имя и фамилия", text: $name_surname)
-                .padding()
-                .frame(width: 323, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                        .strokeBorder(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255), lineWidth: 1)
-                    }
-                .padding(.top, 15)
-            
-            
-            TextField("Email", text: $email)
-                .padding()
-                .frame(width: 323, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                        .strokeBorder(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255), lineWidth: 1)
-                    }
-                .padding(.top, 15)
-            
-            TextField("Пароль", text: $password)
-                .padding()
-                .frame(width: 323, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                        .strokeBorder(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255), lineWidth: 1)
-                    }
-                .padding(.top, 15)
-            
-            TextField("Повторите пароль", text: $checkPassword)
-                .padding()
-                .frame(width: 323, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                        .strokeBorder(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255), lineWidth: 1)
-                    }
-                .padding(.top, 15)
-            
-            HStack(spacing: 0) {
-                CheckBox(cornerRadius: 5, frame: 20, action: {selectionCheckBox.toggle(); print(selectionCheckBox)}, isSelected: selectionCheckBox)
-                Text("Вы соглашаетесь с Политикой Конфиденциальности")
-                    .foregroundColor(Color.black)
-                    .font(.custom("Montserrat-Regular", size: 10))
-                    .padding(.leading, 5)
-            }
-            .padding(.top, 15)
-            .offset(x: -9)
-            
-            
-            Text("Регистрация")
-                .foregroundColor(Color.white)
-                .font(.custom("Montserrat-Medium", size: 16))
-                .padding(.leading, 55)
-                .padding(.trailing, 54)
-                .padding([.top, .bottom], 12)
-                .background(Color(red: 59 / 255, green: 130 / 255, blue: 246 / 255))
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(.top, 15)
-                .onTapGesture {
-                    <#code#>
+        ScrollView {
+            VStack(alignment: .center, spacing: 0) {
+                // Логотип и заголовок
+                HStack{
+                    (Text("Study")
+                        .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
+                        .font(.custom("MontserratAlternates-Bold", size: 20))
+                     + Text("Mate")
+                        .foregroundColor(Color(red: 59 / 255, green: 130 / 255, blue: 246 / 255))
+                        .font(.custom("MontserratAlternates-Bold", size: 20)))
                 }
-            
-            Text("Войти")
-                .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
+                .padding(.top, 30)
+                
+                Text("Регистрация")
+                    .foregroundColor(Color(red: 30/255, green: 58/255, blue: 138/255))
+                    .font(.custom("Montserrat-Bold", size: 18))
+                    .padding(.top, 29)
+                
+                // Поля формы
+                Group {
+                    fields()
+                }
+                .padding()
+                .frame(width: 323, height: 40)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                )
+                .padding(.top, 15)
+                
+                // Чекбокс соглашения
+                HStack(spacing: 0) {
+                    CheckBox(
+                        cornerRadius: 5,
+                        frame: 20,
+                        action: { viewModel.selectionCheckBox.toggle() },
+                        isSelected: viewModel.selectionCheckBox
+                    )
+                    Text("Вы соглашаетесь с Политикой Конфиденциальности")
+                        .foregroundColor(.black)
+                        .font(.custom("Montserrat-Regular", size: 10))
+                        .padding(.leading, 5)
+                }
+                .padding(.top, 15)
+                .offset(x: -9)
+                
+                // Кнопка регистрации
+                if viewModel.isLoading {
+                    ProgressView()
+                        .padding(.top, 15)
+                } else {
+                    Button(action: {
+                        Task {
+                            if await viewModel.register() {
+                                // Успешная регистрация
+                               // dismiss()
+                            }
+                        }
+                    }) {
+                        Text("Регистрация")
+                            .frame(width: 200)
+                            .padding(.vertical, 12)
+                            .background(Color(red: 59/255, green: 130/255, blue: 246/255))
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
+                    .padding(.top, 15)
+                }
+                
+                // Кнопка входа
+                Button("Войти") {
+                    //dismiss()
+                }
+                .foregroundColor(Color(red: 30/255, green: 58/255, blue: 138/255))
                 .font(.custom("Montserrat-Medium", size: 14))
                 .padding(.top, 15)
-            
-
+            }
+            .padding(.horizontal)
         }
-        .frame(width: 363, height: 600, alignment: .top)
+        .frame(width: 363, height: 600)
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 30))
-        
+    }
+    
+    @ViewBuilder
+    private func fields() -> some View {
+        TextField("Логин", text: $viewModel.username)
+        TextField("Имя и фамилия", text: $viewModel.name)
+        TextField("Email", text: $viewModel.email)
+            .keyboardType(.emailAddress)
+            .autocapitalization(.none)
+        SecureField("Пароль", text: $viewModel.password)
+        SecureField("Повторите пароль", text: $viewModel.checkPassword)
     }
 }
 

@@ -11,4 +11,6 @@ enum AuthError: Error {
     case invalidCredentials
     case custom(errorMessage: String)
     case tokenExpired
+    case tokenSaveFailed
+    case noRefreshToken
 }
