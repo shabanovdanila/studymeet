@@ -1,6 +1,6 @@
 import Foundation
 
-final class RequestHandler {
+final class RequestHandler: RequestHandlerProtocol {
     private let apiPerformer: ApiPerformer
     
     init(baseURL: String = "http://194.87.207.73/api") {

@@ -62,9 +62,6 @@ final class AuthClient {
         keychain.clearTokens()
     }
     
-    func getCurrentAccessToken() -> String? {
-        return keychain.getAccessToken()
-    }
 }
 
 private extension AuthClient {

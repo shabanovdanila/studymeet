@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct StudyMateApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            //FiltersView()
             ContentView()
         }
     }

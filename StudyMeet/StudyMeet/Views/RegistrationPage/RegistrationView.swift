@@ -3,28 +3,36 @@ import SwiftUI
 import SwiftUI
 
 struct RegistrationView: View {
+    
     @StateObject private var viewModel = RegistrationViewModel()
+    @Binding var path: NavigationPath
+    @Binding var currentScreen: CurrentScreen
     
     var body: some View {
-        NavigationStack {
-            RegistrationWindowView(viewModel: viewModel)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(red: 219/255, green: 234/255, blue: 254/255))
-                .alert(isPresented: .constant(viewModel.error != nil)) {
-                    Alert(
-                        title: Text("Ошибка"),
-                        message: Text(viewModel.error?.localizedDescription ?? "Неизвестная ошибка"),
-                        dismissButton: .default(Text("OK")) {
-                            viewModel.error = nil
-                        }
-                    )
-                }
-        }
+        RegistrationWindowView(viewModel: viewModel, navigateTo: navigateToMainPage)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(red: 219/255, green: 234/255, blue: 254/255))
+            .alert(isPresented: .constant(viewModel.error != nil)) {
+                Alert(
+                    title: Text("Ошибка"),
+                    message: Text(viewModel.error?.localizedDescription ?? "Неизвестная ошибка"),
+                    dismissButton: .default(Text("OK")) {
+                        viewModel.error = nil
+                    }
+                )
+            }
+            .onAppear {
+                currentScreen = .registration
+            }
+    }
+    private func navigateToMainPage() {
+        path.append(Path.main)
     }
 }
 
 private struct RegistrationWindowView: View {
     @ObservedObject var viewModel: RegistrationViewModel
+    var navigateTo: () -> Void
     
     var body: some View {
         ScrollView {
@@ -83,8 +91,10 @@ private struct RegistrationWindowView: View {
                     Button(action: {
                         Task {
                             if await viewModel.register() {
-                                // Успешная регистрация
-                               // dismiss()
+                                navigateTo()
+                            }
+                            else {
+                                print(11111)
                             }
                         }
                     }) {
@@ -100,7 +110,7 @@ private struct RegistrationWindowView: View {
                 
                 // Кнопка входа
                 Button("Войти") {
-                    //dismiss()
+                    //navigateTo()
                 }
                 .foregroundColor(Color(red: 30/255, green: 58/255, blue: 138/255))
                 .font(.custom("Montserrat-Medium", size: 14))
@@ -123,6 +133,7 @@ private struct RegistrationWindowView: View {
         SecureField("Пароль", text: $viewModel.password)
         SecureField("Повторите пароль", text: $viewModel.checkPassword)
     }
+    
 }
 
 private struct CheckBox: View {
