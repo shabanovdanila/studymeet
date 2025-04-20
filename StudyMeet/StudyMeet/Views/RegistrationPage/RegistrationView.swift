@@ -107,6 +107,7 @@ private struct RegistrationWindowView: View {
             .padding(.top, 15)
             .offset(x: -9)
             
+            
             Text("Регистрация")
                 .foregroundColor(Color.white)
                 .font(.custom("Montserrat-Medium", size: 16))
@@ -116,6 +117,9 @@ private struct RegistrationWindowView: View {
                 .background(Color(red: 59 / 255, green: 130 / 255, blue: 246 / 255))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.top, 15)
+                .onTapGesture {
+                    <#code#>
+                }
             
             Text("Войти")
                 .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))

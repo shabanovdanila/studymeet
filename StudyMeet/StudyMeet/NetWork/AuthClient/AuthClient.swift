@@ -21,8 +21,12 @@ final class AuthClient {
         return try await requestHandler.post(path: "/auth/login", body: request)
     }
     
-    func refreshToken() async throws -> Auth {
-        return try await requestHandler.post(path: "/auth/refresh")
+    func refreshToken(refresh_token: String) async throws -> Auth {
+        return try await requestHandler.post(path: "/auth/refresh", body: refresh_token)
+    }
+    
+    func logout(refresh_token: String) async throws {
+        return try await requestHandler.post(path: "/auth/logout")
     }
 }
 

@@ -35,16 +35,19 @@ struct ContentView: View {
     @State var isLogin: Bool = true
     
     var body: some View {
-            NavigationStack(path: $path) {
-                MainPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
-                    .navigationDestination(for: Path.self) { route in
-                        switch route {
-                        case .main:
-                            MainPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
-                        case .user:
-                            UserPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
-                        }
-                    }
-            }
+        
+        RegistrationView(login: login, password: password, checkPassword: checkPassword, name_surname: name_surname, email: email, selectionCheckBox: selectionCheckBox)
+//        
+//            NavigationStack(path: $path) {
+//                MainPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
+//                    .navigationDestination(for: Path.self) { route in
+//                        switch route {
+//                        case .main:
+//                            MainPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
+//                        case .user:
+//                            UserPageView(path: $path, currentScreen: $currentScreen, isLogin: $isLogin)
+//                        }
+//                    }
+//            }
         }
 }

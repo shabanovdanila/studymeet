@@ -3,7 +3,7 @@ import Foundation
 final class RequestHandler {
     private let apiPerformer: ApiPerformer
     
-    init(baseURL: String = "https://studymate-backend-k56p.onrender.com/api") {
+    init(baseURL: String = "194.87.207.73/api") {
         self.apiPerformer = ApiPerformer(baseURL: baseURL)
     }
     

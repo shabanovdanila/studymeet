@@ -12,6 +12,7 @@
 		64443F742DA90B5F009C64A2 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64443F732DA90B5F009C64A2 /* FavoritesViewModel.swift */; };
 		64687BE62DA79F4F00CB99FA /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64687BE52DA79F4F00CB99FA /* MainPageView.swift */; };
 		64826B182DAFE25F00FCAF4A /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B172DAFE25F00FCAF4A /* DropDownView.swift */; };
+		64826B1A2DB0F8AC00FCAF4A /* AnnounceAnotherPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B192DB0F8AC00FCAF4A /* AnnounceAnotherPageView.swift */; };
 		649450872D8B4A1C0021E6BF /* SegmentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450862D8B4A1C0021E6BF /* SegmentUserView.swift */; };
 		6494508D2D8C82890021E6BF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494508C2D8C82890021E6BF /* LoginView.swift */; };
 		6494508F2D8C86700021E6BF /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */; };
@@ -59,6 +60,7 @@
 		64443F732DA90B5F009C64A2 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		64687BE52DA79F4F00CB99FA /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		64826B172DAFE25F00FCAF4A /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		64826B192DB0F8AC00FCAF4A /* AnnounceAnotherPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceAnotherPageView.swift; sourceTree = "<group>"; };
 		649450862D8B4A1C0021E6BF /* SegmentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentUserView.swift; sourceTree = "<group>"; };
 		6494508C2D8C82890021E6BF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				64DA8A5B2D705D2E004C6C89 /* UserPageView.swift */,
 				64DA8A5D2D705DFF004C6C89 /* UserDescriptionView.swift */,
 				649450862D8B4A1C0021E6BF /* SegmentUserView.swift */,
+				64826B192DB0F8AC00FCAF4A /* AnnounceAnotherPageView.swift */,
 			);
 			path = UserPage;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				64443F742DA90B5F009C64A2 /* FavoritesViewModel.swift in Sources */,
 				64C2E3E12D7A141C0027DBB9 /* RequestHandler.swift in Sources */,
 				6494508D2D8C82890021E6BF /* LoginView.swift in Sources */,
+				64826B1A2DB0F8AC00FCAF4A /* AnnounceAnotherPageView.swift in Sources */,
 				64C2E3E72D7A159A0027DBB9 /* User.swift in Sources */,
 				64687BE62DA79F4F00CB99FA /* MainPageView.swift in Sources */,
 				6494509E2D994A1E0021E6BF /* AnnouncementListViewModel.swift in Sources */,
