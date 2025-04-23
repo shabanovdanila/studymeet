@@ -31,6 +31,7 @@ struct MainPageView: View {
             }
         }
         .background(Color.white)
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             currentScreen = .main
         }

@@ -159,10 +159,10 @@
 			children = (
 				64826B162DAFE24E00FCAF4A /* Filter */,
 				64A8FABF2D6C5548008863FE /* SearcherView.swift */,
-				64A8FAC12D6C558C008863FE /* TopBarView.swift */,
-				64A8FAC52D6C56C2008863FE /* BottomBarView.swift */,
 				64F3AD8E2DA5B1F700F1AD24 /* AnnouncementsScrollView.swift */,
 				64687BE52DA79F4F00CB99FA /* MainPageView.swift */,
+				64A8FAC52D6C56C2008863FE /* BottomBarView.swift */,
+				64A8FAC12D6C558C008863FE /* TopBarView.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";

@@ -9,7 +9,7 @@ final class RequestHandler: RequestHandlerProtocol {
     
     // MARK: - GET
     func get<T: Decodable>(path: String? = nil, query: [String: String?]? = nil, headers: [String: String]? = nil) async throws -> T {
-        try await apiPerformer.performRequest(method: "GET", path: path, query: query, body: nil, headers: headers)
+        return try await apiPerformer.performRequest(method: "GET", path: path, query: query, body: nil, headers: headers)
     }
     
     // MARK: - POST

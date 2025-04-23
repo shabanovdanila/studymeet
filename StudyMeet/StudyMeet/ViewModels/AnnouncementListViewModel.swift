@@ -14,6 +14,10 @@ class AnnouncementListViewModel: ObservableObject {
     @Published var error: Error?
     @Published var currentPage: Int
     @Published var totalPage: Int
+    @Published var gender: Bool?
+    @Published var min_age: Int?
+    @Published var max_age: Int?
+    @Published var tags: [String]?
     @Published var limit: Int
     @Published var isLoading: Bool
     
@@ -25,6 +29,10 @@ class AnnouncementListViewModel: ObservableObject {
         self.totalPage = 10
         self.limit = 10
         self.isLoading = false
+        self.gender = nil
+        self.min_age = nil
+        self.max_age = nil
+        self.tags = nil
     }
     
     
@@ -37,6 +45,7 @@ class AnnouncementListViewModel: ObservableObject {
         
         do {
             let response = try await client.getAllAnnouncements(limit: "\(limit)", page: "\(currentPage)")
+            print(response)
             self.announces.append(contentsOf: response)
             // - TODO
             //self.totalPages = response.totalPages
