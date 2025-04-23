@@ -49,6 +49,8 @@ final class ApiPerformer: ApiPerformerProtocol {
             switch httpResponse.statusCode {
             case 200..<300:
                 return try JSONDecoder().decode(T.self, from: data)
+            case 429:
+                throw ApiPerformerError.tooManyRequests
             case 401:
                 try await refreshToken()
                 let newRequest = try await makeAuthenticatedRequest(method: method, path: path, query: query, body: body, headers: headers)
@@ -82,6 +84,8 @@ final class ApiPerformer: ApiPerformerProtocol {
         switch httpResponse.statusCode {
         case 200..<300:
             return
+        case 429:
+            throw ApiPerformerError.tooManyRequests
         case 401:
             try await refreshToken()
             let newRequest = try await makeAuthenticatedRequest(method: method, path: path, query: query, body: body, headers: headers)

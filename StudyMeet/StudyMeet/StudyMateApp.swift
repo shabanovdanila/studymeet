@@ -10,9 +10,12 @@ import SwiftUI
 @main
 struct StudyMateApp: App {
     
+    @StateObject private var userSession = UserSession.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(userSession)
         }
     }
 }

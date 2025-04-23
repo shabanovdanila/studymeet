@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class RegistrationViewModel: ObservableObject {
     let authClient: AuthClient
+    private let userSession: UserSession = .shared
     
     @Published var username: String = ""
     @Published var password: String = ""
@@ -37,7 +39,7 @@ final class RegistrationViewModel: ObservableObject {
             let name = nameComponents.first ?? ""
             let surname = nameComponents.count > 1 ? nameComponents[1] : ""
             
-            let authResponse = try await authClient.register(
+            let authResponse: Auth = try await authClient.register(
                 email: email,
                 password: password,
                 name: "\(name) \(surname)",
@@ -46,6 +48,11 @@ final class RegistrationViewModel: ObservableObject {
             
             print("Registration successful: \(authResponse)")
             isLoading = false
+            
+            if let user = authResponse.user {
+                print("success login usersession")
+                userSession.login(user: user)
+            }
             return true
             
         } catch {

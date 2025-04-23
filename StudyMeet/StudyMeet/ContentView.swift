@@ -19,8 +19,7 @@ struct ContentView: View {
     
     @State var path = NavigationPath()
     @State private var currentScreen: CurrentScreen = .main
-    
-    @StateObject private var userSession = UserSession.shared
+    @EnvironmentObject var userSession: UserSession
     
     @State var isLogin: Bool = true
     

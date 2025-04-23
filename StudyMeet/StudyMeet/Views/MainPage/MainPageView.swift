@@ -11,6 +11,7 @@ struct MainPageView: View {
     
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
+    @EnvironmentObject private var userSession: UserSession
     
     @Binding var isLogin: Bool
     @State var page1: Bool = true

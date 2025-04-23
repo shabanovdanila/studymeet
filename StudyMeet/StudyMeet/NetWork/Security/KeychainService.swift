@@ -15,6 +15,35 @@ final class KeychainService {
     private let authServiceName = "com.studymeet.auth"
     private let accessTokenKey = "accessToken"
     private let refreshTokenKey = "refreshToken"
+    private let userKey = "currentUser"
+    
+    enum KeychainError: Error {
+        case saveError
+        case loadError
+        case deleteError
+        case tokenNotFound
+    }
+    
+    
+    func saveUser(_ user: User) throws -> Bool {
+        let data = try JSONEncoder().encode(user)
+        let saved = save(key: userKey, data: String(data: data, encoding: .utf8) ?? "")
+        return saved
+    }
+    
+    func getUser() throws -> User? {
+        guard let dataString = load(key: userKey), let data = dataString.data(using: .utf8) else {
+            print("error getting user")
+            return nil
+        }
+        print("success getting user")
+        return try JSONDecoder().decode(User.self, from: data)
+    }
+    
+    func deleteUser() -> Bool{
+        let user = delete(key: userKey)
+        return user
+    }
     
     func saveTokens(accessToken: String, refreshToken: String) -> Bool {
         let accessTokenSaved = save(key: accessTokenKey, data: accessToken)

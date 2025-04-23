@@ -17,6 +17,7 @@
 		64826B1F2DB5598A00FCAF4A /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B1E2DB5598A00FCAF4A /* KeychainService.swift */; };
 		64826B232DB560A900FCAF4A /* RequestHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B222DB560A900FCAF4A /* RequestHandlerProtocol.swift */; };
 		64826B292DB583B600FCAF4A /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B282DB583B600FCAF4A /* UserSession.swift */; };
+		64826B2B2DB834A400FCAF4A /* TextFieldStyle+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B2A2DB834A400FCAF4A /* TextFieldStyle+Font.swift */; };
 		649450872D8B4A1C0021E6BF /* SegmentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450862D8B4A1C0021E6BF /* SegmentUserView.swift */; };
 		6494508D2D8C82890021E6BF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494508C2D8C82890021E6BF /* LoginView.swift */; };
 		6494508F2D8C86700021E6BF /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */; };
@@ -69,6 +70,7 @@
 		64826B1E2DB5598A00FCAF4A /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		64826B222DB560A900FCAF4A /* RequestHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandlerProtocol.swift; sourceTree = "<group>"; };
 		64826B282DB583B600FCAF4A /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		64826B2A2DB834A400FCAF4A /* TextFieldStyle+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldStyle+Font.swift"; sourceTree = "<group>"; };
 		649450862D8B4A1C0021E6BF /* SegmentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentUserView.swift; sourceTree = "<group>"; };
 		6494508C2D8C82890021E6BF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				649450932D91D8FD0021E6BF /* UIApplication.swift */,
 				6494509F2D994EB80021E6BF /* Color+RGB.swift */,
 				649450A12D9951590021E6BF /* Color+HSL.swift */,
+				64826B2A2DB834A400FCAF4A /* TextFieldStyle+Font.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				64DA8A5E2D705DFF004C6C89 /* UserDescriptionView.swift in Sources */,
 				64443F722DA905B1009C64A2 /* FiltersView.swift in Sources */,
 				64C2E3DB2D7A13C80027DBB9 /* ApiPerformerProtocol.swift in Sources */,
+				64826B2B2DB834A400FCAF4A /* TextFieldStyle+Font.swift in Sources */,
 				649450912D8D46770021E6BF /* RegistrationView.swift in Sources */,
 				649450942D91D8FD0021E6BF /* UIApplication.swift in Sources */,
 				64826B232DB560A900FCAF4A /* RequestHandlerProtocol.swift in Sources */,

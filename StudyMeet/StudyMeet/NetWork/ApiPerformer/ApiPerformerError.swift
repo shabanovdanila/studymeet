@@ -10,4 +10,5 @@ enum ApiPerformerError: Error {
     case networkError(Error)
     case unauthorized
     case tokenSavingFailed
+    case tooManyRequests
 }
