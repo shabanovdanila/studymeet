@@ -5,6 +5,7 @@ import SwiftUI
 struct UserDescriptionView: View {
     
     let user: User
+    //let whichPage: EUserPage
     
     var body: some View {
         
@@ -45,7 +46,7 @@ struct UserDescriptionView: View {
                 }
                 
                 //Avatar
-            
+                
                 VStack(alignment: .leading, spacing: 0) {
                     
                     HStack(spacing: 0) {
@@ -55,7 +56,7 @@ struct UserDescriptionView: View {
                             .font(.custom("Montserrat-SemiBold", size: 20))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(width: 194)
-                            
+                        
                         Image(systemName: "pencil")
                             .resizable()
                             .frame(width: 20, height:   20)
@@ -74,95 +75,115 @@ struct UserDescriptionView: View {
                 .padding(.top, 5)
                 .padding(.leading, 130)
                 
-                //RoundedRectangle(cornerRadius: 10)
-                  //      .fill(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255))
-                    //    .frame(width: 333, height: 1, alignment: .center)
-                      //  .padding(.top, 16)
+                
+                //if (whichPage = .ownPage) {
+                
+                line()
                 
                 
                 
-//                VStack {
-//                    HStack(spacing: 3) {
-//                        Image(systemName: "location")
-//                            .resizable()
-//                            .frame(width: 20, height: 20)
-//                            .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                        
-//                        Text("Moscow")
-//                            .lineLimit(1)
-//                            .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                            .font(.custom("Montserrat-Regular", size: 14))
-//                            .frame(width: 90, alignment: .leading)
-//                        
-//                        
-//                        Image(systemName: "birthday.cake")
-//                            .resizable()
-//                            .frame(width: 20, height: 20)
-//                            .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                        Text("21.01.2004")
-//                            .lineLimit(1)
-//                            .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                            .font(.custom("Montserrat-Regular", size: 14))
-//                            .frame(width: 70)
-//
-//                    }
-//                    .frame(width: 200, height: 20)
-//                    .padding(.leading, 15)
-//                    .padding(.trailing, 151)
-//                    HStack(spacing: 3) {
-//                        Image(systemName: "figure.dress.line.vertical.figure")
-//                            .resizable()
-//                            .frame(width: 20, height: 20)
-//                            .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                        
-//                        Text("Женский")
-//                            .lineLimit(1)
-//                            .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                            .font(.custom("Montserrat-Regular", size: 14))
-//                            .frame(width: 90, alignment: .leading)
-//                        
-//                        
-//                        Image(systemName: "calendar")
-//                            .resizable()
-//                            .frame(width: 20, height: 20)
-//                            .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                        Text("21.01.2025")
-//                            .lineLimit(1)
-//                            .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                            .font(.custom("Montserrat-Regular", size: 14))
-//                            .frame(width: 70)
-//                        
-//
-//                    }
-//                    .frame(width: 200, height: 20)
-//                    .padding(.leading, 15)
-//                    .padding(.trailing, 151)
-//                }
-//                .frame(width: 200, height: 20)
-//                .padding(.top, 15)
-//                .padding(.leading, 15)
-//                RoundedRectangle(cornerRadius: 10)
-//                        .fill(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255))
-//                        .frame(width: 333, height: 1, alignment: .center)
-//                        .padding(.top, 16)
-//                VStack(alignment: .leading, spacing: 0) {
-//                    Text("О себе")
-//                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                        .font(.custom("Montserrat-SemiBold", size: 20))
-//                    Text("Привет! Я Анна, и я увлечена изучением новых технологий и программирования. В данный момент я занимаюсь разработкой проектов в области искусственного интеллекта и ищу напарника для совместного изучения и обмена знаниями. Мне нравится работать в команде, обсуждать идеи и находить креативные решения.")
-//                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-//                        .font(.custom("Montserrat-Regular", size: 14))
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                }
-//                .frame(width: 333, height: 181)
-//                .padding(.bottom, 15)
+                info()
                 
+                
+                line()
+                
+                
+                about()
                 
             }
         }
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .frame(width: 363)
+    }
+    
+    @ViewBuilder
+    private func line() -> some View {
+        RoundedRectangle(cornerRadius: 10)
+                .fill(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255))
+                .frame(width: 333, height: 1, alignment: .center)
+                .padding(.top, 16)
+    }
+    
+    private struct info: View {
+        var body: some View {
+            VStack {
+                HStack(spacing: 3) {
+                    Image(systemName: "location")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                    
+                    Text("Moscow")
+                        .lineLimit(1)
+                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .font(.custom("Montserrat-Regular", size: 14))
+                        .frame(width: 90, alignment: .leading)
+                    
+                    
+                    Image(systemName: "birthday.cake")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                    Text("21.01.2004")
+                        .lineLimit(1)
+                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .font(.custom("Montserrat-Regular", size: 14))
+                        .frame(width: 70)
+
+                }
+                .frame(width: 200, height: 20)
+                .padding(.leading, 15)
+                .padding(.trailing, 151)
+                HStack(spacing: 3) {
+                    Image(systemName: "figure.dress.line.vertical.figure")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                    
+                    Text("Женский")
+                        .lineLimit(1)
+                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .font(.custom("Montserrat-Regular", size: 14))
+                        .frame(width: 90, alignment: .leading)
+                    
+                    
+                    Image(systemName: "calendar")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                    Text("21.01.2025")
+                        .lineLimit(1)
+                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .font(.custom("Montserrat-Regular", size: 14))
+                        .frame(width: 70)
+                    
+
+                }
+                .frame(width: 200, height: 20)
+                .padding(.leading, 15)
+                .padding(.trailing, 151)
+            }
+            .frame(width: 200, height: 20)
+            .padding(.top, 15)
+            .padding(.leading, 15)
+        }
+    }
+    
+    private struct about: View {
+        var body: some View {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("О себе")
+                    .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                    .font(.custom("Montserrat-SemiBold", size: 20))
+                Text("Привет! Я Анна, и я увлечена изучением новых технологий и программирования. В данный момент я занимаюсь разработкой проектов в области искусственного интеллекта и ищу напарника для совместного изучения и обмена знаниями. Мне нравится работать в команде, обсуждать идеи и находить креативные решения.")
+                    .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                    .font(.custom("Montserrat-Regular", size: 14))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .frame(width: 333, height: 181)
+            .padding(.bottom, 15)
+        }
     }
 }
 

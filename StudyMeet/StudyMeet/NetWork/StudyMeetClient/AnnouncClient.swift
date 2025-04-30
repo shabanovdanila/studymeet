@@ -26,6 +26,7 @@ final class AnnouncClient {
         //let tagsToSend = tags != nil ? tags?.compactMap{$0}.joined(separator: ";") : nil
         
         let data: [Announcement] = try await requestHandler.get(path: "/announcement", query: ["limit": limit, "page": page])
+        print(data)
         return data
     }
     

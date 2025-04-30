@@ -8,7 +8,7 @@
 import Foundation
 
 struct Tag: Codable, Identifiable {
-    let id: Int?
+    let id: Int
     let name: String?
     let color: String?
 }

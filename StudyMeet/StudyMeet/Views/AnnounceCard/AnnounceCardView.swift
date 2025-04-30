@@ -28,6 +28,7 @@ struct AnnounceCardView: View {
                         .background(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255))
                         .clipShape(Circle())
                     Text(announce.user_name)
+                        .lineLimit(1)
                         .foregroundColor(.black)
                         .font(.custom("Montserrat-Regular", size: 14))
                 }
@@ -49,13 +50,23 @@ struct AnnounceCardView: View {
                     .foregroundColor(Color(red: 122 / 255, green: 122 / 255, blue: 122 / 255))
                     .font(.custom("Montserrat-Regular", size: 10))
                 HStack {
-                    ForEach(announce.tags) {tag in
-                        Text("#" + (tag.name ?? ""))
+                    if (!(announce.tags).isEmpty) {
+                        ForEach(announce.tags) {tag in
+                            Text("#" + (tag.name ?? ""))
+                                .foregroundColor(Color.black)
+                                .font(.custom("Montserrat-Regular", size: 10))
+                                .padding([.top, .bottom], 3)
+                                .padding([.trailing, .leading], 6)
+                                .background(getHslColor(colorhsl: tag.color ?? ""))
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                    } else {
+                        Text("#")
                             .foregroundColor(Color.black)
                             .font(.custom("Montserrat-Regular", size: 10))
                             .padding([.top, .bottom], 3)
                             .padding([.trailing, .leading], 6)
-                            .background(getHslColor(colorhsl: tag.color ?? ""))
+                            .background(Color(r: 255, g: 139, b: 139))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 }
