@@ -36,7 +36,3 @@ struct FiltersView: View {
         }
     }
 }
-
-#Preview {
-    FiltersView()
-}

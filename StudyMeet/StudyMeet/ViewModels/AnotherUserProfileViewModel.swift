@@ -38,7 +38,7 @@ class AnotherUserProfileViewModel: ObservableObject {
         do {
             let user = try await userClient.getUserById(id: userId)
             self.user = user
-            
+            print("SUCCESS")
             let announcements = try await client.getAllAnnouncementsByUserId(
                 userId: userId,
                 limit: "\(limit)",
@@ -56,7 +56,6 @@ class AnotherUserProfileViewModel: ObservableObject {
         isLoading = false
     }
     
-    @MainActor
     func loadNextPage(userId: Int) async {
         guard !isLoading && hasMorePages else { return }
         

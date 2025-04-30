@@ -4,16 +4,15 @@ import SwiftUI
 struct TopBarView: View {
     
     @Binding var path: NavigationPath
-    @Binding var isLogin: Bool
     @Binding var currentScreen: CurrentScreen
-    
+    @EnvironmentObject private var userSession: UserSession
     
     private var isOnMainPage: Bool {
         currentScreen == .main
     }
     
     private var isOnUserPage: Bool {
-        currentScreen == .user
+        currentScreen == .userOwn
     }
 
     var body: some View {
@@ -29,7 +28,7 @@ struct TopBarView: View {
             
             Spacer()
             
-            if !isLogin {
+            if !userSession.isAuthenticated {
                 Text("Войти")
                     .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
                     .font(.custom("Montserrat-Medium", size: 16))
@@ -70,7 +69,7 @@ struct TopBarView: View {
         path.removeLast(path.count)
     }
     private func navigateToUserPage() {
-        path.append(Path.user)
+        path.append(Path.userOwn)
     }
     
     private var appLogo: some View {

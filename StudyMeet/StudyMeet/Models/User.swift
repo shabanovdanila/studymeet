@@ -4,7 +4,7 @@ struct User: Codable {
     let id: Int
     let email: String?
     let name: String
-    let username: String
+    let user_name: String
     let description: String?
     let location: String?
     let gender: Bool?

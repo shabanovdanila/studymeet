@@ -13,20 +13,20 @@ struct UserPageView: View {
     @Binding var currentScreen: CurrentScreen
     
     @State private var selection: Option = .second
-    @Binding var isLogin: Bool
-
+    
+    let user: User
 
     
     var body: some View {
         
         VStack(spacing: 0) {
             
-            TopBarView(path: $path, isLogin: $isLogin, currentScreen: $currentScreen)
+            TopBarView(path: $path, currentScreen: $currentScreen)
                 .frame(width: 393, height: 50)
                 .background(Color.white)
             
                 ScrollView(showsIndicators: false) {
-                    UserDescriptionView(user: User(id: 1, email: "", name: "", username: "", description: "", location: "", gender: true, birthday: "", created_at: ""))
+                    UserDescriptionView(user: user, whichPage: .ownPage)
                         .padding(.top, 15)
                     
                     SegmentUserView(selection: $selection)
@@ -35,12 +35,12 @@ struct UserPageView: View {
                     switch selection {
                     case .first:
                         ForEach(0..<6) {_ in
-                            AnnounceCardView(announce: Announcement(id: 1, title: "Ищу по англу", bg_color: "hsl(350, 98%, 79%)", user_id: 1, user_name: "Emilia lin", description: "Hi everyyy", tags: [Tag(id: 1, name: "English", color: "hsl(350, 98%, 79%)")], liked: false))
+                            AnnounceCardView(announce: Announcement(id: 1, title: "Ищу по англу", bg_color: "hsl(350, 98%, 79%)", user_id: 1, name: "Emilia lin", description: "Hi everyyy", tags: [Tag(id: 1, name: "English", color: "hsl(350, 98%, 79%)")], liked: false))
                                 .padding(.top, 15)
                         }
                         .padding(.bottom, 12)
                     case .second: ForEach(0..<2) {_ in
-                        AnnounceCardView(announce: Announcement(id: 1, title: "Ищу по англу", bg_color: "hsl(350, 98%, 79%)", user_id: 1, user_name: "Emilia lin", description: "Hi everyyy", tags: [Tag(id: 1, name: "English", color: "hsl(350, 98%, 79%)")], liked: false))
+                        AnnounceCardView(announce: Announcement(id: 1, title: "Ищу по англу", bg_color: "hsl(350, 98%, 79%)", user_id: 1, name: "Emilia lin", description: "Hi everyyy", tags: [Tag(id: 1, name: "English", color: "hsl(350, 98%, 79%)")], liked: false))
                             .padding(.top, 15)
                     }
                     .padding(.bottom, 12)
@@ -57,7 +57,7 @@ struct UserPageView: View {
         .background(Color.white)
         .navigationBarBackButtonHidden(true)
         .onAppear() {
-            currentScreen = .user
+            currentScreen = .userOwn
         }
     }
 }

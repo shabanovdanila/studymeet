@@ -201,9 +201,9 @@
 		6494509B2D9948A50021E6BF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				6494509D2D994A1E0021E6BF /* AnnouncementListViewModel.swift */,
 				64443F732DA90B5F009C64A2 /* FavoritesViewModel.swift */,
 				64826B1B2DB5463C00FCAF4A /* RegistrationViewModel.swift */,
+				6494509D2D994A1E0021E6BF /* AnnouncementListViewModel.swift */,
 				64826B362DC25EB100FCAF4A /* AnotherUserProfileViewModel.swift */,
 			);
 			path = ViewModels;

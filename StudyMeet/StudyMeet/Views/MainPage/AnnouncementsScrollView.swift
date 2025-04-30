@@ -11,10 +11,12 @@ struct AnnouncementsScrollView: View {
     
     @StateObject private var viewModel: AnnouncementListViewModel
     @Binding var searchText: String
+    @Binding var path: NavigationPath
     
-    init(viewModel: AnnouncementListViewModel, searchText: Binding<String>) {
+    init(viewModel: AnnouncementListViewModel, searchText: Binding<String>, path: Binding<NavigationPath>) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._searchText = searchText
+        self._path = path
     }
     
     var body: some View {
@@ -30,6 +32,9 @@ struct AnnouncementsScrollView: View {
                                 if announce.id == viewModel.announces.last?.id {
                                     viewModel.loadNextPage()
                                 }
+                            }
+                            .onTapGesture {
+                                path.append(Path.userAnother(userId: announce.user_id))
                             }
                     }
                     

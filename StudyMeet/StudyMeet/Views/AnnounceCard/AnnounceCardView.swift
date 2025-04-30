@@ -27,7 +27,7 @@ struct AnnounceCardView: View {
                         .frame(width: 20, height: 20)
                         .background(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255))
                         .clipShape(Circle())
-                    Text(announce.user_name)
+                    Text(announce.name)
                         .lineLimit(1)
                         .foregroundColor(.black)
                         .font(.custom("Montserrat-Regular", size: 14))

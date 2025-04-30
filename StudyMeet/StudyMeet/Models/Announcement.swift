@@ -12,7 +12,7 @@ struct Announcement: Codable, Identifiable {
     let title: String
     let bg_color: String?
     let user_id: Int
-    let user_name: String
+    let name: String
     let description: String?
     let tags: [Tag]
     let liked: Bool?

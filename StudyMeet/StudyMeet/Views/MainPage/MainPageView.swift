@@ -13,20 +13,19 @@ struct MainPageView: View {
     @Binding var currentScreen: CurrentScreen
     @EnvironmentObject private var userSession: UserSession
     
-    @Binding var isLogin: Bool
     @State var page1: Bool = true
     @State var searchText: String = ""
     
     var body: some View {
         VStack(spacing: 0) {
-            TopBarView(path: $path, isLogin: $isLogin, currentScreen: $currentScreen)
+            TopBarView(path: $path, currentScreen: $currentScreen)
                 .background(Color.white)
             
-            AnnouncementsScrollView(viewModel: .init(client: AnnouncClient()), searchText: $searchText)
+            AnnouncementsScrollView(viewModel: .init(client: AnnouncClient()), searchText: $searchText, path: $path)
             
                 .frame(maxWidth: .infinity)
             
-            if isLogin {
+            if userSession.isAuthenticated {
                 BottomBarView(page1: page1)
             }
         }

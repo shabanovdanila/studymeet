@@ -5,7 +5,9 @@ import SwiftUI
 struct UserDescriptionView: View {
     
     let user: User
-    //let whichPage: EUserPage
+    let whichPage: EUserPage
+    
+    @State private var hiddenFullInfo: Bool = false
     
     var body: some View {
         
@@ -50,20 +52,38 @@ struct UserDescriptionView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     
                     HStack(spacing: 0) {
-                        Text("Emilia Lin")
+                        Text(user.name)
                             .lineLimit(1)
                             .foregroundColor(.black)
                             .font(.custom("Montserrat-SemiBold", size: 20))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(width: 194)
-                        
-                        Image(systemName: "pencil")
-                            .resizable()
-                            .frame(width: 20, height:   20)
-                            .padding(.trailing, 15)
+                        if (!hiddenFullInfo) {
+                            if (whichPage == .ownPage) {
+                                Image(systemName: "pencil")
+                                    .resizable()
+                                    .frame(width: 20, height:   20)
+                                    .padding(.trailing, 15)
+                            }
+                            else if (whichPage == .anotherPage) {
+                                Image(systemName: "exclamationmark.bubble")
+                                    .resizable()
+                                    .frame(width: 20, height:   20)
+                                    .padding(.trailing, 15)
+                            }
+                        }
+                        else {
+                            Image(systemName: "chevron.down")
+                                .font(.title3)
+                                .foregroundStyle(.gray)
+                                .rotationEffect(.init(degrees: hiddenFullInfo ? -180: 0))
+                                .onTapGesture {
+                                    hiddenFullInfo.toggle()
+                                }
+                        }
                     }
                     
-                    Text("@emilialian")
+                    Text(user.user_name)
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 12))
@@ -76,19 +96,20 @@ struct UserDescriptionView: View {
                 .padding(.leading, 130)
                 
                 
-                //if (whichPage = .ownPage) {
-                
-                line()
-                
-                
-                
-                info()
-                
-                
-                line()
-                
-                
-                about()
+                if (!hiddenFullInfo) {
+                    
+                    line()
+                    
+                    
+                    
+                    info(user: user)
+                    
+                    
+                    line()
+                    
+                    
+                    about(user: user)
+                }
                 
             }
         }
@@ -106,6 +127,7 @@ struct UserDescriptionView: View {
     }
     
     private struct info: View {
+        let user: User
         var body: some View {
             VStack {
                 HStack(spacing: 3) {
@@ -114,7 +136,7 @@ struct UserDescriptionView: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                     
-                    Text("Moscow")
+                    Text(user.location ?? "Earth")
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 14))
@@ -125,7 +147,7 @@ struct UserDescriptionView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-                    Text("21.01.2004")
+                    Text(user.birthday ?? "")
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 14))
@@ -141,7 +163,7 @@ struct UserDescriptionView: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                     
-                    Text("Женский")
+                    Text(user.gender != nil ? (user.gender! ? "Мужской" : "Женский") : "")
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 14))
@@ -152,7 +174,7 @@ struct UserDescriptionView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-                    Text("21.01.2025")
+                    Text(user.created_at ?? "21.12.1004")
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 14))
@@ -171,12 +193,13 @@ struct UserDescriptionView: View {
     }
     
     private struct about: View {
+        let user: User
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 Text("О себе")
                     .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                     .font(.custom("Montserrat-SemiBold", size: 20))
-                Text("Привет! Я Анна, и я увлечена изучением новых технологий и программирования. В данный момент я занимаюсь разработкой проектов в области искусственного интеллекта и ищу напарника для совместного изучения и обмена знаниями. Мне нравится работать в команде, обсуждать идеи и находить креативные решения.")
+                Text(user.description ?? "")
                     .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                     .font(.custom("Montserrat-Regular", size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)

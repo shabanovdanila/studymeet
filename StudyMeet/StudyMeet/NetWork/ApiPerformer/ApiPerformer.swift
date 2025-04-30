@@ -60,7 +60,6 @@ final class ApiPerformer: ApiPerformerProtocol {
                       (200..<300).contains(newHttpResponse.statusCode) else {
                     throw ApiPerformerError.invalidResponse(statusCode: (newResponse as? HTTPURLResponse)?.statusCode ?? 0)
                 }
-                
                 return try JSONDecoder().decode(T.self, from: newData)
             default:
                 throw ApiPerformerError.invalidResponse(statusCode: httpResponse.statusCode)

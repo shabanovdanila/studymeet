@@ -13,7 +13,9 @@ final class AuthClient {
     private let keychain = KeychainService.shared
     
     func register(email: String, password: String, name: String, username: String) async throws -> Auth {
-        let request = RegistrationRequest(email: email, password: password, name: name, username: username)
+        
+        let request = RegistrationRequest(email: email, password: password, name: name, user_name: username)
+        
         let response: Auth =  try await requestHandler.post(path: "/auth/registration", body: request)
         
         if !keychain.saveTokens(accessToken: response.access_token, refreshToken: response.refresh_token) {
@@ -70,7 +72,7 @@ private extension AuthClient {
         let email: String
         let password: String
         let name: String
-        let username: String
+        let user_name: String
     }
 
     struct LoginRequest: Codable {
