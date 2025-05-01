@@ -83,7 +83,7 @@ struct UserDescriptionView: View {
                         }
                     }
                     
-                    Text(user.user_name)
+                    Text("@" + user.user_name)
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 12))

@@ -22,45 +22,51 @@ struct AnotherUserPageView: View {
     }
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: 0) {
-                TopBarView(path: $path, currentScreen: $currentScreen)
+        VStack(spacing: 0) {
+            
+            TopBarView(path: $path, currentScreen: $currentScreen)
+                .frame(width: 393, height: 50)
+                .background(Color.white)
+            
+            ScrollView(showsIndicators: false) {
                 
-                // User Info Section
                 if let user = viewModel.user {
                     UserDescriptionView(user: user, whichPage: .anotherPage)
+                        .padding(.top, 15)
                         .transition(.opacity)
                 } else if viewModel.isLoading && viewModel.currentPage == 1 {
                     UserProfilePlaceholder()
+                        .padding(.top, 15)
                 }
                 
-                // Announcements List
                 if !viewModel.userAnnouncements.isEmpty {
                     
                     ForEach(viewModel.userAnnouncements) { announce in
                         AnnounceCardView(announce: announce)
+                            .padding(.top, 15)
                             .onAppear {
-                                if announce.id == viewModel.userAnnouncements.last?.id {
+                                if announce.id == viewModel.userAnnouncements.last?.id && !viewModel.isLoading {
                                     Task {
                                         await viewModel.loadNextPage(userId: userId)
                                     }
                                 }
                             }
                     }
+                    .padding(.bottom, 12)
                 } else if viewModel.isLoading {
                     ProgressView()
                 }
                 
-                // Loading Indicator for pagination
                 if viewModel.isLoading && viewModel.currentPage > 1 {
                     ProgressView()
                         .padding()
                 }
-                
-                BottomBarView(page1: true)
             }
+            .frame(maxWidth: .infinity)
+            .background(Color(red: 219 / 255, green: 234 / 255, blue: 254 / 255))
+            BottomBarView(page1: true)
         }
-        .background(Color(.systemGroupedBackground))
+        .background(Color(.white))
         .task {
             await viewModel.loadUserProfile(userId: userId)
         }
@@ -83,14 +89,12 @@ struct AnotherUserPageView: View {
 struct UserProfilePlaceholder: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            // Header placeholder
             Rectangle()
                 .fill(Color.gray.opacity(0.2))
                 .frame(height: 150)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal, 16)
             
-            // Info placeholder
             VStack(alignment: .leading, spacing: 8) {
                 Rectangle()
                     .fill(Color.gray.opacity(0.2))

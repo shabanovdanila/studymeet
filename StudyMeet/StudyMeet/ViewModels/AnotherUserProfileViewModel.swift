@@ -34,6 +34,7 @@ class AnotherUserProfileViewModel: ObservableObject {
         error = nil
         currentPage = 1
         hasMorePages = true
+        userAnnouncements = []
         
         do {
             let user = try await userClient.getUserById(id: userId)
@@ -56,6 +57,7 @@ class AnotherUserProfileViewModel: ObservableObject {
         isLoading = false
     }
     
+    @MainActor
     func loadNextPage(userId: Int) async {
         guard !isLoading && hasMorePages else { return }
         
@@ -78,7 +80,6 @@ class AnotherUserProfileViewModel: ObservableObject {
         } catch {
             self.error = error
             print("Failed to load next page: \(error)")
-            currentPage -= 1
         }
         
         isLoading = false

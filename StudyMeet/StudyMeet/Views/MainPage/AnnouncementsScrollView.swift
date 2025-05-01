@@ -52,7 +52,6 @@ struct AnnouncementsScrollView: View {
                 }
             }
             .task {
-                // Первоначальная загрузка данных
                 await viewModel.loadAnnounces()
             }
             .alert("Error", isPresented: .constant(viewModel.error != nil)) {
