@@ -66,7 +66,9 @@ struct TopBarView: View {
     
     
     private func returnToMainPage() {
-        path.removeLast(path.count)
+        withAnimation(.smooth) {
+            path = NavigationPath()
+        }
     }
     private func navigateToUserPage() {
         path.append(Path.userOwn)

@@ -136,7 +136,7 @@ struct UserDescriptionView: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                     
-                    Text(user.location ?? "Earth")
+                    Text(user.location ?? "Earthdfdddddddddd")
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 14))
@@ -147,23 +147,25 @@ struct UserDescriptionView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-                    Text(user.birthday ?? "")
+                    
+                    //MARK: TODO FIX THIS
+                    Text(parseDateString(user.birthday ?? "") ?? "")
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 14))
-                        .frame(width: 70)
+                        .frame(width: 80)
 
                 }
                 .frame(width: 200, height: 20)
                 .padding(.leading, 15)
-                .padding(.trailing, 151)
+                .padding(.trailing, 141)
                 HStack(spacing: 3) {
                     Image(systemName: "figure.dress.line.vertical.figure")
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                     
-                    Text(user.gender != nil ? (user.gender! ? "Мужской" : "Женский") : "")
+                    Text(user.gender != nil ? (user.gender! ? "Мужской" : "Женский") : "Неважно")
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 14))
@@ -174,17 +176,18 @@ struct UserDescriptionView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
-                    Text(user.created_at ?? "21.12.1004")
+                    //MARK: TODO FIX THIS
+                    Text(parseDateString(user.created_at ?? "") ?? "")
                         .lineLimit(1)
                         .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
                         .font(.custom("Montserrat-Regular", size: 14))
-                        .frame(width: 70)
+                        .frame(width: 80)
                     
 
                 }
                 .frame(width: 200, height: 20)
                 .padding(.leading, 15)
-                .padding(.trailing, 151)
+                .padding(.trailing, 141)
             }
             .frame(width: 200, height: 20)
             .padding(.top, 15)
@@ -204,7 +207,7 @@ struct UserDescriptionView: View {
                     .font(.custom("Montserrat-Regular", size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(width: 333, height: 181)
+            .frame(width: 333)
             .padding(.bottom, 15)
         }
     }

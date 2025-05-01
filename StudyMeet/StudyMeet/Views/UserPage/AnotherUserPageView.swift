@@ -71,7 +71,9 @@ struct AnotherUserPageView: View {
             await viewModel.loadUserProfile(userId: userId)
         }
         .refreshable {
-            await viewModel.loadUserProfile(userId: userId)
+            Task {
+                await viewModel.loadUserProfile(userId: userId)
+            }
         }
         .alert("Ошибка", isPresented: .constant(viewModel.error != nil)) {
             Button("OK", role: .cancel) { viewModel.error = nil }
