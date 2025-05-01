@@ -48,7 +48,7 @@ struct AnnouncementsScrollView: View {
             }
             .refreshable {
                 Task {
-                    await viewModel.loadAnnounces()
+                    await viewModel.refreshAnnouncements()
                 }
             }
             .task {

@@ -31,6 +31,14 @@ class AnnouncementListViewModel: ObservableObject {
     }
     
     @MainActor
+    func refreshAnnouncements() async {
+        currentPage = 1
+        announces = []
+        hasMorePages = true
+        await loadAnnounces()
+    }
+    
+    @MainActor
     func loadAnnounces() async {
         guard !isLoading && hasMorePages else { return }
         
@@ -39,14 +47,14 @@ class AnnouncementListViewModel: ObservableObject {
         
         do {
             let response = try await client.getAllAnnouncements(limit: "\(limit)", page: "\(currentPage)")
-            if response.isEmpty {
-                hasMorePages = false
-            } else {
-                self.announces.append(contentsOf: response)
-                if response.count < limit {
-                    hasMorePages = false
-                }
+            
+            let newAnnouncements = response.filter { newAnnounce in
+                !announces.contains(where: { $0.id == newAnnounce.id })
             }
+            
+            self.announces.append(contentsOf: newAnnouncements)
+            hasMorePages = !response.isEmpty && response.count >= limit
+            
         } catch {
             self.error = error
             print(error)
