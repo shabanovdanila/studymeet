@@ -104,7 +104,9 @@ final class ApiPerformer: ApiPerformerProtocol {
         var headers = headers ?? [:]
         if let accessToken = keychainService.getAccessToken() {
             headers["Authorization"] = "Bearer \(accessToken)"
+            print(accessToken)
         }
+        print(headers)
         return try makeRequest(method: method, path: path, query: query, body: body, headers: headers)
     }
     

@@ -39,7 +39,7 @@ class FavoritesViewModel: ObservableObject {
         error = nil
         
         do {
-            let response = try await client.getFavoritesByUserId(user_id: user_id, limit: "\(limit)", page: "\(currentPage)")
+            let response = try await client.getFavoritesByUserId(limit: "\(limit)", page: "\(currentPage)")
             self.favorites.append(contentsOf: response)
             // - TODO
             //self.totalPages = response.totalPages

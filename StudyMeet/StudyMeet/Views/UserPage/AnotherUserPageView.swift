@@ -87,8 +87,7 @@ struct AnotherUserPageView: View {
     }
 }
 
-// Placeholder for loading state
-struct UserProfilePlaceholder: View {
+private struct UserProfilePlaceholder: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Rectangle()

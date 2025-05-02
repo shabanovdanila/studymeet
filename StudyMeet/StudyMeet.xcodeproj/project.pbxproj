@@ -26,6 +26,8 @@
 		64826B492DC3613500FCAF4A /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B452DC3613500FCAF4A /* UIApplication.swift */; };
 		64826B4A2DC3613500FCAF4A /* Color+HSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B422DC3613500FCAF4A /* Color+HSL.swift */; };
 		64826B4C2DC3617300FCAF4A /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B4B2DC3617300FCAF4A /* Date+.swift */; };
+		64826B4E2DC4A35700FCAF4A /* OwnUserPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B4D2DC4A35700FCAF4A /* OwnUserPageViewModel.swift */; };
+		64826B502DC4A4F500FCAF4A /* OwnUserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B4F2DC4A4F500FCAF4A /* OwnUserPageView.swift */; };
 		649450872D8B4A1C0021E6BF /* SegmentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649450862D8B4A1C0021E6BF /* SegmentUserView.swift */; };
 		6494508D2D8C82890021E6BF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6494508C2D8C82890021E6BF /* LoginView.swift */; };
 		6494508F2D8C86700021E6BF /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */; };
@@ -84,6 +86,8 @@
 		64826B442DC3613500FCAF4A /* TextFieldStyle+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldStyle+Font.swift"; sourceTree = "<group>"; };
 		64826B452DC3613500FCAF4A /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		64826B4B2DC3617300FCAF4A /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		64826B4D2DC4A35700FCAF4A /* OwnUserPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnUserPageViewModel.swift; sourceTree = "<group>"; };
+		64826B4F2DC4A4F500FCAF4A /* OwnUserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnUserPageView.swift; sourceTree = "<group>"; };
 		649450862D8B4A1C0021E6BF /* SegmentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentUserView.swift; sourceTree = "<group>"; };
 		6494508C2D8C82890021E6BF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				64826B192DB0F8AC00FCAF4A /* AnnounceAnotherPageView.swift */,
 				64826B302DC2598100FCAF4A /* AnnounceOwnPageView.swift */,
 				64826B322DC259F300FCAF4A /* AnotherUserPageView.swift */,
+				64826B4F2DC4A4F500FCAF4A /* OwnUserPageView.swift */,
 			);
 			path = UserPage;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 				64826B1B2DB5463C00FCAF4A /* RegistrationViewModel.swift */,
 				6494509D2D994A1E0021E6BF /* AnnouncementListViewModel.swift */,
 				64826B362DC25EB100FCAF4A /* AnotherUserProfileViewModel.swift */,
+				64826B4D2DC4A35700FCAF4A /* OwnUserPageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -458,12 +464,14 @@
 				64826B4C2DC3617300FCAF4A /* Date+.swift in Sources */,
 				64A8FAC22D6C558C008863FE /* TopBarView.swift in Sources */,
 				64C2E3E42D7A14C10027DBB9 /* UserClient.swift in Sources */,
+				64826B502DC4A4F500FCAF4A /* OwnUserPageView.swift in Sources */,
 				649450872D8B4A1C0021E6BF /* SegmentUserView.swift in Sources */,
 				64826B332DC259F300FCAF4A /* AnotherUserPageView.swift in Sources */,
 				64F3AD8B2DA1C0FB00F1AD24 /* TagClient.swift in Sources */,
 				64A8FAC02D6C5548008863FE /* SearcherView.swift in Sources */,
 				64C2E3DD2D7A13E00027DBB9 /* ApiPerformer.swift in Sources */,
 				6427E56B2DA073F4002379F7 /* FavoriteClient.swift in Sources */,
+				64826B4E2DC4A35700FCAF4A /* OwnUserPageViewModel.swift in Sources */,
 				649450962D92A6630021E6BF /* AnnouncClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

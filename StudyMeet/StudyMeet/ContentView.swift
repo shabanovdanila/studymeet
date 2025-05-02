@@ -41,7 +41,7 @@ struct ContentView: View {
                 case .main:
                     MainPageView(path: $path, currentScreen: $currentScreen )
                 case .userOwn:
-                    UserPageView(path: $path, currentScreen: $currentScreen, user: userSession.currentUser!)
+                    OwnUserPageView(path: $path, currentScreen: $currentScreen)
                 case .userAnother(let userId):
                     AnotherUserPageView(userId: userId, path: $path, currentScreen: $currentScreen)
                 case .login:

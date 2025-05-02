@@ -86,10 +86,10 @@ struct AnnounceCardView: View {
 
 private func getHslColor(colorhsl: String) -> Color {
     let trimmedString = colorhsl.replacingOccurrences(of: "hsl(", with: "").replacingOccurrences(of: ")", with: "")
-    print(trimmedString)
+    //print(trimmedString)
     let components = trimmedString.components(separatedBy: ", ")
     
-    print(components, components.count)
+    //print(components, components.count)
     if components.count == 3 {
         let hue = Double(components[0])!
         let saturation = Double(components[1].replacingOccurrences(of: "%", with: ""))!
