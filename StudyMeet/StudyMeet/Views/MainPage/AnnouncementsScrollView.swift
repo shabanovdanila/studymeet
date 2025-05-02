@@ -13,14 +13,21 @@ struct AnnouncementsScrollView: View {
     @Binding var searchText: String
     @Binding var path: NavigationPath
     
-    init(viewModel: AnnouncementListViewModel, searchText: Binding<String>, path: Binding<NavigationPath>) {
+    @Binding var scrollProxy: ScrollViewProxy?
+    
+    init(viewModel: AnnouncementListViewModel, searchText: Binding<String>, path: Binding<NavigationPath>,
+         scrollProxy: Binding<ScrollViewProxy?>) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._searchText = searchText
         self._path = path
+        self._scrollProxy = scrollProxy
     }
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
+        ScrollViewReader { proxy in
+            
+            ScrollView(showsIndicators: false) {
+                Text("").id("top")
                 LazyVStack {
                     SearcherView(searchText: $searchText)
                         .padding(.top, 15)
@@ -64,6 +71,10 @@ struct AnnouncementsScrollView: View {
             } message: {
                 Text(viewModel.error?.localizedDescription ?? "Unknown error")
             }
+            .onAppear() {
+                scrollProxy = proxy
+            }
             .background(Color(red: 219 / 255, green: 234 / 255, blue: 254 / 255))
+        }
     }
 }

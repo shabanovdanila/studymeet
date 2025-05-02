@@ -18,7 +18,7 @@ final class ApiPerformer: ApiPerformerProtocol {
         guard let refreshToken = keychainService.getRefreshToken() else {
             throw ApiPerformerError.unauthorized
         }
-        
+        print("REFRESHING")
         let refreshRequest = try makeRequest(
             method: "POST",
             path: "/auth/refresh", query: nil,
@@ -87,6 +87,7 @@ final class ApiPerformer: ApiPerformerProtocol {
             throw ApiPerformerError.tooManyRequests
         case 401:
             try await refreshToken()
+            print("REFRESHing TOKENS")
             let newRequest = try await makeAuthenticatedRequest(method: method, path: path, query: query, body: body, headers: headers)
             let (_, newResponse) = try await urlSession.data(for: newRequest)
             
@@ -106,7 +107,6 @@ final class ApiPerformer: ApiPerformerProtocol {
             headers["Authorization"] = "Bearer \(accessToken)"
             print(accessToken)
         }
-        print(headers)
         return try makeRequest(method: method, path: path, query: query, body: body, headers: headers)
     }
     

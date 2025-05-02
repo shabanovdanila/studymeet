@@ -7,6 +7,8 @@ struct TopBarView: View {
     @Binding var currentScreen: CurrentScreen
     @EnvironmentObject private var userSession: UserSession
     
+    var scrollToTop: (() -> Void)?
+    
     private var isOnMainPage: Bool {
         currentScreen == .main
     }
@@ -19,7 +21,9 @@ struct TopBarView: View {
         HStack {
             
             if isOnMainPage {
-                appLogo
+                Button(action: { scrollToTop?()} ) {
+                    appLogo
+                }
             } else {
                 Button(action: returnToMainPage) {
                     appLogo

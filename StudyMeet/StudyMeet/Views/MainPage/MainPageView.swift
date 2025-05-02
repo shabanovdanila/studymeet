@@ -16,12 +16,20 @@ struct MainPageView: View {
     @State var page1: Bool = true
     @State var searchText: String = ""
     
+    @State private var scrollProxy: ScrollViewProxy?
+    
     var body: some View {
         VStack(spacing: 0) {
-            TopBarView(path: $path, currentScreen: $currentScreen)
+            TopBarView(path: $path, currentScreen: $currentScreen, scrollToTop: {
+                withAnimation(.smooth) {
+                    scrollProxy?.scrollTo("top", anchor: .top)
+                }})
                 .background(Color.white)
             
-            AnnouncementsScrollView(viewModel: .init(client: AnnouncClient()), searchText: $searchText, path: $path)
+            Button("logout") {
+                userSession.logout()
+            }
+            AnnouncementsScrollView(viewModel: .init(client: AnnouncClient()), searchText: $searchText, path: $path, scrollProxy: $scrollProxy)
             
                 .frame(maxWidth: .infinity)
             
