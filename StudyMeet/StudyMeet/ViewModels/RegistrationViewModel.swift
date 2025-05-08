@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 final class RegistrationViewModel: ObservableObject {
-    let authClient: AuthClient
+    private let authClient: AuthClient
     private let userSession: UserSession = .shared
     
     @Published var username: String = ""

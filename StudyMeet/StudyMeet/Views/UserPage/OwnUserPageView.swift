@@ -36,7 +36,6 @@ struct OwnUserPageView: View {
                         .padding(.top, 15)
                 }
                 
-                // Сегментированное управление
                 SegmentUserView(selection: $selection)
                     .padding(.top, 15)
                 

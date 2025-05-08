@@ -8,8 +8,8 @@
 import Foundation
 
 struct Auth: Codable {
+    let user: User?
     let access_token: String
     let refresh_token: String
-    let user: User?
 }
 

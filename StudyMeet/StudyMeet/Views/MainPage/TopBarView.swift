@@ -5,6 +5,8 @@ struct TopBarView: View {
     
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
+    
+    @EnvironmentObject private var modalState: ModalStateManager
     @EnvironmentObject private var userSession: UserSession
     
     var scrollToTop: (() -> Void)?
@@ -40,11 +42,17 @@ struct TopBarView: View {
                     .padding(.horizontal, 15)
             } else {
                 HStack {
-                    Image(systemName: "plus")
-                        .resizable()
-                        .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
-                        .frame(width: 25, height: 25)
-                        .padding(.trailing, 15)
+                    
+                    Button(action: {
+                        modalState.showCreateAnnouncement = true
+                    }) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
+                            .frame(width: 25, height: 25)
+                    }
+                    .padding(.trailing, 15)
+                    
                     Image(systemName: "bell")
                         .resizable()
                         .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))

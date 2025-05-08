@@ -11,12 +11,12 @@ final class AnnouncClient {
     
     private let requestHandler = RequestHandler()
     
-    func createAnnouncement(title: String, description: String?,
-                            tags: [(name: String, color: String)]) async throws {
+    func createAnnouncement(title: String, description: String,
+                            tags: [String]) async throws {
         
-        let tagRequests = tags.map { TagRequest(name: $0.name, color: $0.color) }
+        //let tagRequests = tags.map { TagRequest(name: $0.name, color: $0.color) }
         
-        let request = CreateAnnouncementRequest(announcement: AnnouncementRequest(title: title, description: description), tags: tagRequests)
+        let request = CreateAnnouncementRequest(announcement: AnnouncementRequest(title: title, description: description), tags: tags)
         
         try await requestHandler.post(path: "/announcement", body: request)
     }
@@ -42,9 +42,9 @@ final class AnnouncClient {
         return try await requestHandler.get(path: "/announcement/user/\(userId)", query: ["limit" : limit, "page": page])
     }
     
-    func updateAnnouncementById(id: Int, title: String, description: String, tags: [(name: String, color: String)]) async throws {
+    func updateAnnouncementById(id: Int, title: String, description: String, tags: [String]) async throws {
         
-        let request = UpdateAnnouncementRequest(title: title, description: description, tags: tags.map{TagRequest(name: $0.name, color: $0.color)})
+        let request = UpdateAnnouncementRequest(title: title, description: description, tags: tags)
         
         try await requestHandler.put(path: "/announcement/\(id)", body: request)
     }
@@ -60,12 +60,12 @@ private extension AnnouncClient {
     struct UpdateAnnouncementRequest: Encodable {
         let title: String
         let description: String
-        let tags: [TagRequest]
+        let tags: [String]
     }
     
     struct CreateAnnouncementRequest: Encodable {
         let announcement: AnnouncementRequest
-        let tags: [TagRequest]
+        let tags: [String]
     }
 
     struct AnnouncementRequest: Encodable {
@@ -73,8 +73,4 @@ private extension AnnouncClient {
         let description: String?
     }
     
-    struct TagRequest: Encodable {
-        let name: String
-        let color: String
-    }
 }

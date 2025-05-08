@@ -7,19 +7,19 @@
 
 import Foundation
 
-class AnotherUserProfileViewModel: ObservableObject {
-    let client: AnnouncClient
-    let userClient: UserClient
+final class AnotherUserProfileViewModel: ObservableObject {
+    private let client: AnnouncClient
+    private let userClient: UserClient
     
     @Published var user: User?
     @Published var userAnnouncements: [Announcement] = []
     @Published var error: Error?
     @Published var isLoading: Bool = false
     @Published var isRefreshing: Bool = false
-
     @Published var currentPage: Int = 1
-    @Published var hasMorePages: Bool = true
-    @Published var limit: Int = 10
+    
+    private var hasMorePages: Bool = true
+    private let limit: Int = 10
     
     init(client: AnnouncClient = AnnouncClient(), userClient: UserClient = UserClient()) {
         self.client = client

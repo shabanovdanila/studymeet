@@ -22,6 +22,7 @@ struct ContentView: View {
     @State var path = NavigationPath()
     @State private var currentScreen: CurrentScreen = .main
     @EnvironmentObject var userSession: UserSession
+    @EnvironmentObject var modalState: ModalStateManager
     
     @State var isLogin: Bool = true
     
@@ -40,6 +41,10 @@ struct ContentView: View {
                 switch route {
                 case .main:
                     MainPageView(path: $path, currentScreen: $currentScreen )
+                        .sheet(isPresented: $modalState.showCreateAnnouncement) {
+                            CreateAnnouncementModal(viewModel: CreateAnnouncementViewModel())
+                                            .presentationDetents([.medium, .large])
+                                    }
                 case .userOwn:
                     OwnUserPageView(path: $path, currentScreen: $currentScreen)
                 case .userAnother(let userId):

@@ -7,9 +7,11 @@
 
 import Foundation
 
-class OwnUserPageViewModel: ObservableObject {
-    let clientAnnouncement: AnnouncClient
-    let clientFavorites: FavoriteClient
+final class OwnUserPageViewModel: ObservableObject {
+    private let clientAnnouncement: AnnouncClient
+    private let clientFavorites: FavoriteClient
+    private let userClient: UserClient
+    
     private let userSession: UserSession = .shared
     
     @Published var user: User?
@@ -22,14 +24,15 @@ class OwnUserPageViewModel: ObservableObject {
     @Published var currentPage: Int = 1
     @Published var favoritesCurrentPage: Int = 1
     
-    @Published var hasMorePages: Bool = true
-    @Published var hasMoreFavoritesPages: Bool = true
-    @Published var limit: Int = 10
+    private var hasMorePages: Bool = true
+    private var hasMoreFavoritesPages: Bool = true
+    private let limit: Int = 10
     
     init(clientAnnouncement: AnnouncClient = AnnouncClient(),
-         clientFavorites: FavoriteClient = FavoriteClient()) {
+         clientFavorites: FavoriteClient = FavoriteClient(), userClient: UserClient = UserClient()) {
         self.clientAnnouncement = clientAnnouncement
         self.clientFavorites = clientFavorites
+        self.userClient = userClient
     }
     
     @MainActor
@@ -47,7 +50,8 @@ class OwnUserPageViewModel: ObservableObject {
         favoriteAnnouncements = []
         
         do {
-            self.user = userSession.currentUser
+            self.user = try await userClient.getUserById(id: userId)
+            print("SUCCESS USER")
             let announcements = try await clientAnnouncement.getAllAnnouncementsByUserId(
                 userId: userId,
                 limit: "\(limit)",
@@ -105,7 +109,6 @@ class OwnUserPageViewModel: ObservableObject {
     
     @MainActor
     func loadNextFavoritesPage() async {
-        guard let userId = userSession.currentUser?.id else { return }
         guard !isLoading && hasMoreFavoritesPages else { return }
         
         isLoading = true

@@ -18,19 +18,31 @@ final class ApiPerformer: ApiPerformerProtocol {
         guard let refreshToken = keychainService.getRefreshToken() else {
             throw ApiPerformerError.unauthorized
         }
-        print("REFRESHING")
+        print("REFRESH ToKEN CURRENT: ")
+        print(refreshToken)
+        print("ACCESS ToKEN CURRENT: ")
+        print(keychainService.getAccessToken())
         let refreshRequest = try makeRequest(
             method: "POST",
-            path: "/auth/refresh", query: nil,
+            path: "/auth/refresh",
+            query: nil,
             body: ["refresh_token": refreshToken],
             headers: nil
         )
         
-        let (data, _) = try await urlSession.data(for: refreshRequest)
-        let token = try JSONDecoder().decode(Auth.self, from: data)
+        let (data, response) = try await urlSession.data(for: refreshRequest)
         
-        if !keychainService.saveTokens(accessToken: token.access_token, refreshToken: token.refresh_token) {
-            throw ApiPerformerError.tokenSavingFailed
+        print("Raw response data:", String(data: data, encoding: .utf8) ?? "nil")
+        print("Response status code:", (response as? HTTPURLResponse)?.statusCode ?? 0)
+        
+        do {
+            let token = try JSONDecoder().decode(Auth.self, from: data)
+            if !keychainService.saveTokens(accessToken: token.access_token, refreshToken: token.refresh_token) {
+                throw ApiPerformerError.tokenSavingFailed
+            }
+        } catch {
+            print("Decoding error:", error)
+            throw error
         }
     }
     

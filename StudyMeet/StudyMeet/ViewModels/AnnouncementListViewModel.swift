@@ -7,27 +7,24 @@
 
 import Foundation
 
-class AnnouncementListViewModel: ObservableObject {
-    let client: AnnouncClient
+final class AnnouncementListViewModel: ObservableObject {
+    private let client: AnnouncClient
     
-    @Published var announces: [Announcement]
+    @Published var announces: [Announcement] = []
     @Published var error: Error?
-    @Published var currentPage: Int
-    @Published var hasMorePages: Bool
+    @Published var currentPage: Int = 1
     @Published var gender: Bool?
     @Published var min_age: Int?
     @Published var max_age: Int?
     @Published var tags: [String]?
-    @Published var limit: Int
-    @Published var isLoading: Bool
+    @Published var isLoading: Bool = false
+    
+    private var limit: Int = 10
+    private var hasMorePages: Bool = true
+    
     
     init(client: AnnouncClient = AnnouncClient()) {
         self.client = client
-        self.announces = []
-        self.currentPage = 1
-        self.hasMorePages = true
-        self.limit = 10
-        self.isLoading = false
     }
     
     @MainActor

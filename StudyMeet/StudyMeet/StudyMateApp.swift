@@ -11,11 +11,13 @@ import SwiftUI
 struct StudyMateApp: App {
     
     @StateObject private var userSession = UserSession.shared
+    @StateObject private var modalState = ModalStateManager()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(userSession)
+                .environmentObject(modalState)
         }
     }
 }

@@ -46,7 +46,7 @@ private struct RegistrationWindowView: View {
                 (Text("Study")
                     .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
                     .font(.custom("MontserratAlternates-Bold", size: 20))
-                 + Text("Mate")
+                 + Text("Meet")
                     .foregroundColor(Color(red: 59 / 255, green: 130 / 255, blue: 246 / 255))
                     .font(.custom("MontserratAlternates-Bold", size: 20)))
             }
@@ -57,7 +57,6 @@ private struct RegistrationWindowView: View {
                 .font(.custom("Montserrat-Bold", size: 18))
                 .padding(.top, 29)
             
-            // Поля формы
             Group {
                 fields()
             }
