@@ -11,6 +11,10 @@ struct AnotherUserPageView: View {
     let userId: Int
     
     @StateObject private var viewModel: AnotherUserProfileViewModel
+    @StateObject private var viewModelCreationAnnounce: CreateAnnouncementViewModel
+    
+    @EnvironmentObject private var modalState: ModalStateManager
+    
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
     
@@ -19,6 +23,7 @@ struct AnotherUserPageView: View {
         self._path = path
         self._currentScreen = currentScreen
         self._viewModel = StateObject(wrappedValue: AnotherUserProfileViewModel())
+        self._viewModelCreationAnnounce = StateObject(wrappedValue: CreateAnnouncementViewModel())
     }
     
     var body: some View {
@@ -67,18 +72,22 @@ struct AnotherUserPageView: View {
             BottomBarView(page1: true)
         }
         .background(Color(.white))
-        .task {
-            await viewModel.loadUserProfile(userId: userId)
-        }
         .refreshable {
             Task {
                 await viewModel.loadUserProfile(userId: userId)
             }
         }
+        .task {
+            await viewModel.loadUserProfile(userId: userId)
+        }
         .alert("Ошибка", isPresented: .constant(viewModel.error != nil)) {
             Button("OK", role: .cancel) { viewModel.error = nil }
         } message: {
             Text(viewModel.error?.localizedDescription ?? "Неизвестная ошибка")
+        }
+        .fullScreenCover(isPresented: $modalState.showCreateAnnouncement) {
+            CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
+                .edgesIgnoringSafeArea(.all)
         }
         .navigationBarBackButtonHidden(true)
         .onAppear() {

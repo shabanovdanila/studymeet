@@ -7,6 +7,7 @@ struct TopBarView: View {
     @Binding var currentScreen: CurrentScreen
     
     @EnvironmentObject private var userSession: UserSession
+    @EnvironmentObject private var modalState: ModalStateManager
     
     var scrollToTop: (() -> Void)?
     
@@ -43,6 +44,7 @@ struct TopBarView: View {
                 HStack {
                     
                     Button(action: {
+                        modalState.showCreateAnnouncement = true
                     }) {
                         Image(systemName: "plus")
                             .resizable()
@@ -76,9 +78,7 @@ struct TopBarView: View {
     
     
     private func returnToMainPage() {
-        withAnimation(.smooth) {
-            path = NavigationPath()
-        }
+        path.removeLast(path.count)
     }
     private func navigateToUserPage() {
         path.append(Path.userOwn)

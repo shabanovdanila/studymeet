@@ -52,12 +52,18 @@ final class CreateAnnouncementViewModel: ObservableObject {
         
         isLoading = true
         
+        print(title)
+        print(description)
+        print(tags)
+        
         do {
             try await client.createAnnouncement(
                 title: title,
                 description: description,
                 tags: tags
             )
+            
+            
             creationSuccess = true
             clearForm()
             showAlert(message: "Объявление успешно создано!")

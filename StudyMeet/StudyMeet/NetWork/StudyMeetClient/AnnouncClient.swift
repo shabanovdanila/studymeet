@@ -14,9 +14,8 @@ final class AnnouncClient {
     func createAnnouncement(title: String, description: String,
                             tags: [String]) async throws {
         
-        //let tagRequests = tags.map { TagRequest(name: $0.name, color: $0.color) }
         
-        let request = CreateAnnouncementRequest(announcement: AnnouncementRequest(title: title, description: description), tags: tags)
+        let request = CreateAnnouncementRequest(title: title, description: description,tags: tags)
         
         try await requestHandler.post(path: "/announcement", body: request)
     }
@@ -64,7 +63,8 @@ private extension AnnouncClient {
     }
     
     struct CreateAnnouncementRequest: Encodable {
-        let announcement: AnnouncementRequest
+        let title: String
+        let description: String
         let tags: [String]
     }
 

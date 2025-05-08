@@ -11,11 +11,14 @@ struct MainPageView: View {
     
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
+    
     @EnvironmentObject private var userSession: UserSession
+    @EnvironmentObject private var modalState: ModalStateManager
+    
+    @StateObject private var viewModelCreationAnnounce = CreateAnnouncementViewModel()
     
     @State var page1: Bool = true
     @State var searchText: String = ""
-    
     @State private var scrollProxy: ScrollViewProxy?
     
     var body: some View {
@@ -38,6 +41,10 @@ struct MainPageView: View {
             }
         }
         .background(Color.white)
+        .fullScreenCover(isPresented: $modalState.showCreateAnnouncement) {
+            CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
+                .edgesIgnoringSafeArea(.all)
+        }
         .navigationBarBackButtonHidden(true)
         .onAppear {
             currentScreen = .main

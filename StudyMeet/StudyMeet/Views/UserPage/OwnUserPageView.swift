@@ -7,9 +7,14 @@
 import SwiftUI
 
 struct OwnUserPageView: View {
+    
     @StateObject private var viewModel: OwnUserPageViewModel
+    @StateObject private var viewModelCreationAnnounce: CreateAnnouncementViewModel
+    
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
+    
+    @EnvironmentObject private var modalState: ModalStateManager
     
     @State private var selection: Option = .first
     
@@ -17,6 +22,7 @@ struct OwnUserPageView: View {
         self._path = path
         self._currentScreen = currentScreen
         self._viewModel = StateObject(wrappedValue: OwnUserPageViewModel())
+        self._viewModelCreationAnnounce = StateObject(wrappedValue: CreateAnnouncementViewModel())
     }
     
     var body: some View {
@@ -75,14 +81,18 @@ struct OwnUserPageView: View {
             BottomBarView(page1: true)
         }
         .background(Color.white)
-        .task {
-            if viewModel.user == nil {
-                await viewModel.loadUserProfile()
-            }
+        .fullScreenCover(isPresented: $modalState.showCreateAnnouncement) {
+            CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
+                .edgesIgnoringSafeArea(.all)
         }
         .refreshable {
             Task {
                 await viewModel.refresh()
+            }
+        }
+        .task {
+            if viewModel.user == nil {
+                await viewModel.loadUserProfile()
             }
         }
         .alert("Ошибка", isPresented: .constant(viewModel.error != nil)) {
@@ -93,7 +103,9 @@ struct OwnUserPageView: View {
         .navigationBarBackButtonHidden(true)
         .onAppear {
             currentScreen = .userOwn
+            print("!!!!!!!!!!!!!OwnUserPageView appeared!!!!!!!!!!!!!")
         }
+        .onDisappear { print("!!!!!!!!!!!!OwnUserPageView disappeared!!!!!!!!!!!!!") }
     }
     
     private var announcementsList: some View {
