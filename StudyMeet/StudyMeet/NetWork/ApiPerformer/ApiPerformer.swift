@@ -15,13 +15,14 @@ final class ApiPerformer: ApiPerformerProtocol {
     
     // MARK: - Token Refresh
     private func refreshToken() async throws {
+        print("refreshToken in apipefrormer")
         guard let refreshToken = keychainService.getRefreshToken() else {
             throw ApiPerformerError.unauthorized
         }
-        print("REFRESH ToKEN CURRENT: ")
-        print(refreshToken)
-        print("ACCESS ToKEN CURRENT: ")
-        print(keychainService.getAccessToken())
+        //print("REFRESH ToKEN CURRENT: ")
+        //print(refreshToken)
+        //print("ACCESS ToKEN CURRENT: ")
+        //print(keychainService.getAccessToken())
         let refreshRequest = try makeRequest(
             method: "POST",
             path: "/auth/refresh",
@@ -32,8 +33,8 @@ final class ApiPerformer: ApiPerformerProtocol {
         
         let (data, response) = try await urlSession.data(for: refreshRequest)
         
-        print("Raw response data:", String(data: data, encoding: .utf8) ?? "nil")
-        print("Response status code:", (response as? HTTPURLResponse)?.statusCode ?? 0)
+        //print("Raw response data:", String(data: data, encoding: .utf8) ?? "nil")
+        //print("Response status code:", (response as? HTTPURLResponse)?.statusCode ?? 0)
         
         do {
             let token = try JSONDecoder().decode(Auth.self, from: data)
@@ -64,6 +65,8 @@ final class ApiPerformer: ApiPerformerProtocol {
             case 429:
                 throw ApiPerformerError.tooManyRequests
             case 401:
+                print(401)
+                print("empty request")
                 try await refreshToken()
                 let newRequest = try await makeAuthenticatedRequest(method: method, path: path, query: query, body: body, headers: headers)
                 let (newData, newResponse) = try await urlSession.data(for: newRequest)
@@ -99,7 +102,7 @@ final class ApiPerformer: ApiPerformerProtocol {
             throw ApiPerformerError.tooManyRequests
         case 401:
             try await refreshToken()
-            print("REFRESHing TOKENS")
+            print("REFRESHing TOKENS in full")
             let newRequest = try await makeAuthenticatedRequest(method: method, path: path, query: query, body: body, headers: headers)
             let (_, newResponse) = try await urlSession.data(for: newRequest)
             
@@ -117,7 +120,7 @@ final class ApiPerformer: ApiPerformerProtocol {
         var headers = headers ?? [:]
         if let accessToken = keychainService.getAccessToken() {
             headers["Authorization"] = "Bearer \(accessToken)"
-            print(accessToken)
+            //print(accessToken)
         }
         return try makeRequest(method: method, path: path, query: query, body: body, headers: headers)
     }
