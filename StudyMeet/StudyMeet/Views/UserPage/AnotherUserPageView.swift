@@ -13,7 +13,7 @@ struct AnotherUserPageView: View {
     @StateObject private var viewModel: AnotherUserProfileViewModel
     @StateObject private var viewModelCreationAnnounce: CreateAnnouncementViewModel
     
-    @EnvironmentObject private var modalState: ModalStateManager
+    @State private var showCreateModal = false
     
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
@@ -29,7 +29,7 @@ struct AnotherUserPageView: View {
     var body: some View {
         VStack(spacing: 0) {
             
-            TopBarView(path: $path, currentScreen: $currentScreen)
+            TopBarView(path: $path, currentScreen: $currentScreen, onCreateButtonTapped: { showCreateModal = true})
                 .frame(width: 393, height: 50)
                 .background(Color.white)
             
@@ -85,7 +85,7 @@ struct AnotherUserPageView: View {
         } message: {
             Text(viewModel.error?.localizedDescription ?? "Неизвестная ошибка")
         }
-        .fullScreenCover(isPresented: $modalState.showCreateAnnouncement) {
+        .fullScreenCover(isPresented: $showCreateModal) {
             CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
                 .edgesIgnoringSafeArea(.all)
         }

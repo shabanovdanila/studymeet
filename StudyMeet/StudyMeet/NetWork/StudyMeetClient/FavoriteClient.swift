@@ -16,6 +16,7 @@ final class FavoriteClient {
     }
     
     func getFavoritesByUserId(limit: String, page: String) async throws -> [Announcement] {
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2222221")
         return try await requestHandler.get(path: "/favorites/user", query: ["limit" : limit, "page": page])
     }
     

@@ -23,7 +23,7 @@ final class AnnouncClient {
     func getAllAnnouncements(limit: String, page: String, tags: [String]? = nil, gender: String? = nil, min_age: String? = nil, max_age: String? = nil) async throws -> [Announcement] {
         
         //let tagsToSend = tags != nil ? tags?.compactMap{$0}.joined(separator: ";") : nil
-        
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         let data: [Announcement] = try await requestHandler.get(path: "/announcement", query: ["limit": limit, "page": page])
         //print(data)
         return data
@@ -38,6 +38,7 @@ final class AnnouncClient {
     }
     
     func getAllAnnouncementsByUserId(userId: Int, limit: String, page: String) async throws -> [Announcement] {
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111")
         return try await requestHandler.get(path: "/announcement/user/\(userId)", query: ["limit" : limit, "page": page])
     }
     

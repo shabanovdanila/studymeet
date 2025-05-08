@@ -14,7 +14,7 @@ struct OwnUserPageView: View {
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
     
-    @EnvironmentObject private var modalState: ModalStateManager
+    @State private var showCreateModal = false
     
     @State private var selection: Option = .first
     
@@ -27,7 +27,7 @@ struct OwnUserPageView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            TopBarView(path: $path, currentScreen: $currentScreen)
+            TopBarView(path: $path, currentScreen: $currentScreen, onCreateButtonTapped: { showCreateModal = true })
                 .frame(width: 393, height: 50)
                 .background(Color.white)
             
@@ -81,7 +81,7 @@ struct OwnUserPageView: View {
             BottomBarView(page1: true)
         }
         .background(Color.white)
-        .fullScreenCover(isPresented: $modalState.showCreateAnnouncement) {
+        .fullScreenCover(isPresented: $showCreateModal) {
             CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
                 .edgesIgnoringSafeArea(.all)
         }

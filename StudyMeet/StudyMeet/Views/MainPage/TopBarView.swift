@@ -7,7 +7,8 @@ struct TopBarView: View {
     @Binding var currentScreen: CurrentScreen
     
     @EnvironmentObject private var userSession: UserSession
-    @EnvironmentObject private var modalState: ModalStateManager
+    
+    var onCreateButtonTapped: () -> Void
     
     var scrollToTop: (() -> Void)?
     
@@ -43,9 +44,7 @@ struct TopBarView: View {
             } else {
                 HStack {
                     
-                    Button(action: {
-                        modalState.showCreateAnnouncement = true
-                    }) {
+                    Button(action: onCreateButtonTapped) {
                         Image(systemName: "plus")
                             .resizable()
                             .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))

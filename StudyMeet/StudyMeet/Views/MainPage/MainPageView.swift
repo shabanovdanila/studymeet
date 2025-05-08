@@ -13,9 +13,11 @@ struct MainPageView: View {
     @Binding var currentScreen: CurrentScreen
     
     @EnvironmentObject private var userSession: UserSession
-    @EnvironmentObject private var modalState: ModalStateManager
+    
     
     @StateObject private var viewModelCreationAnnounce = CreateAnnouncementViewModel()
+    
+    @State private var showCreateModal = false
     
     @State var page1: Bool = true
     @State var searchText: String = ""
@@ -23,7 +25,9 @@ struct MainPageView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            TopBarView(path: $path, currentScreen: $currentScreen, scrollToTop: {
+            TopBarView(path: $path, currentScreen: $currentScreen,
+                       onCreateButtonTapped: { showCreateModal = true },
+                       scrollToTop: {
                 withAnimation(.smooth) {
                     scrollProxy?.scrollTo("top", anchor: .top)
                 }})
@@ -41,7 +45,7 @@ struct MainPageView: View {
             }
         }
         .background(Color.white)
-        .fullScreenCover(isPresented: $modalState.showCreateAnnouncement) {
+        .fullScreenCover(isPresented: $showCreateModal) {
             CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
                 .edgesIgnoringSafeArea(.all)
         }
