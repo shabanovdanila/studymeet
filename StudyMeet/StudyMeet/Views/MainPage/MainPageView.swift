@@ -14,7 +14,6 @@ struct MainPageView: View {
     
     @EnvironmentObject private var userSession: UserSession
     
-    
     @StateObject private var viewModelCreationAnnounce = CreateAnnouncementViewModel()
     
     @State private var showCreateModal = false

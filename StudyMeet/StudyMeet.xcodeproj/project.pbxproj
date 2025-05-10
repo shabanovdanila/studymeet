@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6427E56B2DA073F4002379F7 /* FavoriteClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6427E56A2DA073F4002379F7 /* FavoriteClient.swift */; };
+		643B8BD82DCF9D5200FFEFE0 /* EditProfileModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643B8BD72DCF9D5200FFEFE0 /* EditProfileModalView.swift */; };
 		64443F722DA905B1009C64A2 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64443F712DA905B1009C64A2 /* FiltersView.swift */; };
 		64687BE62DA79F4F00CB99FA /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64687BE52DA79F4F00CB99FA /* MainPageView.swift */; };
 		64826B182DAFE25F00FCAF4A /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64826B172DAFE25F00FCAF4A /* DropDownView.swift */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		6427E56A2DA073F4002379F7 /* FavoriteClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteClient.swift; sourceTree = "<group>"; };
+		643B8BD72DCF9D5200FFEFE0 /* EditProfileModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModalView.swift; sourceTree = "<group>"; };
 		64443F712DA905B1009C64A2 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
 		64687BE52DA79F4F00CB99FA /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		64826B172DAFE25F00FCAF4A /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				64826B302DC2598100FCAF4A /* AnnounceOwnPageView.swift */,
 				64826B322DC259F300FCAF4A /* AnotherUserPageView.swift */,
 				64826B4F2DC4A4F500FCAF4A /* OwnUserPageView.swift */,
+				643B8BD72DCF9D5200FFEFE0 /* EditProfileModalView.swift */,
 			);
 			path = UserPage;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				64C2E3DD2D7A13E00027DBB9 /* ApiPerformer.swift in Sources */,
 				6427E56B2DA073F4002379F7 /* FavoriteClient.swift in Sources */,
 				64826B4E2DC4A35700FCAF4A /* OwnUserPageViewModel.swift in Sources */,
+				643B8BD82DCF9D5200FFEFE0 /* EditProfileModalView.swift in Sources */,
 				649450962D92A6630021E6BF /* AnnouncClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

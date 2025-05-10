@@ -9,6 +9,8 @@ struct UserDescriptionView: View {
     
     @State private var hiddenFullInfo: Bool = false
     
+    //private var pencilButtonTapped: () -> Void
+    
     var body: some View {
         
         ZStack(alignment: .topLeading) {
@@ -60,16 +62,20 @@ struct UserDescriptionView: View {
                             .frame(width: 194)
                         if (!hiddenFullInfo) {
                             if (whichPage == .ownPage) {
-                                Image(systemName: "pencil")
-                                    .resizable()
-                                    .frame(width: 20, height:   20)
-                                    .padding(.trailing, 15)
+                                Button(action: {} ) {
+                                    Image(systemName: "pencil")
+                                        .resizable()
+                                        .frame(width: 20, height:   20)
+                                        .padding(.trailing, 15)
+                                }
                             }
                             else if (whichPage == .anotherPage) {
-                                Image(systemName: "exclamationmark.bubble")
-                                    .resizable()
-                                    .frame(width: 20, height:   20)
-                                    .padding(.trailing, 15)
+                                Button(action: {}) {
+                                    Image(systemName: "exclamationmark.bubble")
+                                        .resizable()
+                                        .frame(width: 20, height:   20)
+                                        .padding(.trailing, 15)
+                                }
                             }
                         }
                         else {
