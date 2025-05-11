@@ -8,11 +8,11 @@
 import Foundation
 
 final class AnnouncementListViewModel: ObservableObject {
-    private let client: AnnouncClient
+    private let client: AnnounceClient
     
     @Published var announces: [Announcement] = []
     @Published var error: Error?
-    @Published var currentPage: Int = 1
+    private var currentPage: Int = 1
     @Published var gender: Bool?
     @Published var min_age: Int?
     @Published var max_age: Int?
@@ -23,7 +23,7 @@ final class AnnouncementListViewModel: ObservableObject {
     private var hasMorePages: Bool = true
     
     
-    init(client: AnnouncClient = AnnouncClient()) {
+    init(client: AnnounceClient = DependencyContainer().makeAnnounceClient()) {
         self.client = client
     }
     
@@ -53,6 +53,7 @@ final class AnnouncementListViewModel: ObservableObject {
             hasMorePages = !response.isEmpty && response.count >= limit
             
         } catch {
+            currentPage -= 1
             self.error = error
             print(error)
         }

@@ -1,42 +1,25 @@
+//
+//  RequestHandlerProtocol.swift
+//  StudyMeet
+//
+//  Created by Данила Шабанов on 20.04.2025.
+//
+
 import Foundation
 
-final class RequestHandler: RequestHandlerProtocol {
-    private let apiPerformer: ApiPerformer
+protocol RequestHandler {
     
-    init(baseURL: String = "http://194.87.207.73/api") {
-        self.apiPerformer = ApiPerformer(baseURL: baseURL)
-    }
+    func get<T: Decodable>(path: String?, query: [String: String?]?, headers: [String: String]?) async throws -> T
     
-    // MARK: - GET
-    func get<T: Decodable>(path: String? = nil, query: [String: String?]? = nil, headers: [String: String]? = nil) async throws -> T {
-        try await apiPerformer.performRequest(method: "GET", path: path, query: query, body: nil, headers: headers)
-    }
+    func post<T: Decodable>(path: String?, body: Encodable?, query: [String: String?]?, headers: [String: String]?) async throws -> T
     
-    // MARK: - POST
-    func post<T: Decodable>(path: String? = nil, body: Encodable? = nil, query: [String: String?]? = nil, headers: [String: String]? = nil) async throws -> T {
-        try await apiPerformer.performRequest(method: "POST", path: path, query: query, body: body, headers: headers)
-    }
+    func post(path: String?, body: Encodable?, query: [String: String?]?, headers: [String: String]?) async throws
     
-    func post(path: String? = nil, body: Encodable? = nil, query: [String: String?]? = nil, headers: [String: String]? = nil) async throws {
-        try await apiPerformer.performRequest(method: "POST", path: path, query: query, body: body, headers: headers)
-    }
+    func put<T: Decodable>(path: String?, body: Encodable?, query: [String: String?]?, headers: [String: String]?) async throws -> T
     
-    // MARK: - PUT
-    func put<T: Decodable>(path: String? = nil, body: Encodable? = nil, query: [String: String?]? = nil, headers: [String: String]? = nil) async throws -> T {
-        try await apiPerformer.performRequest(method: "PUT", path: path, query: query, body: body, headers: headers)
-    }
+    func put(path: String?, body: Encodable?, query: [String: String?]?, headers: [String: String]?) async throws
     
-    func put(path: String? = nil, body: Encodable? = nil, query: [String: String?]? = nil, headers: [String: String]? = nil) async throws {
-        try await apiPerformer.performRequest(method: "PUT", path: path, query: query, body: body, headers: headers)
-    }
+    func delete<T: Decodable>(path: String?, body: Encodable?, query: [String: String?]?, headers: [String: String]?) async throws -> T
     
-    // MARK: - DELETE
-    func delete<T: Decodable>(path: String? = nil, body: Encodable? = nil, query: [String: String?]? = nil, headers: [String: String]? = nil) async throws -> T {
-        try await apiPerformer.performRequest(method: "DELETE", path: path, query: query, body: body, headers: headers)
-    }
-    
-    func delete(path: String? = nil, body: Encodable? = nil, query: [String: String?]? = nil, headers: [String: String]? = nil) async throws {
-        try await apiPerformer.performRequest(method: "DELETE", path: path, query: query, body: body, headers: headers)
-    }
+    func delete(path: String?, body: Encodable?, query: [String: String?]?, headers: [String: String]?) async throws
 }
-

@@ -7,43 +7,26 @@
 
 import SwiftUI
 
+import SwiftUI
+
 extension Color {
-    init(hue: Double, saturation: Double, lightness: Double) {
-        let c = (1 - abs(2 * lightness - 1)) * saturation
-        let x = c * (1 - abs((hue / 60).truncatingRemainder(dividingBy: 2) - 1))
-        let m = lightness - c / 2
-
-        var r: Double = 0
-        var g: Double = 0
-        var b: Double = 0
-
-        switch hue {
-        case 0..<60:
-            r = c
-            g = x
-        case 60..<120:
-            r = x
-            g = c
-        case 120..<180:
-            g = c
-            b = x
-        case 180..<240:
-            g = x
-            b = c
-        case 240..<300:
-            r = x
-            b = c
-        case 300..<360:
-            r = c
-            b = x
-        default:
-            break
+    init(hue h: Double, saturation s: Double, lightness l: Double) {
+        let h = h / 360.0
+        let q = l < 0.5 ? l * (1 + s) : l + s - l * s
+        let p = 2 * l - q
+        
+        func hueToRGB(_ t: Double) -> Double {
+            let t = t < 0 ? t + 1 : (t > 1 ? t - 1 : t)
+            if t < 1/6 { return p + (q - p) * 6 * t }
+            if t < 1/2 { return q }
+            if t < 2/3 { return p + (q - p) * (2/3 - t) * 6 }
+            return p
         }
-
-        r += m
-        g += m
-        b += m
-
+        
+        let r = hueToRGB(h + 1/3)
+        let g = hueToRGB(h)
+        let b = hueToRGB(h - 1/3)
+        
         self.init(red: r, green: g, blue: b)
     }
 }

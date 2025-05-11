@@ -8,7 +8,7 @@
 import Foundation
 
 final class AnotherUserProfileViewModel: ObservableObject {
-    private let client: AnnouncClient
+    private let client: AnnounceClient
     private let userClient: UserClient
     
     @Published var user: User?
@@ -21,7 +21,7 @@ final class AnotherUserProfileViewModel: ObservableObject {
     private var hasMorePages: Bool = true
     private let limit: Int = 10
     
-    init(client: AnnouncClient = AnnouncClient(), userClient: UserClient = UserClient()) {
+    init(client: AnnounceClient = DependencyContainer().makeAnnounceClient(), userClient: UserClient = DependencyContainer().makeUserClient()) {
         self.client = client
         self.userClient = userClient
     }
@@ -78,6 +78,7 @@ final class AnotherUserProfileViewModel: ObservableObject {
             hasMorePages = newAnnouncements.count >= limit
             
         } catch {
+            currentPage -= 1
             self.error = error
             print("Failed to load next page: \(error)")
         }

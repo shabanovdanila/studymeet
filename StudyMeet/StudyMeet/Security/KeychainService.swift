@@ -52,17 +52,15 @@ final class KeychainService {
     }
     
     func getAccessToken() -> String? {
-        return load(key: accessTokenKey)
+        load(key: accessTokenKey)
     }
     
     func getRefreshToken() -> String? {
-        return load(key: refreshTokenKey)
+        load(key: refreshTokenKey)
     }
     
     func clearTokens() -> Bool {
-        let accessDeleted = delete(key: accessTokenKey)
-        let refreshDeleted = delete(key: refreshTokenKey)
-        return accessDeleted && refreshDeleted
+        delete(key: accessTokenKey) && delete(key: refreshTokenKey)
     }
     
     private func save(key: String, data: String) -> Bool {

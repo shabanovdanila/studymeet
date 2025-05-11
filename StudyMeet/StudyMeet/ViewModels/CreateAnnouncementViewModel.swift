@@ -9,7 +9,7 @@ import Foundation
 
 final class CreateAnnouncementViewModel: ObservableObject {
     
-    private let client: AnnouncClient
+    private let client: AnnounceClient
     private let userSession: UserSession = .shared
     
     @Published var title: String = ""
@@ -22,7 +22,7 @@ final class CreateAnnouncementViewModel: ObservableObject {
     @Published var alertMessage: String = ""
     @Published var creationSuccess: Bool = false
     
-    init(client: AnnouncClient = AnnouncClient()) {
+    init(client: AnnounceClient = DependencyContainer().makeAnnounceClient()) {
         self.client = client
     }
     

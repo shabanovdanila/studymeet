@@ -116,7 +116,7 @@ struct EditProfileModalView: View {
                     .font(.custom("Montserrat-Regular", size: 14))
                     .padding(10)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 30)
+                        RoundedRectangle(cornerRadius: 15)
                             .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
                     )
                     .frame(width: 333, height: 170)

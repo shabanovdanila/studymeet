@@ -8,7 +8,7 @@
 import Foundation
 
 final class OwnUserPageViewModel: ObservableObject {
-    private let clientAnnouncement: AnnouncClient
+    private let clientAnnouncement: AnnounceClient
     private let clientFavorites: FavoriteClient
     private let userClient: UserClient
     
@@ -28,8 +28,9 @@ final class OwnUserPageViewModel: ObservableObject {
     private var hasMoreFavoritesPages: Bool = true
     private let limit: Int = 10
     
-    init(clientAnnouncement: AnnouncClient = AnnouncClient(),
-         clientFavorites: FavoriteClient = FavoriteClient(), userClient: UserClient = UserClient()) {
+    init(clientAnnouncement: AnnounceClient = DependencyContainer().makeAnnounceClient(),
+         clientFavorites: FavoriteClient = DependencyContainer().makeFavoriteClient(),
+         userClient: UserClient = DependencyContainer().makeUserClient()) {
         self.clientAnnouncement = clientAnnouncement
         self.clientFavorites = clientFavorites
         self.userClient = userClient
@@ -100,6 +101,7 @@ final class OwnUserPageViewModel: ObservableObject {
             hasMorePages = newAnnouncements.count >= limit
             
         } catch {
+            currentPage -= 1
             self.error = error
             print("Failed to load next page: \(error)")
         }
@@ -126,6 +128,7 @@ final class OwnUserPageViewModel: ObservableObject {
             hasMoreFavoritesPages = newFavorites.count >= limit
             
         } catch {
+            favoritesCurrentPage -= 1
             self.error = error
             print("Failed to load next favorites page: \(error)")
         }

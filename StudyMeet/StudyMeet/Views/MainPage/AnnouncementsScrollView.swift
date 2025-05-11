@@ -9,15 +9,14 @@ import SwiftUI
 
 struct AnnouncementsScrollView: View {
     
-    @StateObject private var viewModel: AnnouncementListViewModel
+    @StateObject private var viewModel = AnnouncementListViewModel()
     @Binding var searchText: String
     @Binding var path: NavigationPath
     
     @Binding var scrollProxy: ScrollViewProxy?
     
-    init(viewModel: AnnouncementListViewModel, searchText: Binding<String>, path: Binding<NavigationPath>,
+    init(searchText: Binding<String>, path: Binding<NavigationPath>,
          scrollProxy: Binding<ScrollViewProxy?>) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
         self._searchText = searchText
         self._path = path
         self._scrollProxy = scrollProxy

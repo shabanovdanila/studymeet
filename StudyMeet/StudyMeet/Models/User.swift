@@ -1,3 +1,11 @@
+//
+//  User.swift
+//  StudyMate
+//
+//  Created by Данила Шабанов on 25.03.2025.
+//
+
+
 import Foundation
 
 struct User: Codable {

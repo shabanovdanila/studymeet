@@ -37,7 +37,7 @@ struct AnnounceCardView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(width: 363, height: 89)
-            .background(getHslColor(colorhsl: announce.bg_color ?? ""))
+            .background(ColorHSLConverter.getHslColor(colorhsl: announce.bg_color ?? ""))
             .clipShape(.rect(
                 topLeadingRadius: 20,
                 bottomLeadingRadius: 0,
@@ -57,7 +57,7 @@ struct AnnounceCardView: View {
                                 .font(.custom("Montserrat-Regular", size: 10))
                                 .padding([.top, .bottom], 3)
                                 .padding([.trailing, .leading], 6)
-                                .background(getHslColor(colorhsl: tag.color ?? ""))
+                                .background(ColorHSLConverter.getHslColor(colorhsl: tag.color ?? ""))
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     } else {
@@ -84,17 +84,4 @@ struct AnnounceCardView: View {
     }
 }
 
-private func getHslColor(colorhsl: String) -> Color {
-    let trimmedString = colorhsl.replacingOccurrences(of: "hsl(", with: "").replacingOccurrences(of: ")", with: "")
-    //print(trimmedString)
-    let components = trimmedString.components(separatedBy: ", ")
-    
-    //print(components, components.count)
-    if components.count == 3 {
-        let hue = Double(components[0])!
-        let saturation = Double(components[1].replacingOccurrences(of: "%", with: ""))!
-        let lightness = Double(components[2].replacingOccurrences(of: "%", with: ""))!
-        return Color(hue: hue, saturation: (saturation / 100), lightness: (lightness / 100))
-    }
-    return Color(r: 0, g: 0, b: 0)
-}
+

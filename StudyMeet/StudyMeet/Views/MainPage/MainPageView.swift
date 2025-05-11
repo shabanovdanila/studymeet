@@ -35,7 +35,7 @@ struct MainPageView: View {
             Button("logout") {
                 userSession.logout()
             }
-            AnnouncementsScrollView(viewModel: .init(client: AnnouncClient()), searchText: $searchText, path: $path, scrollProxy: $scrollProxy)
+            AnnouncementsScrollView(searchText: $searchText, path: $path, scrollProxy: $scrollProxy)
             
                 .frame(maxWidth: .infinity)
             
