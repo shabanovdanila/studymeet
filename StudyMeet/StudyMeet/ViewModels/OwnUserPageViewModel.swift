@@ -28,9 +28,9 @@ final class OwnUserPageViewModel: ObservableObject {
     private var hasMoreFavoritesPages: Bool = true
     private let limit: Int = 10
     
-    init(clientAnnouncement: AnnounceClient = DependencyContainer().makeAnnounceClient(),
-         clientFavorites: FavoriteClient = DependencyContainer().makeFavoriteClient(),
-         userClient: UserClient = DependencyContainer().makeUserClient()) {
+    init(clientAnnouncement: AnnounceClient = DependencyContainer.shared.makeAnnounceClient(),
+         clientFavorites: FavoriteClient = DependencyContainer.shared.makeFavoriteClient(),
+         userClient: UserClient = DependencyContainer.shared.makeUserClient()) {
         self.clientAnnouncement = clientAnnouncement
         self.clientFavorites = clientFavorites
         self.userClient = userClient

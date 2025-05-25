@@ -11,10 +11,7 @@ struct Response: Codable {
     let id: Int
     let announcement_id: Int
     let user_id: Int
-    let user_name: String
+    let name: String
     let descritption: String
 }
 
-struct AllResponse: Codable {
-    let responses: [AllResponse]
-}

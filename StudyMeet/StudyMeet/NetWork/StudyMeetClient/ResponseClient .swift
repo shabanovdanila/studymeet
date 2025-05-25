@@ -20,7 +20,7 @@ final class ResponseClient {
         try await requestHandler.post(path: "/response", body: request, query: nil, headers: nil)
     }
     
-    func getAllResponses() async throws -> AllResponse {
+    func getAllResponses() async throws -> [Response] {
         return try await requestHandler.get(path: "/response", query: nil, headers: nil)
     }
     
@@ -28,12 +28,12 @@ final class ResponseClient {
         return try await requestHandler.get(path: "/response/\(response_id)", query: nil, headers: nil)
     }
     
-    func getResponseByAnnounceId(announce_id: Int) async throws -> AllResponse {
-        return try await requestHandler.get(path: "/response/\(announce_id)", query: nil, headers: nil)
+    func getResponseByAnnounceId(announce_id: Int) async throws -> [Response] {
+        return try await requestHandler.get(path: "/response/announcement/\(announce_id)", query: nil, headers: nil)
     }
     
-    func getResponseByUserId(user_id: Int) async throws -> AllResponse {
-        return try await requestHandler.get(path: "/response/\(user_id)", query: nil, headers: nil)
+    func getResponseByUserId(user_id: Int) async throws -> [Response] {
+        return try await requestHandler.get(path: "/response/user/\(user_id)", query: nil, headers: nil)
     }
     
     func deleteResponseById(response_id: Int) async throws {

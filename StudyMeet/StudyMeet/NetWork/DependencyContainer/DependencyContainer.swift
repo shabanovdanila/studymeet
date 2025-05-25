@@ -8,11 +8,15 @@
 import Foundation
 
 final class DependencyContainer {
+    
+    
+    static let shared = DependencyContainer()
+
     private let baseURL: String
     private let sharedRequestHandler: RequestHandler
 
-    init(baseURL: String = "http://194.87.207.73/api") {
-        self.baseURL = baseURL
+    private init() {
+        self.baseURL = "http://194.87.207.73/api"
         let apiPerformer = ApiPerformerDefault(baseURL: baseURL)
         self.sharedRequestHandler = RequestHandlerDefault(apiPerformer: apiPerformer)
     }

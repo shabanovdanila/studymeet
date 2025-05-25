@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct EditProfileModalView: View {
-    
-    //@EnvironmentObject private var userSession: UserSession
-    
-    @State var text: String = "Emilia Lin"
-    
-    @State private var bio: String = "Привет! Я Анна, и я увлечена изучением новых технологий и программирования. В данный момент я занимаюсь разработкой проектов в области искусственного интеллекта и ищу напарника для совместного изучения и обмена знаниями."
-    
+    @State var text: String = ""
+    @State private var bio: String = ""
     
     var body: some View {
             
@@ -128,6 +123,7 @@ struct EditProfileModalView: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
         )
+        
     }
     
     @ViewBuilder

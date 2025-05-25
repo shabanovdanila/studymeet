@@ -23,7 +23,7 @@ final class AnnouncementListViewModel: ObservableObject {
     private var hasMorePages: Bool = true
     
     
-    init(client: AnnounceClient = DependencyContainer().makeAnnounceClient()) {
+    init(client: AnnounceClient = DependencyContainer.shared.makeAnnounceClient()) {
         self.client = client
     }
     

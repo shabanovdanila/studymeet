@@ -21,7 +21,7 @@ final class AnotherUserProfileViewModel: ObservableObject {
     private var hasMorePages: Bool = true
     private let limit: Int = 10
     
-    init(client: AnnounceClient = DependencyContainer().makeAnnounceClient(), userClient: UserClient = DependencyContainer().makeUserClient()) {
+    init(client: AnnounceClient = DependencyContainer.shared.makeAnnounceClient(), userClient: UserClient = DependencyContainer.shared.makeUserClient()) {
         self.client = client
         self.userClient = userClient
     }

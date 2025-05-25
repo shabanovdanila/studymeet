@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		640DE4B42DDD0CEC00498209 /* ResponseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640DE4B32DDD0CEC00498209 /* ResponseViewModel.swift */; };
+		640DE4B62DDD0F2900498209 /* OwnResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640DE4B52DDD0F2900498209 /* OwnResponseView.swift */; };
 		6494508F2D8C86700021E6BF /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6494508E2D8C86700021E6BF /* Montserrat-Bold.ttf */; };
 		649856C02D6B1A69001AE27E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649856BF2D6B1A69001AE27E /* Assets.xcassets */; };
 		649856C32D6B1A69001AE27E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649856C22D6B1A69001AE27E /* Preview Assets.xcassets */; };
@@ -71,6 +73,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		640DE4B32DDD0CEC00498209 /* ResponseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseViewModel.swift; sourceTree = "<group>"; };
+		640DE4B52DDD0F2900498209 /* OwnResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnResponseView.swift; sourceTree = "<group>"; };
 		6427E56A2DA073F4002379F7 /* FavoriteClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteClient.swift; sourceTree = "<group>"; };
 		643B8BD72DCF9D5200FFEFE0 /* EditProfileModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileModalView.swift; sourceTree = "<group>"; };
 		643B8BDC2DD0F65A00FFEFE0 /* ColorHSLConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHSLConverter.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 				64826B362DC25EB100FCAF4A /* AnotherUserProfileViewModel.swift */,
 				64826B4D2DC4A35700FCAF4A /* OwnUserPageViewModel.swift */,
 				64826B512DC500F800FCAF4A /* CreateAnnouncementViewModel.swift */,
+				640DE4B32DDD0CEC00498209 /* ResponseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				64A8FAC32D6C567D008863FE /* AnnounceCardView.swift */,
+				640DE4B52DDD0F2900498209 /* OwnResponseView.swift */,
 			);
 			path = AnnounceCard;
 			sourceTree = "<group>";
@@ -491,11 +497,13 @@
 				64E209B02DD104050095EFEF /* DependencyContainer.swift in Sources */,
 				64E2099E2DD0F9F60095EFEF /* SearcherView.swift in Sources */,
 				64E2099F2DD0F9F60095EFEF /* AnnouncementsScrollView.swift in Sources */,
+				640DE4B42DDD0CEC00498209 /* ResponseViewModel.swift in Sources */,
 				64E209A02DD0F9F60095EFEF /* MainPageView.swift in Sources */,
 				64E209A12DD0F9F60095EFEF /* BottomBarView.swift in Sources */,
 				64E209A22DD0F9F60095EFEF /* TopBarView.swift in Sources */,
 				64E209A32DD0F9F60095EFEF /* CreateAnnouncementModalView.swift in Sources */,
 				64E209A42DD0F9F60095EFEF /* UserPageView.swift in Sources */,
+				640DE4B62DDD0F2900498209 /* OwnResponseView.swift in Sources */,
 				64E209A52DD0F9F60095EFEF /* UserDescriptionView.swift in Sources */,
 				64E209A62DD0F9F60095EFEF /* SegmentUserView.swift in Sources */,
 				64E209A72DD0F9F60095EFEF /* AnnounceAnotherPageView.swift in Sources */,

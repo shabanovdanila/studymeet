@@ -22,7 +22,7 @@ final class RegistrationViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var error: Error?
     
-    init(authClient: AuthClient = DependencyContainer().makeAuthClient()) {
+    init(authClient: AuthClient = DependencyContainer.shared.makeAuthClient()) {
         self.authClient = authClient
     }
     

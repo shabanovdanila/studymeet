@@ -14,7 +14,3 @@ struct Tag: Codable, Identifiable {
 }
 //"hsl(350, 98%, 79%)"
 
-struct AllTag: Codable {
-    let tags: [Tag]
-}
-

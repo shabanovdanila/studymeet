@@ -22,7 +22,7 @@ final class CreateAnnouncementViewModel: ObservableObject {
     @Published var alertMessage: String = ""
     @Published var creationSuccess: Bool = false
     
-    init(client: AnnounceClient = DependencyContainer().makeAnnounceClient()) {
+    init(client: AnnounceClient = DependencyContainer.shared.makeAnnounceClient()) {
         self.client = client
     }
     

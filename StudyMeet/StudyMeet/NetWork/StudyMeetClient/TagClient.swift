@@ -22,7 +22,7 @@ final class TagClient {
         try await requestHandler.post(path: "/tag", body: request, query: nil, headers: nil)
     }
     
-    func getAllTags() async throws -> AllTag {
+    func getAllTags() async throws -> [Tag] {
         return try await requestHandler.get(path: "/tag", query: nil, headers: nil)
     }
     
