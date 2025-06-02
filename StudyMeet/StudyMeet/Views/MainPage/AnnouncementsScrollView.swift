@@ -73,7 +73,7 @@ struct AnnouncementsScrollView: View {
             .onAppear() {
                 scrollProxy = proxy
             }
-            .background(Color(red: 219 / 255, green: 234 / 255, blue: 254 / 255))
+            .background(Color.blueBackgroundSM)
         }
     }
 }

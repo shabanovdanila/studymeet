@@ -14,7 +14,7 @@ struct RegistrationView: View {
             navigateToMainPage()
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(red: 219/255, green: 234/255, blue: 254/255))
+            .background(Color.blueBackgroundSM)
             .onTapGesture {
                 UIApplication.shared.endEditing()
             }
@@ -44,16 +44,16 @@ private struct RegistrationWindowView: View {
         VStack(alignment: .center, spacing: 0) {
             HStack{
                 (Text("Study")
-                    .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
+                    .foregroundColor(Color.darkBlueSM)
                     .font(.custom("MontserratAlternates-Bold", size: 20))
                  + Text("Meet")
-                    .foregroundColor(Color(red: 59 / 255, green: 130 / 255, blue: 246 / 255))
+                    .foregroundColor(Color.lightBlueSM)
                     .font(.custom("MontserratAlternates-Bold", size: 20)))
             }
             .padding(.top, 30)
             
             Text("Регистрация")
-                .foregroundColor(Color(red: 30/255, green: 58/255, blue: 138/255))
+                .foregroundColor(Color.darkBlueSM)
                 .font(.custom("Montserrat-Bold", size: 18))
                 .padding(.top, 29)
             
@@ -64,7 +64,7 @@ private struct RegistrationWindowView: View {
             .clipShape(RoundedRectangle(cornerRadius: 30))
             .overlay(
                 RoundedRectangle(cornerRadius: 30)
-                    .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                    .stroke(Color.graySM, lineWidth: 1)
             )
 
             .padding(.top, 15)
@@ -104,7 +104,7 @@ private struct RegistrationWindowView: View {
                     Text("Регистрация")
                         .frame(width: 200)
                         .padding(.vertical, 12)
-                        .background(Color(red: 59/255, green: 130/255, blue: 246/255))
+                        .background(Color.lightBlueSM)
                         .foregroundColor(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
@@ -115,7 +115,7 @@ private struct RegistrationWindowView: View {
             Button("Войти") {
                 //navigateTo()
             }
-            .foregroundColor(Color(red: 30/255, green: 58/255, blue: 138/255))
+            .foregroundColor(Color.darkBlueSM)
             .font(.custom("Montserrat-Medium", size: 14))
             .padding(.top, 15)
         }
@@ -156,7 +156,7 @@ private struct CheckBox: View {
                     .foregroundColor(Color.white)
                     .overlay {
                             RoundedRectangle(cornerRadius: cornerRadius)
-                            .strokeBorder(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255), lineWidth: 1)
+                            .strokeBorder(Color.graySM, lineWidth: 1)
                         }
             } else {
                 ZStack(alignment: .center) {
@@ -166,7 +166,7 @@ private struct CheckBox: View {
                     Image(systemName: "checkmark.square.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(Color(red: 59 / 255, green: 130 / 255, blue: 246 / 255))
+                        .foregroundColor(Color.lightBlueSM)
                         .frame(width: frame, height: frame)
                         .zIndex(1)
                 }

@@ -76,7 +76,7 @@ struct OwnUserPageView: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .background(Color(red: 219/255, green: 234/255, blue: 254/255))
+            .background(Color.blueBackgroundSM)
             
             BottomBarView(page1: true)
         }

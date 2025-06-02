@@ -59,11 +59,11 @@ private struct Segment: View {
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
-            .foregroundColor((isSelected ? Color.white : Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255)))
+            .foregroundColor((isSelected ? Color.white : Color.darkBlueSM))
             .background {
                 if isSelected {
                     Color.white
-                    Color(red: 59 / 255, green: 130 / 255, blue: 246 / 255)
+                    Color.lightBlueSM
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
             }

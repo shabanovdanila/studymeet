@@ -91,7 +91,7 @@ struct UserDescriptionView: View {
                     
                     Text("@" + user.user_name)
                         .lineLimit(1)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 12))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .frame(width: 180)
@@ -127,7 +127,7 @@ struct UserDescriptionView: View {
     @ViewBuilder
     private func line() -> some View {
         RoundedRectangle(cornerRadius: 10)
-                .fill(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255))
+                .fill(Color.graySM)
                 .frame(width: 333, height: 1, alignment: .center)
                 .padding(.top, 16)
     }
@@ -140,11 +140,11 @@ struct UserDescriptionView: View {
                     Image(systemName: "location")
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                     
                     Text(user.location ?? "Earthdfdddddddddd")
                         .lineLimit(1)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 14))
                         .frame(width: 90, alignment: .leading)
                     
@@ -152,12 +152,12 @@ struct UserDescriptionView: View {
                     Image(systemName: "birthday.cake")
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                     
                     //MARK: TODO FIX THIS
                     Text(parseDateString(user.birthday ?? "") ?? "")
                         .lineLimit(1)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 14))
                         .frame(width: 80)
 
@@ -169,11 +169,11 @@ struct UserDescriptionView: View {
                     Image(systemName: "figure.dress.line.vertical.figure")
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                     
                     Text(user.gender != nil ? (user.gender! ? "Мужской" : "Женский") : "Неважно")
                         .lineLimit(1)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 14))
                         .frame(width: 90, alignment: .leading)
                     
@@ -181,11 +181,11 @@ struct UserDescriptionView: View {
                     Image(systemName: "calendar")
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                     //MARK: TODO FIX THIS
                     Text(parseDateString(user.created_at ?? "") ?? "")
                         .lineLimit(1)
-                        .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                        .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 14))
                         .frame(width: 80)
                     
@@ -206,10 +206,10 @@ struct UserDescriptionView: View {
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 Text("О себе")
-                    .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                    .foregroundColor(Color.grayProfileTextSM)
                     .font(.custom("Montserrat-SemiBold", size: 20))
                 Text(user.description ?? "")
-                    .foregroundColor(Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255))
+                    .foregroundColor(Color.grayProfileTextSM)
                     .font(.custom("Montserrat-Regular", size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }

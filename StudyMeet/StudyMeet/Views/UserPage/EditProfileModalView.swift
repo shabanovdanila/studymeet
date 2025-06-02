@@ -48,7 +48,7 @@ struct EditProfileModalView: View {
                     .padding(.horizontal, 15)
                     .overlay(
                         RoundedRectangle(cornerRadius: 30)
-                            .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                            .stroke(Color.graySM, lineWidth: 1)
                     )
                     .frame(width: 208, height: 30)
                     .padding(.top, 140)
@@ -67,7 +67,7 @@ struct EditProfileModalView: View {
                         .padding(.horizontal, 15)
                         .overlay(
                             RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                                .stroke(Color.graySM, lineWidth: 1)
                         )
                         .frame(width: 160, height: 30)
                     
@@ -77,7 +77,7 @@ struct EditProfileModalView: View {
                         .padding(.horizontal, 15)
                         .overlay(
                             RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                                .stroke(Color.graySM, lineWidth: 1)
                         )
                         .frame(width: 160, height: 30)
                 }
@@ -89,7 +89,7 @@ struct EditProfileModalView: View {
                         .padding(.horizontal, 15)
                         .overlay(
                             RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                                .stroke(Color.graySM, lineWidth: 1)
                         )
                         .frame(width: 160, height: 30)
                     
@@ -99,7 +99,7 @@ struct EditProfileModalView: View {
                         .padding(.horizontal, 15)
                         .overlay(
                             RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                                .stroke(Color.graySM, lineWidth: 1)
                         )
                         .frame(width: 160, height: 30)
                 }
@@ -112,7 +112,7 @@ struct EditProfileModalView: View {
                     .padding(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                            .stroke(Color.graySM, lineWidth: 1)
                     )
                     .frame(width: 333, height: 170)
             }
@@ -121,7 +121,7 @@ struct EditProfileModalView: View {
         .frame(width: 363, height: 579)
         .overlay(
             RoundedRectangle(cornerRadius: 20)
-                .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                .stroke(Color.graySM, lineWidth: 1)
         )
         
     }
@@ -129,7 +129,7 @@ struct EditProfileModalView: View {
     @ViewBuilder
     private func line() -> some View {
         RoundedRectangle(cornerRadius: 10)
-                .fill(Color(red: 235 / 255, green: 235 / 255, blue: 235 / 255))
+                .fill(Color.graySM)
                 .frame(width: 333, height: 1, alignment: .center)
     }
     

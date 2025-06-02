@@ -14,7 +14,7 @@ extension View {
             .padding(.horizontal, 15)
             .padding(.top, 11)
             .padding(.bottom, 12)
-            .foregroundColor(Color(r: 122, g: 122, b: 122))
+            .foregroundColor(Color.grayTextSM)
             .contrast(0)
     }
 }

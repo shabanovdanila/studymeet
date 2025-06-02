@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AnnounceCardView: View {
-    //
+    
     let announce: Announcement
     
     var body: some View {
@@ -25,6 +25,7 @@ struct AnnounceCardView: View {
                         .resizable()
                         .padding(3)
                         .frame(width: 20, height: 20)
+                    //TODO
                         .background(Color(red: 217 / 255, green: 217 / 255, blue: 217 / 255))
                         .clipShape(Circle())
                     Text(announce.name)
@@ -47,7 +48,7 @@ struct AnnounceCardView: View {
             
             VStack(alignment: .leading) {
                 Text("Теги")
-                    .foregroundColor(Color(red: 122 / 255, green: 122 / 255, blue: 122 / 255))
+                    .foregroundColor(Color.grayTextSM)
                     .font(.custom("Montserrat-Regular", size: 10))
                 HStack {
                     if (!(announce.tags).isEmpty) {
@@ -66,6 +67,8 @@ struct AnnounceCardView: View {
                             .font(.custom("Montserrat-Regular", size: 10))
                             .padding([.top, .bottom], 3)
                             .padding([.trailing, .leading], 6)
+                        
+                        //TODO
                             .background(Color(r: 255, g: 139, b: 139))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }

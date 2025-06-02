@@ -14,11 +14,13 @@ struct BottomBarView: View {
             ZStack(alignment: .center) {
                 Image(systemName: "house")
                     .resizable()
-                    .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
+                    .foregroundColor(Color.darkBlueSM)
                     .frame(width: 30, height: 30)
                 
                 if page1 { RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(red: 0 / 255, green: 117 / 255, blue: 255 / 255))
+                    
+                    //tODO
+                        .fill(Color.blueLineSM)
                         .frame(width: 20, height: 2, alignment: .center)
                         .padding(.top, 47)
                 }
@@ -28,10 +30,10 @@ struct BottomBarView: View {
             ZStack(alignment: .center) {
                 Image(systemName: "ellipsis.message")
                     .resizable()
-                    .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
+                    .foregroundColor(Color.darkBlueSM)
                     .frame(width: 30, height: 30)
                 if !page1 { RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(red: 0 / 255, green: 117 / 255, blue: 255 / 255))
+                        .fill(Color.blueLineSM)
                         .frame(width: 20, height: 2, alignment: .center)
                         .padding(.top, 47)
                 }
@@ -41,10 +43,10 @@ struct BottomBarView: View {
             ZStack(alignment: .center) {
                 Image(systemName: "magnifyingglass")
                     .resizable()
-                    .foregroundColor(Color(red: 30 / 255, green: 58 / 255, blue: 138 / 255))
+                    .foregroundColor(Color.darkBlueSM)
                     .frame(width: 30, height: 30)
                 if !page1 { RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(red: 0 / 255, green: 117 / 255, blue: 255 / 255))
+                        .fill(Color.blueLineSM)
                         .frame(width: 20, height: 2, alignment: .center)
                         .padding(.top, 47)
                 }

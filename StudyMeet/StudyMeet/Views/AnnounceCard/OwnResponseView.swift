@@ -32,7 +32,7 @@ struct OwnResponseView: View {
         .font(.custom("Montserrat-SemiBold", size: 18))
         .overlay(
             RoundedRectangle(cornerRadius: 20)
-                .stroke(Color(red: 235/255, green: 235/255, blue: 235/255), lineWidth: 1)
+                .stroke(Color.graySM, lineWidth: 1)
         )
     }
 }
