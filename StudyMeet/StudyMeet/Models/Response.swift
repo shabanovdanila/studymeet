@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Response: Codable {
+struct Response: Codable, Identifiable {
     let id: Int
     let announcement_id: Int
     let user_id: Int

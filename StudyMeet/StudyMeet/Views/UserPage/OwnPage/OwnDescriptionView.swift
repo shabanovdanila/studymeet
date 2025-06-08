@@ -1,16 +1,19 @@
-
+//
+//  OwnDescriptionView.swift
+//  StudyMeet
+//
+//  Created by Данила Шабанов on 08.06.2025.
+//
 
 import SwiftUI
 
-struct UserDescriptionView: View {
+struct OwnDescriptionView: View {
     
     let user: User
-    let whichPage: EUserPage
     
-    @State private var hiddenFullInfo: Bool = false
+    @State private var hiddenFullInfo: Bool = true
     
-    @Binding var showEditProfileModal: Bool
-    //private var pencilButtonTapped: () -> Void
+    @State var showEditProfileModal: Bool = false
     
     var body: some View {
         
@@ -57,35 +60,14 @@ struct UserDescriptionView: View {
                             .font(.custom("Montserrat-SemiBold", size: 20))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(width: 194)
-                        if (!hiddenFullInfo) {
-                            if (whichPage == .ownPage) {
-                                Button(action: {
-                                    showEditProfileModal = true
-                                } ) {
-                                    Image(systemName: "pencil")
-                                        .resizable()
-                                        .frame(width: 20, height:   20)
-                                        .padding(.trailing, 15)
-                                }
-                            }
-                            else if (whichPage == .anotherPage) {
-                                Button(action: {}) {
-                                    Image(systemName: "exclamationmark.bubble")
-                                        .resizable()
-                                        .frame(width: 20, height:   20)
-                                        .padding(.trailing, 15)
-                                }
-                            }
-                        }
-                        else {
+                        
                             Image(systemName: "chevron.down")
                                 .font(.title3)
                                 .foregroundStyle(.gray)
-                                .rotationEffect(.init(degrees: hiddenFullInfo ? -180: 0))
+                                .rotationEffect(.init(degrees: hiddenFullInfo ? 0 : 180))
                                 .onTapGesture {
                                     hiddenFullInfo.toggle()
                                 }
-                        }
                     }
                     
                     Text("@" + user.user_name)
@@ -217,3 +199,8 @@ struct UserDescriptionView: View {
         }
     }
 }
+
+#Preview {
+    OwnDescriptionView(user: User(id: 20, email: "dasd", name: "Danila shabanov", user_name: "danilka", description: "DLASMDJNSAJKDNKJSANDdnsakjdnakdnasndaskjdnask ajnsdasndkjandk", location: "Voronezh", gender: true, birthday: "19.01.2004", created_at: "20.04.2003"))
+}
+

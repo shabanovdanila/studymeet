@@ -20,9 +20,6 @@ final class ResponseClient {
         try await requestHandler.post(path: "/response", body: request, query: nil, headers: nil)
     }
     
-    func getAllResponses() async throws -> [Response] {
-        return try await requestHandler.get(path: "/response", query: nil, headers: nil)
-    }
     
     func getResponseById(response_id: Int) async throws -> Response {
         return try await requestHandler.get(path: "/response/\(response_id)", query: nil, headers: nil)

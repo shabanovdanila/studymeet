@@ -43,7 +43,7 @@ struct AnnouncementsScrollView: View {
                                 }
                             }
                             .onTapGesture {
-                                choosePath(user_id: announce.user_id)
+                                choosePath(user_id: announce.user_id, announcementId: announce.id)
                             }
                     }
                     
@@ -86,11 +86,10 @@ struct AnnouncementsScrollView: View {
         .ignoresSafeArea(.keyboard)
     }
     
-    private func choosePath(user_id: Int) {
-        if (user_id == userSession.currentUser?.id) {
-            path.append(Path.userOwn)
-        }
-        else {
+    private func choosePath(user_id: Int, announcementId: Int) {
+        if let currentUser = userSession.currentUser, currentUser.id == user_id {
+            path.append(Path.ownAnnounce(announcementId: announcementId))
+        } else {
             path.append(Path.userAnother(userId: user_id))
         }
     }

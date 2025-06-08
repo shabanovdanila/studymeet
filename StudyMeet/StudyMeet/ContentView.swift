@@ -4,6 +4,7 @@ import SwiftUI
 enum Path: Hashable {
     case main
     case userOwn
+    case ownAnnounce(announcementId: Int)
     case userAnother(userId: Int)
     case login
     case registration
@@ -12,6 +13,7 @@ enum Path: Hashable {
 enum CurrentScreen {
     case main
     case userOwn
+    case ownAnnounce
     case userAnother
     case login
     case registration
@@ -42,6 +44,8 @@ struct ContentView: View {
                     MainPageView(path: $path, currentScreen: $currentScreen )
                 case .userOwn:
                     OwnUserPageView(path: $path, currentScreen: $currentScreen)
+                case .ownAnnounce(let announcementId):
+                    AnnounceOwnPageView(path: $path, currentScreen: $currentScreen, announcementId: announcementId)
                 case .userAnother(let userId):
                     AnotherUserPageView(userId: userId, path: $path, currentScreen: $currentScreen)
                 case .login:
