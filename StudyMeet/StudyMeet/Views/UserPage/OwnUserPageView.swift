@@ -10,11 +10,13 @@ struct OwnUserPageView: View {
     
     @StateObject private var viewModel: OwnUserPageViewModel
     @StateObject private var viewModelCreationAnnounce: CreateAnnouncementViewModel
+    @StateObject private var editProfileViewModel: EditProfileViewModel
     
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
     
     @State private var showCreateModal = false
+    @State private var showEditProfileModal = false
     
     @State private var selection: Option = .first
     
@@ -23,6 +25,7 @@ struct OwnUserPageView: View {
         self._currentScreen = currentScreen
         self._viewModel = StateObject(wrappedValue: OwnUserPageViewModel())
         self._viewModelCreationAnnounce = StateObject(wrappedValue: CreateAnnouncementViewModel())
+        self._editProfileViewModel = StateObject(wrappedValue: EditProfileViewModel())
     }
     
     var body: some View {
@@ -34,7 +37,7 @@ struct OwnUserPageView: View {
             ScrollView(showsIndicators: false) {
                 // Информация о пользователе
                 if let user = viewModel.user {
-                    UserDescriptionView(user: user, whichPage: .ownPage)
+                    UserDescriptionView(user: user, whichPage: .ownPage, showEditProfileModal: $showEditProfileModal)
                         .padding(.top, 15)
                         .transition(.opacity)
                 } else {
@@ -84,6 +87,13 @@ struct OwnUserPageView: View {
         .fullScreenCover(isPresented: $showCreateModal) {
             CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
                 .edgesIgnoringSafeArea(.all)
+        }
+        .sheet(isPresented: $showEditProfileModal) {
+            EditProfileModalView(viewModel: editProfileViewModel).onDisappear() {
+                Task {
+                    await viewModel.loadUserProfile()
+                }
+            }
         }
         .refreshable {
             Task {

@@ -14,6 +14,7 @@ struct AnotherUserPageView: View {
     @StateObject private var viewModelCreationAnnounce: CreateAnnouncementViewModel
     
     @State private var showCreateModal = false
+    @State private var reportUser = false
     
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
@@ -36,7 +37,7 @@ struct AnotherUserPageView: View {
             ScrollView(showsIndicators: false) {
                 
                 if let user = viewModel.user {
-                    UserDescriptionView(user: user, whichPage: .anotherPage)
+                    UserDescriptionView(user: user, whichPage: .anotherPage, showEditProfileModal: $reportUser)
                         .padding(.top, 15)
                         .transition(.opacity)
                 } else if viewModel.isLoading && viewModel.currentPage == 1 {

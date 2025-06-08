@@ -64,10 +64,10 @@ final class OwnUserPageViewModel: ObservableObject {
                 page: "\(favoritesCurrentPage)"
             )
             print("SUCCESS FAVORITES")
-            //let (userAnnouncements, favoriteAnnouncements) = await (try announcements, try favorites)
             
             self.userAnnouncements = announcements
             self.favoriteAnnouncements = favorites
+            userSession.updateUser(created_at: parseDateString(user?.created_at ?? ""))
             
             hasMorePages = userAnnouncements.count >= limit
             hasMoreFavoritesPages = favoriteAnnouncements.count >= limit

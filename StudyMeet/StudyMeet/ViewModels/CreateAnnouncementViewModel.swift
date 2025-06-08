@@ -22,6 +22,8 @@ final class CreateAnnouncementViewModel: ObservableObject {
     @Published var alertMessage: String = ""
     @Published var creationSuccess: Bool = false
     
+    let auth = DependencyContainer.shared.makeAuthClient()
+    
     init(client: AnnounceClient = DependencyContainer.shared.makeAnnounceClient()) {
         self.client = client
     }
@@ -38,6 +40,16 @@ final class CreateAnnouncementViewModel: ObservableObject {
         tags.removeAll { $0 == tag }
     }
     
+
+    @MainActor
+    func logoutt() async {
+        do {
+            try await auth.logout()
+        } catch {
+            
+        }
+    }
+    
     @MainActor
     func createAnnouncement() async {
         guard !title.isEmpty else {
@@ -51,10 +63,6 @@ final class CreateAnnouncementViewModel: ObservableObject {
         }
         
         isLoading = true
-        
-        print(title)
-        print(description)
-        print(tags)
         
         do {
             try await client.createAnnouncement(
@@ -75,7 +83,7 @@ final class CreateAnnouncementViewModel: ObservableObject {
         isLoading = false
     }
     
-    private func clearForm() {
+    func clearForm() {
         title = ""
         description = ""
         tags = []

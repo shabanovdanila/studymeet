@@ -41,6 +41,7 @@ final class KeychainService {
     }
     
     func deleteUser() -> Bool{
+        clearTokens()
         let user = delete(key: userKey)
         return user
     }

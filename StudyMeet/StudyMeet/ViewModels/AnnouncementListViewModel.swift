@@ -25,6 +25,7 @@ final class AnnouncementListViewModel: ObservableObject {
     
     init(client: AnnounceClient = DependencyContainer.shared.makeAnnounceClient()) {
         self.client = client
+        print("CREATING ANNOUNCEMENTLISTVM")
     }
     
     @MainActor
@@ -53,19 +54,24 @@ final class AnnouncementListViewModel: ObservableObject {
             hasMorePages = !response.isEmpty && response.count >= limit
             
         } catch {
-            currentPage -= 1
-            self.error = error
-            print(error)
+            if (error as NSError).code != NSURLErrorCancelled {
+                self.error = error
+            } else {
+                currentPage -= 1
+                self.error = error
+                print(error)
+            }
         }
         
         isLoading = false
     }
     
     func loadNextPage() {
-        guard hasMorePages else { return }
+        guard !isLoading && hasMorePages else { return }
         currentPage += 1
         Task {
             await loadAnnounces()
         }
     }
+    
 }

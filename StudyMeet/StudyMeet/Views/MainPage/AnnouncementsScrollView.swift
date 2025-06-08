@@ -15,8 +15,11 @@ struct AnnouncementsScrollView: View {
     
     @Binding var scrollProxy: ScrollViewProxy?
     
+    @EnvironmentObject private var userSession: UserSession
+    
     init(searchText: Binding<String>, path: Binding<NavigationPath>,
          scrollProxy: Binding<ScrollViewProxy?>) {
+        print("CREATING ANNOUNCE SCROLL VIEW")
         self._searchText = searchText
         self._path = path
         self._scrollProxy = scrollProxy
@@ -40,7 +43,7 @@ struct AnnouncementsScrollView: View {
                                 }
                             }
                             .onTapGesture {
-                                path.append(Path.userAnother(userId: announce.user_id))
+                                choosePath(user_id: announce.user_id)
                             }
                     }
                     
@@ -53,13 +56,15 @@ struct AnnouncementsScrollView: View {
                 .padding(.bottom, 12)
             }
             .refreshable {
+                print("REFRESHABLE")
                 Task {
                     await viewModel.refreshAnnouncements()
                 }
             }
-            .task {
-                await viewModel.loadAnnounces()
-            }
+//            .task {
+//                print("TOO MANY")
+//                await viewModel.loadAnnounces()
+//            }
             .alert("Error", isPresented: .constant(viewModel.error != nil)) {
                 Button("OK", role: .cancel) { }
                 Button("Retry") {
@@ -72,8 +77,21 @@ struct AnnouncementsScrollView: View {
             }
             .onAppear() {
                 scrollProxy = proxy
+                Task {
+                    await viewModel.loadAnnounces()
+                }
             }
             .background(Color.blueBackgroundSM)
+        }
+        .ignoresSafeArea(.keyboard)
+    }
+    
+    private func choosePath(user_id: Int) {
+        if (user_id == userSession.currentUser?.id) {
+            path.append(Path.userOwn)
+        }
+        else {
+            path.append(Path.userAnother(userId: user_id))
         }
     }
 }

@@ -45,8 +45,7 @@ struct ContentView: View {
                 case .userAnother(let userId):
                     AnotherUserPageView(userId: userId, path: $path, currentScreen: $currentScreen)
                 case .login:
-                    //LoginView(login: $login, password: <#T##String#>)
-                    EmptyView()
+                    LoginView(path: $path, currentScreen: $currentScreen)
                 case .registration:
                     RegistrationView(path: $path, currentScreen: $currentScreen)
                 }

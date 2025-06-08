@@ -17,13 +17,19 @@ final class UserSession: ObservableObject {
     
     private init() {
         self.loadUserFromKeychain()
-        print(currentUser?.name)
     }
     
     func login(user: User) {
         self.currentUser = user
         self.isAuthenticated = true
         try? keychain.saveUser(user)
+    }
+    
+    func updateUser(name: String? = nil, location: String? = nil, gender: Bool? = nil, birtday: String? = nil, description: String? = nil, created_at: String? = nil) {
+        if let currentUser = self.currentUser {
+            let newUser = User(id: currentUser.id, email: currentUser.email, name: name ?? currentUser.name, user_name: currentUser.user_name, description: description ?? currentUser.description, location: location ?? currentUser.location, gender: gender ?? currentUser.gender, birthday: birtday ?? currentUser.birthday, created_at: created_at ?? currentUser.created_at)
+            login(user: newUser)
+        }
     }
     
     func logout() {
@@ -35,9 +41,8 @@ final class UserSession: ObservableObject {
     private func loadUserFromKeychain() {
         if let savedUser = try? keychain.getUser() {
             self.currentUser = savedUser
-            print("email:")
-            print(currentUser?.email)
             self.isAuthenticated = true
+            print("succes load from keychain")
         }
     }
 }

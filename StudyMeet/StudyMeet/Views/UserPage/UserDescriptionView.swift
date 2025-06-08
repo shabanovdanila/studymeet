@@ -9,6 +9,7 @@ struct UserDescriptionView: View {
     
     @State private var hiddenFullInfo: Bool = false
     
+    @Binding var showEditProfileModal: Bool
     //private var pencilButtonTapped: () -> Void
     
     var body: some View {
@@ -62,7 +63,9 @@ struct UserDescriptionView: View {
                             .frame(width: 194)
                         if (!hiddenFullInfo) {
                             if (whichPage == .ownPage) {
-                                Button(action: {} ) {
+                                Button(action: {
+                                    showEditProfileModal = true
+                                } ) {
                                     Image(systemName: "pencil")
                                         .resizable()
                                         .frame(width: 20, height:   20)

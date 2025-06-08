@@ -22,6 +22,7 @@ struct MainPageView: View {
     @State var searchText: String = ""
     @State private var scrollProxy: ScrollViewProxy?
     
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(path: $path, currentScreen: $currentScreen,
@@ -34,9 +35,12 @@ struct MainPageView: View {
             
             Button("logout") {
                 userSession.logout()
+                
+                Task {
+                    await viewModelCreationAnnounce.logoutt()
+                }
             }
             AnnouncementsScrollView(searchText: $searchText, path: $path, scrollProxy: $scrollProxy)
-            
                 .frame(maxWidth: .infinity)
             
             if userSession.isAuthenticated {
@@ -47,10 +51,15 @@ struct MainPageView: View {
         .fullScreenCover(isPresented: $showCreateModal) {
             CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
                 .edgesIgnoringSafeArea(.all)
+                .onDisappear() {
+                    viewModelCreationAnnounce.clearForm()
+                }
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
             currentScreen = .main
+            print("CREATING MAINPAGEVIEW")
         }
+        .ignoresSafeArea(.keyboard)
     }
 }

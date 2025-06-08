@@ -1,20 +1,52 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State var login: String
-    @State var password: String
+    
+    @StateObject private var viewModel = LoginViewModel()
+    @Binding var path: NavigationPath
+    @Binding var currentScreen: CurrentScreen
+    @EnvironmentObject private var userSession: UserSession
+    
     var body: some View {
-        NavigationStack {
-            LoginWindowView(login: $login, password: $password)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.blueBackgroundSM)
-        }
+        LoginWindowView(viewModel: viewModel, navigateToMain: navigateToMainPage,
+                        navigateToRegistration: navigateToRegistrationPage)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.blueBackgroundSM)
+            .onTapGesture {
+                UIApplication.shared.endEditing()
+            }
+            .alert(isPresented: .constant(viewModel.error != nil)) {
+                Alert(
+                    title: Text("Ошибка"),
+                    message: Text(viewModel.error?.localizedDescription ?? "Неизвестная ошибка"),
+                    dismissButton: .default(Text("OK")) {
+                        viewModel.error = nil
+                    }
+                )
+            }
+            .navigationBarBackButtonHidden(true)
+            .onAppear {
+                currentScreen = .registration
+            }
+            .ignoresSafeArea(.keyboard)
+    }
+    private func navigateToMainPage() {
+        path = NavigationPath()
+        path.append(Path.main)
+    }
+    private func navigateToRegistrationPage() {
+//        if !path.isEmpty {
+//            path.removeLast()
+//        }
+        path = NavigationPath()
+        path.append(Path.registration)
     }
 }
 
 private struct LoginWindowView: View {
-    @Binding var login: String
-    @Binding var password: String
+    @ObservedObject var viewModel: LoginViewModel
+    var navigateToMain: () -> Void
+    var navigateToRegistration: () -> Void
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -22,7 +54,7 @@ private struct LoginWindowView: View {
                 (Text("Study")
                     .foregroundColor(Color.darkBlueSM)
                     .font(.custom("MontserratAlternates-Bold", size: 20))
-                 + Text("Mate")
+                 + Text("Meet")
                     .foregroundColor(Color.lightBlueSM)
                     .font(.custom("MontserratAlternates-Bold", size: 20)))
             }
@@ -33,42 +65,51 @@ private struct LoginWindowView: View {
                 .font(.custom("Montserrat-Bold", size: 18))
                 .padding(.top, 65)
             
-            TextField("Логин или email", text: $login)
-                .padding()
-                .frame(width: 323, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                        .strokeBorder(Color.graySM, lineWidth: 1)
-                    }
-                .padding(.top, 15)
-            
-            TextField("Пароль", text: $password)
-                .padding()
-                .frame(width: 323, height: 40)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-                .overlay {
-                        RoundedRectangle(cornerRadius: 30)
-                        .strokeBorder(Color.graySM, lineWidth: 1)
-                    }
-                .padding(.top, 15)
+            Group {
+                fields()
+            }
+            .frame(width: 323, height: 40)
+            .clipShape(RoundedRectangle(cornerRadius: 30))
+            .overlay(
+                RoundedRectangle(cornerRadius: 30)
+                    .stroke(Color.graySM, lineWidth: 1)
+            )
+            .padding(.top, 15)
             
             Text("Забыли пароль?")
                 .foregroundColor(Color.lightBlueSM)
                 .font(.custom("Montserrat-Medium", size: 14))
                 .padding(.top, 15)
             
-            Text("Войти")
-                .foregroundColor(Color.white)
-                .font(.custom("Montserrat-Medium", size: 16))
-                .padding(.leading, 55)
-                .padding(.trailing, 54)
-                .padding([.top, .bottom], 12)
-                .background(Color.lightBlueSM)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+            if viewModel.isLoading {
+                ProgressView()
+                    .padding(.top, 15)
+            } else {
+                Button(action: {
+                    Task {
+                        if await viewModel.login() {
+                            navigateToMain()
+                        }
+                        else {
+                            print(11111)
+                        }
+                    }
+                }) {
+                    Text("Войти")
+                        .frame(width: 200)
+                        .padding(.vertical, 12)
+                        .background(Color.lightBlueSM)
+                        .foregroundColor(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                }
                 .padding(.top, 15)
+            }
             
-            Text("Регистрация")
+            Button("Регистрация") {
+                withAnimation(.none) {
+                    navigateToRegistration()
+                }
+            }
                 .foregroundColor(Color.darkBlueSM)
                 .font(.custom("Montserrat-Medium", size: 14))
                 .padding(.top, 15)
@@ -81,5 +122,16 @@ private struct LoginWindowView: View {
         .clipShape(RoundedRectangle(cornerRadius: 30))
         
     }
+    
+    @ViewBuilder
+    private func fields() -> some View {
+        Group {
+            TextField("Логин", text: $viewModel.usernameOrEmail)
+            SecureField("Пароль", text: $viewModel.password)
+        }
+        .autocapitalization(.none)
+        .registrationTextFieldStyle()
+    }
+    
 }
 

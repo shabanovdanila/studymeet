@@ -1,6 +1,5 @@
 import SwiftUI
 
-import SwiftUI
 
 struct RegistrationView: View {
     
@@ -10,9 +9,8 @@ struct RegistrationView: View {
     @EnvironmentObject private var userSession: UserSession
     
     var body: some View {
-        RegistrationWindowView(viewModel: viewModel, navigateTo: {
-            navigateToMainPage()
-        })
+        RegistrationWindowView(viewModel: viewModel, navigateToMain:navigateToMainPage,
+                               navigateToLogin: navigateToLoginPage)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.blueBackgroundSM)
             .onTapGesture {
@@ -27,18 +25,29 @@ struct RegistrationView: View {
                     }
                 )
             }
+            .navigationBarBackButtonHidden(true)
             .onAppear {
-                currentScreen = .registration
+                currentScreen = .login
             }
+            .ignoresSafeArea(.keyboard)
     }
     private func navigateToMainPage() {
+        path = NavigationPath()
         path.append(Path.main)
+    }
+    private func navigateToLoginPage() {
+//        if !path.isEmpty {
+//            path.removeLast()
+//        }
+        path = NavigationPath()
+        path.append(Path.login)
     }
 }
 
 private struct RegistrationWindowView: View {
     @ObservedObject var viewModel: RegistrationViewModel
-    var navigateTo: () -> Void
+    var navigateToMain: () -> Void
+    var navigateToLogin: () -> Void
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -66,7 +75,6 @@ private struct RegistrationWindowView: View {
                 RoundedRectangle(cornerRadius: 30)
                     .stroke(Color.graySM, lineWidth: 1)
             )
-
             .padding(.top, 15)
             
             // Чекбокс соглашения
@@ -93,8 +101,7 @@ private struct RegistrationWindowView: View {
                 Button(action: {
                     Task {
                         if await viewModel.register() {
-                            
-                            navigateTo()
+                            navigateToMain()
                         }
                         else {
                             print(11111)
@@ -113,7 +120,9 @@ private struct RegistrationWindowView: View {
             
             // Кнопка входа
             Button("Войти") {
-                //navigateTo()
+                withAnimation(.none) {
+                    navigateToLogin()
+                }
             }
             .foregroundColor(Color.darkBlueSM)
             .font(.custom("Montserrat-Medium", size: 14))
