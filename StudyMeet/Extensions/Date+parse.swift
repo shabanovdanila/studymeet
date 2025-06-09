@@ -21,3 +21,18 @@ func parseDateString(_ dateString: String) -> String? {
     
     return outputFormatter.string(from: date)
 }
+
+func convertToISO8601(from dateString: String) -> String? {
+    let inputFormatter = DateFormatter()
+    inputFormatter.dateFormat = "dd.MM.yyyy"
+    inputFormatter.locale = Locale(identifier: "ru_RU")
+    inputFormatter.timeZone = TimeZone(secondsFromGMT: 0) // Указываем UTC
+    
+    guard let date = inputFormatter.date(from: dateString) else {
+        return nil
+    }
+    let outputFormatter = ISO8601DateFormatter()
+    outputFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    
+    return outputFormatter.string(from: date)
+}

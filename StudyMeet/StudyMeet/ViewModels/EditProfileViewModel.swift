@@ -16,7 +16,7 @@ final class EditProfileViewModel: ObservableObject {
     @Published var birthday: String = ""
     @Published var gender: Bool = true // false - женский, true - мужской
     @Published var description: String = ""
-    var created_at: String = ""
+    @Published var created_at: String = ""
     
     @Published var isLoading: Bool = false
     @Published var error: Error?
@@ -46,13 +46,15 @@ final class EditProfileViewModel: ObservableObject {
         isLoading = true
         error = nil
         
+        let newDate = convertToISO8601(from: birthday) ?? birthday
+        print(newDate)
         do {
             
             try await userClient.updateUser(
                 name: name,
                 location: location,
                 gender: gender,
-                birthday: birthday,
+                birthday: newDate,
                 description: description
             )
             userSession.updateUser(name: name, location: location, gender: gender, birtday: birthday, description: description)
