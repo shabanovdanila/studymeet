@@ -90,7 +90,7 @@ struct AnnouncementsScrollView: View {
         if let currentUser = userSession.currentUser, currentUser.id == user_id {
             path.append(Path.ownAnnounce(announcementId: announcementId))
         } else {
-            path.append(Path.userAnother(userId: user_id))
+            path.append(Path.anotherAnnounce(announcementId: announcementId, userId: user_id))
         }
     }
 }

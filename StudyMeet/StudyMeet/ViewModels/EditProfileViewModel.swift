@@ -47,7 +47,6 @@ final class EditProfileViewModel: ObservableObject {
         error = nil
         
         let newDate = convertToISO8601(from: birthday) ?? birthday
-        print(newDate)
         do {
             
             try await userClient.updateUser(

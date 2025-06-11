@@ -8,22 +8,18 @@
 import SwiftUI
 
 struct OwnDescriptionView: View {
-    
     let user: User
     
     @State private var hiddenFullInfo: Bool = true
-    
     @State var showEditProfileModal: Bool = false
     
     var body: some View {
-        
         ZStack(alignment: .topLeading) {
             ZStack(alignment: .center) {
                 Circle()
                     .foregroundStyle(Color.white)
                     .frame(width: 100, height: 100)
                 
-        
                 Image(systemName: "cat.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -35,6 +31,7 @@ struct OwnDescriptionView: View {
             .padding(.horizontal, 15)
             .padding(.top, 105)
             .zIndex(1)
+            
             VStack {
                 ZStack(alignment: .topLeading) {
                     Image("avatar")
@@ -49,10 +46,7 @@ struct OwnDescriptionView: View {
                         ))
                 }
                 
-                //Avatar
-                
                 VStack(alignment: .leading, spacing: 0) {
-                    
                     HStack(spacing: 0) {
                         Text(user.name)
                             .lineLimit(1)
@@ -60,14 +54,20 @@ struct OwnDescriptionView: View {
                             .font(.custom("Montserrat-SemiBold", size: 20))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .frame(width: 194)
-                        
+                        Spacer()
+                        // Toggle button
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                hiddenFullInfo.toggle()
+                            }
+                        }) {
                             Image(systemName: "chevron.down")
                                 .font(.title3)
-                                .foregroundStyle(.gray)
-                                .rotationEffect(.init(degrees: hiddenFullInfo ? 0 : 180))
-                                .onTapGesture {
-                                    hiddenFullInfo.toggle()
-                                }
+                                .rotationEffect(.degrees(hiddenFullInfo ? 0 : 180))
+                                .foregroundColor(.gray)
+                        }
+                        .animation(.easeInOut(duration: 0.3), value: hiddenFullInfo)
+                        .padding(.trailing, 15)
                     }
                     
                     Text("@" + user.user_name)
@@ -82,21 +82,17 @@ struct OwnDescriptionView: View {
                 .padding(.top, 5)
                 .padding(.leading, 130)
                 
-                
-                if (!hiddenFullInfo) {
-                    
-                    line()
-                    
-                    
-                    
-                    info(user: user)
-                    
-                    
-                    line()
-                    
-                    
-                    about(user: user)
+                // Full info with animation
+                Group {
+                    if !hiddenFullInfo {
+                        line()
+                        info(user: user)
+                        line()
+                        about(user: user)
+                    }
                 }
+                .transition(.opacity.combined(with: .move(edge: .top)))
+                .animation(.easeInOut(duration: 0.3), value: hiddenFullInfo)
                 
             }
         }
@@ -108,9 +104,9 @@ struct OwnDescriptionView: View {
     @ViewBuilder
     private func line() -> some View {
         RoundedRectangle(cornerRadius: 10)
-                .fill(Color.graySM)
-                .frame(width: 333, height: 1, alignment: .center)
-                .padding(.top, 16)
+            .fill(Color.graySM)
+            .frame(width: 333, height: 1)
+            .padding(.top, 16)
     }
     
     private struct info: View {
@@ -123,29 +119,27 @@ struct OwnDescriptionView: View {
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color.grayProfileTextSM)
                     
-                    Text(user.location ?? "Earthdfdddddddddd")
+                    Text(user.location ?? "Earth")
                         .lineLimit(1)
                         .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 14))
                         .frame(width: 90, alignment: .leading)
-                    
                     
                     Image(systemName: "birthday.cake")
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color.grayProfileTextSM)
                     
-                    //MARK: TODO FIX THIS
                     Text(parseDateString(user.birthday ?? "") ?? "")
                         .lineLimit(1)
                         .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 14))
                         .frame(width: 80)
-
                 }
                 .frame(width: 200, height: 20)
                 .padding(.leading, 15)
                 .padding(.trailing, 141)
+                
                 HStack(spacing: 3) {
                     Image(systemName: "figure.dress.line.vertical.figure")
                         .resizable()
@@ -158,19 +152,16 @@ struct OwnDescriptionView: View {
                         .font(.custom("Montserrat-Regular", size: 14))
                         .frame(width: 90, alignment: .leading)
                     
-                    
                     Image(systemName: "calendar")
                         .resizable()
                         .frame(width: 20, height: 20)
                         .foregroundColor(Color.grayProfileTextSM)
-                    //MARK: TODO FIX THIS
+                    
                     Text(parseDateString(user.created_at ?? "") ?? "")
                         .lineLimit(1)
                         .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 14))
                         .frame(width: 80)
-                    
-
                 }
                 .frame(width: 200, height: 20)
                 .padding(.leading, 15)
@@ -201,6 +192,15 @@ struct OwnDescriptionView: View {
 }
 
 #Preview {
-    OwnDescriptionView(user: User(id: 20, email: "dasd", name: "Danila shabanov", user_name: "danilka", description: "DLASMDJNSAJKDNKJSANDdnsakjdnakdnasndaskjdnask ajnsdasndkjandk", location: "Voronezh", gender: true, birthday: "19.01.2004", created_at: "20.04.2003"))
+    OwnDescriptionView(user: User(
+        id: 20,
+        email: "dasd",
+        name: "Danila Shabanov",
+        user_name: "danilka",
+        description: "DLASMDJNSAJKDNKJSANDdnsakjdnakdnasndaskjdnask ajnsdasndkjandk",
+        location: "Voronezh",
+        gender: true,
+        birthday: "19.01.2004",
+        created_at: "20.04.2003"
+    ))
 }
-

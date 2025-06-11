@@ -6,6 +6,7 @@ enum Path: Hashable {
     case userOwn
     case ownAnnounce(announcementId: Int)
     case userAnother(userId: Int)
+    case anotherAnnounce(announcementId: Int, userId: Int)
     case login
     case registration
 }
@@ -15,6 +16,7 @@ enum CurrentScreen {
     case userOwn
     case ownAnnounce
     case userAnother
+    case anotherAnnounce
     case login
     case registration
 }
@@ -52,6 +54,8 @@ struct ContentView: View {
                     LoginView(path: $path, currentScreen: $currentScreen)
                 case .registration:
                     RegistrationView(path: $path, currentScreen: $currentScreen)
+                case .anotherAnnounce(let announcementId, let userId):
+                    AnnounceAnotherPageView(path: $path, currentScreen: $currentScreen, announcementId: announcementId, userId: userId)
                 }
             }
         }

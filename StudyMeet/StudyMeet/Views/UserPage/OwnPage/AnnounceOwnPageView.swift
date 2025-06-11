@@ -40,9 +40,36 @@ struct AnnounceOwnPageView: View {
                         .padding(.top, 15)
                     
                     FullAnnounceCardView(announce: announcement)
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.graySM, lineWidth: 1)
+                        )
+                        .padding()
                     
-                    ResponsesView(responses: viewModel.responses)
+                    Text("Отклики (\(viewModel.responses.count))")
+                        .foregroundColor(Color.darkBlueSM)
+                        .font(.custom("Montserrat-SemiBold", size: 20))
+                        .padding(.top, 15)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
+                    VStack {
+                        ForEach(viewModel.responses) { response in
+                            VStack(spacing: 0) {
+                                ResponseCardView(response: response)
+                                    .background(Color.white)
+                                    .padding(15)
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .stroke(Color.graySM, lineWidth: 1)
+                                    )
+                                    .padding(.bottom, 10)
+                            }
+
+                        }
+                    }
                     
                 } else {
                     UserProfilePlaceholder()
@@ -161,50 +188,52 @@ private struct FullAnnounceCardView: View {
     var announce: Announcement
     
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Text(announce.title)
+        VStack(alignment: .leading) {
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    Text(announce.title)
+                        .foregroundColor(Color.black)
+                        .font(.custom("Montserrat-SemiBold", size: 20))
+                    Spacer()
+                    Image(systemName: "heart")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 24, height: 24)
+                }
+                .frame(height: 49)
+                .padding(15)
+                
+                line()
+                
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Кого ищу?")
                     .foregroundColor(Color.black)
-                    .font(.custom("Montserrat-SemiBold", size: 20))
-                Spacer()
-                Image(systemName: "heart")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
-            }
-            .frame(height: 49)
-            .padding(15)
-            
-            line()
-
-        }
-        VStack(alignment: .leading, spacing: 0) {
-            Text("Кого ищу?")
-                .foregroundColor(Color.black)
-                .font(.custom("Montserrat-SemiBold", size: 18))
-            Text(announce.description ?? "")
-                .foregroundColor(Color.black)
-                .font(.custom("Montserrat-Regular", size: 14))
+                    .font(.custom("Montserrat-SemiBold", size: 18))
+                Text(announce.description ?? "")
+                    .foregroundColor(Color.black)
+                    .font(.custom("Montserrat-Regular", size: 14))
+                    .padding(.top, 15)
+                tagsView(tags: announce.tags)
+                    .padding(.top, 10)
+                
+                Button("Редактировать") {
+                    //                Task {
+                    //                    await viewModel.updateProfile()
+                    //                    if viewModel.updateSuccess {
+                    //                        dismiss()
+                    //                    }
+                    //                }
+                }
+                .padding(.horizontal, 20)
+                .frame(height: 44)
+                .background(Color.grayTextSM)
+                .foregroundColor(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.top, 15)
-            tagsView(tags: announce.tags)
-                .padding(.top, 10)
-            
-            Button("Редактировать") {
-//                Task {
-//                    await viewModel.updateProfile()
-//                    if viewModel.updateSuccess {
-//                        dismiss()
-//                    }
-//                }
             }
-            .padding(.horizontal, 20)
-            .frame(height: 44)
-            .background(Color.grayTextSM)
-            .foregroundColor(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .padding(.top, 15)
+            .padding(15)
         }
-        .padding(15)
     }
     @ViewBuilder
     private func line() -> some View {
@@ -240,26 +269,44 @@ private struct FullAnnounceCardView: View {
                 }
             }
         }
-        
     }
 }
 
-private struct ResponsesView: View {
-    var responses: [Response]
-    
+private struct ResponseCardView: View {
+    var response: Response
     var body: some View {
-        VStack {
-            Text("Отклики")
-                .padding(.top, 15)
-            
-            ForEach(responses) { response in
-                Text(response.descritption)
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                avatar
+                    .padding([.trailing], 5)
+                Text(response.name)
+                    .foregroundColor(Color.black)
+                    .font(.custom("Montserrat-Regular", size: 16))
+                Spacer()
+                
+                Image(systemName: "xmark")
+                    .foregroundStyle(Color.red)
+                    .padding(.bottom, 10)
+                    .padding(.trailing, 19)
+                Image(systemName: "checkmark")
+                    .foregroundStyle(Color.green)
+                    .padding(.bottom, 10)
             }
+            Text(response.description)
+                .foregroundColor(Color.black)
+                .font(.custom("Montserrat-Regular", size: 14))
+                .padding(.top, 4)
         }
     }
+    
+    private var avatar: some View {
+        Image(systemName: "cat.fill")
+            .resizable()
+            .padding(3)
+            .frame(width: 14, height: 14)
+            .background(Color.yellow)
+            .clipShape(Circle())
+    }
 }
 
 
-#Preview {
-    FullAnnounceCardView(announce: Announcement(id: 1, title: "Ищу напарника по геймдизайну", bg_color: "", user_id: 12, name: "danila", description: "klmflkmaslfn;nf ;kasnf;jnas;jkffnfjknnkfnjjsshhjbsbjh7787878 hsjdasjndksankdjnasjkdaknkndajndnddddf;jnas;jkffnfjknnkfnjjsshhjbsbjh7787878assssssalkmaslknflfkanfjanflkmafnnl hsjdasjndksankdjnasjkdaknkndajndnddddf;jnas;jkffnfjknnkfnjjsshhjbsbjh7787878 hsjdasjndksankdjnasjkdaknkndajndnddddf;jnas;jkffnfjknnkfnjjsshhjbsbjh7787878 hsjdasjndksankdjnasjkdaknkndajndndddd", tags: [Tag(id: 1, name: "tagggg", color: "")], liked: true))
-}

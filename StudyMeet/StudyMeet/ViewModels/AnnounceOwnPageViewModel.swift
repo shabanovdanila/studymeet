@@ -61,38 +61,15 @@ final class AnnounceOwnPageViewModel: ObservableObject {
             
         } catch {
             self.error = error
+            print(error)
             showAlert(message: "Ошибка при загрузке данных: \(error.localizedDescription)")
         }
         
         isLoading = false
     }
     
-    @MainActor
-    func updateAnnouncement(announcementId: Int) async {
-        guard !isLoading else { return }
-        
-        isLoading = true
-        error = nil
-        
-        do {
-            try await clientAnnouncement.updateAnnouncementById(
-                id: announcementId,
-                title: title,
-                description: description,
-                tags: tags
-            )
-            
-            updateSuccess = true
-            showAlert(message: "Объявление успешно обновлено")
-            
-        } catch {
-            self.error = error
-            showAlert(message: "Ошибка при обновлении: \(error.localizedDescription)")
-            updateSuccess = false
-        }
-        
-        isLoading = false
-    }
+    //@MainActor
+    //func updateAnnouncement(announcementId: Int) async
     
     @MainActor
     func refresh(announcementId: Int) async {
@@ -100,12 +77,6 @@ final class AnnounceOwnPageViewModel: ObservableObject {
         
         isRefreshing = true
         error = nil
-        
-        // Сохраняем текущие редактируемые данные, если находимся в режиме редактирования
-        let currentTitle = title
-        let currentDescription = description
-        let currentTags = tags
-        let wasEditing = isEditing
         
         do {
             // Загружаем свежие данные
@@ -118,15 +89,6 @@ final class AnnounceOwnPageViewModel: ObservableObject {
             self.announcement = loadedAnnouncement
             
             // Восстанавливаем редактируемые данные, если были в режиме редактирования
-            if wasEditing {
-                self.title = currentTitle
-                self.description = currentDescription
-                self.tags = currentTags
-            } else {
-                self.title = loadedAnnouncement.title
-                self.description = loadedAnnouncement.description ?? ""
-                self.tags = loadedAnnouncement.tags.map { $0.name ?? "" }
-            }
             
         } catch {
             self.error = error

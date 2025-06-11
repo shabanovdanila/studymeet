@@ -12,6 +12,6 @@ struct Response: Codable, Identifiable {
     let announcement_id: Int
     let user_id: Int
     let name: String
-    let descritption: String
+    let description: String
 }
 
