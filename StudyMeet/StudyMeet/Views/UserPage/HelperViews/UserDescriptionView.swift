@@ -34,7 +34,7 @@ struct UserDescriptionView: View {
             .zIndex(1)
             VStack {
                 ZStack(alignment: .topLeading) {
-                    Image("avatar")
+                    Image("avatarBanner")
                         .resizable()
                         .frame(width: 363, height: 150)
                         .background(Color.yellow)

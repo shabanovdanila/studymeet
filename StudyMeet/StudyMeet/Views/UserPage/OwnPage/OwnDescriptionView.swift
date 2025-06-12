@@ -34,9 +34,9 @@ struct OwnDescriptionView: View {
             
             VStack {
                 ZStack(alignment: .topLeading) {
-                    Image("avatar")
+                    Image("avatarBanner")
                         .resizable()
-                        .frame(width: 363, height: 150)
+                        .frame(width: 369, height: 150)
                         .background(Color.yellow)
                         .clipShape(.rect(
                             topLeadingRadius: 20,
@@ -52,10 +52,10 @@ struct OwnDescriptionView: View {
                             .lineLimit(1)
                             .foregroundColor(.black)
                             .font(.custom("Montserrat-SemiBold", size: 20))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .frame(width: 194)
+                            .frame(width: 194, alignment: .leading)
+                        
                         Spacer()
-                        // Toggle button
+                        
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 hiddenFullInfo.toggle()
@@ -66,7 +66,6 @@ struct OwnDescriptionView: View {
                                 .rotationEffect(.degrees(hiddenFullInfo ? 0 : 180))
                                 .foregroundColor(.gray)
                         }
-                        .animation(.easeInOut(duration: 0.3), value: hiddenFullInfo)
                         .padding(.trailing, 15)
                     }
                     
@@ -74,31 +73,25 @@ struct OwnDescriptionView: View {
                         .lineLimit(1)
                         .foregroundColor(Color.grayProfileTextSM)
                         .font(.custom("Montserrat-Regular", size: 12))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .frame(width: 180)
+                        .frame(width: 180, alignment: .leading)
                         .padding(.leading, 3)
                 }
-                .padding(.bottom, 15)
                 .padding(.top, 5)
+                .padding(.bottom, 15)
                 .padding(.leading, 130)
                 
-                // Full info with animation
-                Group {
-                    if !hiddenFullInfo {
-                        line()
-                        info(user: user)
-                        line()
-                        about(user: user)
-                    }
+                if !hiddenFullInfo {
+                    line()
+                    info(user: user)
+                    line()
+                    about(user: user)
                 }
-                .transition(.opacity.combined(with: .move(edge: .top)))
-                .animation(.easeInOut(duration: 0.3), value: hiddenFullInfo)
-                
             }
         }
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .frame(width: 363)
+        .animation(.easeInOut(duration: 0.3), value: hiddenFullInfo)
     }
     
     @ViewBuilder
@@ -190,6 +183,7 @@ struct OwnDescriptionView: View {
         }
     }
 }
+
 
 #Preview {
     OwnDescriptionView(user: User(
