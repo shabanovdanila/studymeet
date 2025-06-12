@@ -42,7 +42,7 @@ struct AnnounceAnotherPageView: View {
                     OwnDescriptionView(user: user)
                         .padding(.top, 15)
 
-                    FullAnnounceCardView(announce: announcement)
+                    FullAnnounceCardView(announce: announcement, showReportAlert: $showReportAlert, showRespondModal: $showRespondModal)
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         .overlay(
@@ -63,31 +63,6 @@ struct AnnounceAnotherPageView: View {
             .frame(maxWidth: .infinity)
             .background(Color.blueBackgroundSM)
 
-            HStack(spacing: 15) {
-                Button(action: {
-                    showRespondModal = true
-                }) {
-                    Text("Откликнуться")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.darkBlueSM)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                }
-
-                Button(action: {
-                    showReportAlert = true
-                }) {
-                    Text("Пожаловаться")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.red)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                }
-            }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 10)
         }
         .background(Color.white)
         .refreshable {
@@ -152,6 +127,9 @@ struct AnnounceAnotherPageView: View {
 private struct FullAnnounceCardView: View {
     var announce: Announcement
     
+    @Binding var showReportAlert: Bool
+    @Binding var showRespondModal: Bool
+    
     var body: some View {
         VStack(alignment: .leading) {
             VStack(spacing: 0) {
@@ -165,7 +143,7 @@ private struct FullAnnounceCardView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }
-                .frame(height: 49)
+                .frame(maxHeight: .infinity)
                 .padding(15)
                 
                 line()
@@ -182,19 +160,33 @@ private struct FullAnnounceCardView: View {
                 tagsView(tags: announce.tags)
                     .padding(.top, 10)
                 
-                Button("Редактировать") {
-                    //                Task {
-                    //                    await viewModel.updateProfile()
-                    //                    if viewModel.updateSuccess {
-                    //                        dismiss()
-                    //                    }
-                    //                }
+                HStack(spacing: 0) {
+                    Button(action: {
+                        showRespondModal = true
+                    }) {
+                        Text("Откликнуться")
+                            .font(.custom("Montserrat-Medium", size: 16))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding([.top, .bottom], 12)
+                            .padding([.horizontal, .trailing], 20)
+                            .background(Color.lightBlueSM)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
+                    Spacer()
+                    Button(action: {
+                        showReportAlert = true
+                    }) {
+                        Text("Пожаловаться")
+                            .font(.custom("Montserrat-Medium", size: 16))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding([.top, .bottom], 12)
+                            .padding([.horizontal, .trailing], 20)
+                            .background(Color.redReportSM)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                    }
                 }
-                .padding(.horizontal, 20)
-                .frame(height: 44)
-                .background(Color.grayTextSM)
-                .foregroundColor(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .padding(.top, 15)
             }
             .padding(15)
