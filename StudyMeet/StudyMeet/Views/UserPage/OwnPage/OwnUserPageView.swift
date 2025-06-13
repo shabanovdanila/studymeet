@@ -118,6 +118,7 @@ struct OwnUserPageView: View {
         .onDisappear { print("!!!!!!!!!!!!OwnUserPageView disappeared!!!!!!!!!!!!!") }
     }
     
+    //TODO FIX
     private var announcementsList: some View {
         ForEach(viewModel.userAnnouncements) { announce in
             AnnounceCardView(announce: announce)
@@ -129,10 +130,14 @@ struct OwnUserPageView: View {
                         }
                     }
                 }
+            //TODO
+                .onTapGesture {
+                    path.append(Path.ownAnnounce(announcementId: announce.id))
+                }
         }
         .padding(.bottom, 12)
     }
-    
+    //TODO FIX
     private var favoritesList: some View {
         ForEach(viewModel.favoriteAnnouncements) { announce in
             AnnounceCardView(announce: announce)
@@ -142,6 +147,15 @@ struct OwnUserPageView: View {
                         Task {
                             await viewModel.loadNextFavoritesPage()
                         }
+                    }
+                }
+            //TODO
+                .onTapGesture {
+                    if (announce.user_id == viewModel.user?.id) {
+                        path.append(Path.ownAnnounce(announcementId: announce.id))
+                    }
+                    else {
+                        path.append(Path.anotherAnnounce(announcementId: announce.id, userId: announce.user_id))
                     }
                 }
         }
