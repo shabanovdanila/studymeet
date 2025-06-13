@@ -11,6 +11,7 @@ final class AnnounceOwnPageViewModel: ObservableObject {
     private let clientAnnouncement: AnnounceClient
     private let userClient: UserClient
     private let responseClient: ResponseClient
+    private let favoriteClient: FavoriteClient
     
     private let userSession: UserSession = .shared
     
@@ -31,10 +32,12 @@ final class AnnounceOwnPageViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     
     init(clientAnnouncement: AnnounceClient = DependencyContainer.shared.makeAnnounceClient(),
-         userClient: UserClient = DependencyContainer.shared.makeUserClient(), responseClient: ResponseClient = DependencyContainer.shared.makeResponseClient()) {
+         userClient: UserClient = DependencyContainer.shared.makeUserClient(), responseClient: ResponseClient = DependencyContainer.shared.makeResponseClient(),
+         favoriteClient: FavoriteClient = DependencyContainer.shared.makeFavoriteClient()) {
         self.clientAnnouncement = clientAnnouncement
         self.userClient = userClient
         self.responseClient = responseClient
+        self.favoriteClient = favoriteClient
     }
     
     @MainActor
@@ -79,7 +82,6 @@ final class AnnounceOwnPageViewModel: ObservableObject {
         error = nil
         
         do {
-            // Загружаем свежие данные
             async let userTask = userClient.getUserById(id: userSession.currentUser?.id ?? 0)
             async let announcementTask = clientAnnouncement.getFullAnnouncementById(id: announcementId)
             
@@ -87,8 +89,6 @@ final class AnnounceOwnPageViewModel: ObservableObject {
             
             self.user = loadedUser
             self.announcement = loadedAnnouncement
-            
-            // Восстанавливаем редактируемые данные, если были в режиме редактирования
             
         } catch {
             self.error = error
@@ -98,7 +98,20 @@ final class AnnounceOwnPageViewModel: ObservableObject {
         isRefreshing = false
     }
     
-    
+    @MainActor
+    func addToFavorite() async{
+        print(1)
+        guard let announcement else { return }
+        print(2)
+        do {
+            try await favoriteClient.createFavorites(announcement_id: announcement.id)
+            showAlert(message: "Успешно добавлено в избранное!")
+        } catch {
+            self.error = error
+            print(error)
+            showAlert(message: "Ошибка при добавлении в избранное: \(error.localizedDescription)")
+        }
+    }
     func addTag() {
         let trimmedTag = newTag.trimmingCharacters(in: .whitespacesAndNewlines)
         if !trimmedTag.isEmpty, !tags.contains(trimmedTag) {

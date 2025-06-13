@@ -42,7 +42,7 @@ struct AnnounceAnotherPageView: View {
                     OwnDescriptionView(user: user)
                         .padding(.top, 15)
 
-                    FullAnnounceCardView(announce: announcement, showReportAlert: $showReportAlert, showRespondModal: $showRespondModal)
+                    FullAnnounceCardView(announce: announcement, viewModel: viewModel, showReportAlert: $showReportAlert, showRespondModal: $showRespondModal)
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         .overlay(
@@ -75,7 +75,7 @@ struct AnnounceAnotherPageView: View {
             Button("Отмена", role: .cancel) {}
             Button("Пожаловаться", role: .destructive) {
                 //Task {
-                    //await viewModel.reportAnnouncement(reason: "Нарушение правил") // Можно заменить на ввод
+                    //await viewModel.reportAnnouncement(reason: "Нарушение правил")
                // }
             }
         }
@@ -127,6 +127,7 @@ struct AnnounceAnotherPageView: View {
 private struct FullAnnounceCardView: View {
     var announce: Announcement
     
+    @ObservedObject var viewModel: AnnounceAnotherPageViewModel
     @Binding var showReportAlert: Bool
     @Binding var showRespondModal: Bool
     
@@ -138,10 +139,16 @@ private struct FullAnnounceCardView: View {
                         .foregroundColor(Color.black)
                         .font(.custom("Montserrat-SemiBold", size: 20))
                     Spacer()
-                    Image(systemName: "heart")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
+                    Button(action: {
+                        Task {
+                            await viewModel.addToFavorite()
+                        }
+                    }) {
+                        Image(systemName: "heart")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                    }
                 }
                 .frame(maxHeight: .infinity)
                 .padding(15)

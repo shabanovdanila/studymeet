@@ -39,7 +39,7 @@ struct AnnounceOwnPageView: View {
                     OwnDescriptionView(user: user)
                         .padding(.top, 15)
                     
-                    FullAnnounceCardView(announce: announcement)
+                    FullAnnounceCardView(announce: announcement, viewModel: viewModel)
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         .overlay(
@@ -106,6 +106,11 @@ struct AnnounceOwnPageView: View {
             Button("OK", role: .cancel) { viewModel.error = nil }
         } message: {
             Text(viewModel.error?.localizedDescription ?? "Неизвестная ошибка")
+        }
+        .alert("Сообщение", isPresented: $viewModel.showAlert) {
+            Button("ОК", role: .cancel) {}
+        } message: {
+            Text(viewModel.alertMessage)
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
@@ -186,7 +191,7 @@ private struct AnnouncementsPlaceholder: View {
 
 private struct FullAnnounceCardView: View {
     var announce: Announcement
-    
+    @ObservedObject var viewModel: AnnounceOwnPageViewModel
     var body: some View {
         VStack(alignment: .leading) {
             VStack(spacing: 0) {
@@ -195,10 +200,17 @@ private struct FullAnnounceCardView: View {
                         .foregroundColor(Color.black)
                         .font(.custom("Montserrat-SemiBold", size: 20))
                     Spacer()
-                    Image(systemName: "heart")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
+                    Button(action: {
+                        Task {
+                            await viewModel.addToFavorite()
+                        }
+                    }) {
+                        Image(systemName: "heart")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                    }
+
                 }
                 .frame(height: 49)
                 .padding(15)

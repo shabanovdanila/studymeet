@@ -16,7 +16,8 @@ final class FavoriteClient {
     }
     
     func createFavorites(announcement_id: Int) async throws {
-        try await requestHandler.post(path: "/favorites", body: announcement_id, query: nil, headers: nil)
+        let request = FavoriteRequest(announcement_id: announcement_id)
+        try await requestHandler.post(path: "/favorites", body: request, query: nil, headers: nil)
     }
     
     func getFavoritesByUserId(limit: String, page: String) async throws -> [Announcement] {
@@ -26,6 +27,10 @@ final class FavoriteClient {
     func deleteFavoriteById(favorite_id: Int) async throws {
         try await requestHandler.delete(path: "/favorites/\(favorite_id)", body: nil, query: nil, headers: nil)
     }
-    
 }
 
+private extension FavoriteClient {
+    struct FavoriteRequest: Encodable {
+        let announcement_id: Int
+    }
+}

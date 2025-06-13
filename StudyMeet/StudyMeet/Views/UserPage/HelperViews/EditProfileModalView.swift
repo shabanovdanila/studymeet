@@ -212,6 +212,7 @@ struct EditProfileModalView: View {
                 }
             }
         }
+    //TODO вынести отсюда 
     private func genderToString(gender: Bool?) -> String {
         print(viewModel.created_at)
         return gender == true ? "Мужской" : gender == false ? "Женский" : "Не указано"

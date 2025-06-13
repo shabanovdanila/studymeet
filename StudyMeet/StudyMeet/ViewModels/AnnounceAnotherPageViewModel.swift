@@ -14,6 +14,7 @@ final class AnnounceAnotherPageViewModel: ObservableObject {
     private let clientAnnouncement: AnnounceClient
     private let userClient: UserClient
     private let responseClient: ResponseClient
+    private let favoriteClient: FavoriteClient
     
     // MARK: - Published Properties
     @Published var user: User?
@@ -36,14 +37,17 @@ final class AnnounceAnotherPageViewModel: ObservableObject {
     init(
         clientAnnouncement: AnnounceClient = DependencyContainer.shared.makeAnnounceClient(),
         userClient: UserClient = DependencyContainer.shared.makeUserClient(),
-        responseClient: ResponseClient = DependencyContainer.shared.makeResponseClient()
+        responseClient: ResponseClient = DependencyContainer.shared.makeResponseClient(),
+        favoriteClient: FavoriteClient = DependencyContainer.shared.makeFavoriteClient()
     ) {
         self.clientAnnouncement = clientAnnouncement
         self.userClient = userClient
         self.responseClient = responseClient
+        self.favoriteClient = favoriteClient
     }
 
     // MARK: - Load & Refresh
+    @MainActor
     func loadAnnouncementProfile(announcementId: Int, userId: Int) async {
         guard !isLoading else { return }
         isLoading = true
@@ -69,6 +73,7 @@ final class AnnounceAnotherPageViewModel: ObservableObject {
         isLoading = false
     }
 
+    @MainActor
     func refresh(announcementId: Int, userId: Int) async {
         guard !isRefreshing else { return }
         isRefreshing = true
@@ -95,9 +100,9 @@ final class AnnounceAnotherPageViewModel: ObservableObject {
     }
 
     // MARK: - User Interaction Methods
-
+    @MainActor
     func respondToAnnouncement(message: String) async {
-        guard let announcement = announcement else { return }
+        guard let announcement else { return }
         isSubmittingResponse = true
         defer { isSubmittingResponse = false }
 
@@ -108,6 +113,22 @@ final class AnnounceAnotherPageViewModel: ObservableObject {
             showAlert(message: "Ошибка при отклике: \(error.localizedDescription)")
         }
     }
+    
+    
+    @MainActor
+    func addToFavorite() async{
+        guard let announcement else { return }
+        
+        do {
+            try await favoriteClient.createFavorites(announcement_id: announcement.id)
+            showAlert(message: "Успешно добавлено в избраное!")
+        } catch {
+            self.error = error
+            print(error)
+            showAlert(message: "Ошибка при добавлении в избранное: \(error.localizedDescription)")
+        }
+    }
+    
 //
 //    func reportAnnouncement(reason: String) async {
 //        guard let announcement = announcement else { return }
