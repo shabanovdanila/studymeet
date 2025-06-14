@@ -15,11 +15,14 @@ struct AnnounceAnotherPageView: View {
     let announcementId: Int
     let userId: Int
     
-    @StateObject private var viewModel = AnnounceAnotherPageViewModel()
+    @StateObject private var viewModel: AnnounceAnotherPageViewModel
+    @StateObject private var viewModelCreationAnnounce: CreateAnnouncementViewModel
+    
     
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
     
+    @State private var showCreateModal = false
     @State private var showReportAlert = false
     @State private var showRespondModal = false
     @State private var responseText: String = ""
@@ -29,11 +32,15 @@ struct AnnounceAnotherPageView: View {
         self._currentScreen = currentScreen
         self.announcementId = announcementId
         self.userId = userId
+        self._viewModelCreationAnnounce = StateObject(wrappedValue: CreateAnnouncementViewModel())
+        self._viewModel = StateObject(wrappedValue: AnnounceAnotherPageViewModel())
     }
 
     var body: some View {
         VStack(spacing: 0) {
-            TopBarView(path: $path, currentScreen: $currentScreen, onCreateButtonTapped: {})
+            TopBarView(path: $path, currentScreen: $currentScreen, onCreateButtonTapped: {
+                showCreateModal = true
+            })
                 .frame(width: 393, height: 50)
                 .background(Color.white)
 
@@ -116,6 +123,10 @@ struct AnnounceAnotherPageView: View {
                 Spacer()
             }
             .padding()
+        }
+        .fullScreenCover(isPresented: $showCreateModal) {
+            CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
+                .edgesIgnoringSafeArea(.all)
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
