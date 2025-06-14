@@ -32,14 +32,14 @@ struct LoginView: View {
     }
     private func navigateToMainPage() {
         path = NavigationPath()
-        path.append(Path.main)
+        path.append(PathNavigator.main)
     }
     private func navigateToRegistrationPage() {
 //        if !path.isEmpty {
 //            path.removeLast()
 //        }
         path = NavigationPath()
-        path.append(Path.registration)
+        path.append(PathNavigator.registration)
     }
 }
 

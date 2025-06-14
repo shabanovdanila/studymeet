@@ -88,9 +88,9 @@ struct AnnouncementsScrollView: View {
     
     private func choosePath(user_id: Int, announcementId: Int) {
         if let currentUser = userSession.currentUser, currentUser.id == user_id {
-            path.append(Path.ownAnnounce(announcementId: announcementId))
+            path.append(PathNavigator.ownAnnounce(announcementId: announcementId))
         } else {
-            path.append(Path.anotherAnnounce(announcementId: announcementId, userId: user_id))
+            path.append(PathNavigator.anotherAnnounce(announcementId: announcementId, userId: user_id))
         }
     }
 }

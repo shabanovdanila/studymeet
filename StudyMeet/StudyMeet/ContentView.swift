@@ -1,7 +1,7 @@
 import SwiftUI
 
 
-enum Path: Hashable {
+enum PathNavigator: Hashable {
     case main
     case userOwn
     case ownAnnounce(announcementId: Int)
@@ -40,7 +40,7 @@ struct ContentView: View {
                     RegistrationView(path: $path, currentScreen: $currentScreen)
                 }
             }
-            .navigationDestination(for: Path.self) { route in
+            .navigationDestination(for: PathNavigator.self) { route in
                 switch route {
                 case .main:
                     MainPageView(path: $path, currentScreen: $currentScreen )

@@ -80,7 +80,7 @@ struct TopBarView: View {
         path.removeLast(path.count)
     }
     private func navigateToUserPage() {
-        path.append(Path.userOwn)
+        path.append(PathNavigator.userOwn)
     }
     
     private var appLogo: some View {

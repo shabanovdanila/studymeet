@@ -132,7 +132,7 @@ struct OwnUserPageView: View {
                 }
             //TODO
                 .onTapGesture {
-                    path.append(Path.ownAnnounce(announcementId: announce.id))
+                    path.append(PathNavigator.ownAnnounce(announcementId: announce.id))
                 }
         }
         .padding(.bottom, 12)
@@ -152,10 +152,10 @@ struct OwnUserPageView: View {
             //TODO
                 .onTapGesture {
                     if (announce.user_id == viewModel.user?.id) {
-                        path.append(Path.ownAnnounce(announcementId: announce.id))
+                        path.append(PathNavigator.ownAnnounce(announcementId: announce.id))
                     }
                     else {
-                        path.append(Path.anotherAnnounce(announcementId: announce.id, userId: announce.user_id))
+                        path.append(PathNavigator.anotherAnnounce(announcementId: announce.id, userId: announce.user_id))
                     }
                 }
         }
