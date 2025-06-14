@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftUI
 
 struct FiltersView: View {
+    
+    @Environment(\.dismiss) var dismiss
     @State private var selectedCity: String = "Не выбрано"
     @State private var showCityPicker = false
     
@@ -108,7 +110,7 @@ struct FiltersView: View {
                 .font(.custom("Montserrat-SemiBold", size: 18))
             Spacer()
             Button(action: {
-                // Закрыть фильтры, можно добавить dismiss или привязку
+                dismiss()
             }) {
                 Image(systemName: "xmark")
                     .foregroundColor(.black)
