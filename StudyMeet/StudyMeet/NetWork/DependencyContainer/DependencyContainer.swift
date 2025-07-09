@@ -45,4 +45,8 @@ final class DependencyContainer {
     func makeTagClient() -> TagClient {
         TagClient(requestHandler: sharedRequestHandler)
     }
+    
+    func makeChatClient() -> ChatClient {
+        ChatClient(requestHandler: sharedRequestHandler)
+    }
 }

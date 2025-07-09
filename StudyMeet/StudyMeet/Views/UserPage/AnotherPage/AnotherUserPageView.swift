@@ -70,7 +70,13 @@ struct AnotherUserPageView: View {
             }
             .frame(maxWidth: .infinity)
             .background(Color.blueBackgroundSM)
-            BottomBarView(page1: true)
+            
+            
+            //TODO
+//            BottomBarView(page1: true, onMessagesTap: {
+//                                path.append(PathNavigator.chatList)
+//                                currentScreen = .chatList
+//                            })
         }
         .background(Color(.white))
         .refreshable {

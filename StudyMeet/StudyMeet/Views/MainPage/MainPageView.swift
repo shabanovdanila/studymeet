@@ -14,8 +14,6 @@ struct MainPageView: View {
     
     @EnvironmentObject private var userSession: UserSession
     
-    @StateObject private var viewModelCreationAnnounce = CreateAnnouncementViewModel()
-    
     @State private var showCreateModal = false
     
     @State var page1: Bool = true
@@ -34,26 +32,17 @@ struct MainPageView: View {
                 .background(Color.white)
             
             Button("logout") {
+                //TODO добавить лог аут на сервер
                 userSession.logout()
-                
-                Task {
-                    await viewModelCreationAnnounce.logoutt()
-                }
             }
             AnnouncementsScrollView(searchText: $searchText, path: $path, scrollProxy: $scrollProxy)
                 .frame(maxWidth: .infinity)
             
-            if userSession.isAuthenticated {
-                BottomBarView(page1: page1)
-            }
         }
         .background(Color.white)
         .fullScreenCover(isPresented: $showCreateModal) {
-            CreateAnnouncementModal(viewModel: viewModelCreationAnnounce)
+            CreateAnnouncementModal()
                 .edgesIgnoringSafeArea(.all)
-                .onDisappear() {
-                    viewModelCreationAnnounce.clearForm()
-                }
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {

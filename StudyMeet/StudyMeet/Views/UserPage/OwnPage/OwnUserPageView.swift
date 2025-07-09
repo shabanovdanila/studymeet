@@ -81,7 +81,10 @@ struct OwnUserPageView: View {
             .frame(maxWidth: .infinity)
             .background(Color.blueBackgroundSM)
             
-            BottomBarView(page1: true)
+//            BottomBarView(page1: true, onMessagesTap: {
+//                                path.append(PathNavigator.chatList)
+//                                currentScreen = .chatList
+//                            })
         }
         .background(Color.white)
         .fullScreenCover(isPresented: $showCreateModal) {

@@ -11,10 +11,18 @@ import SwiftUI
 struct StudyMateApp: App {
     
     @StateObject private var userSession = UserSession.shared
+    private let keychainService = KeychainService.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(userSession)
+            //todo
+                .onAppear {
+                    if let token = keychainService.getAccessToken() {
+                        ChatSocketService.shared.connect(token: token)
+                    }
+                }
         }
     }
 }

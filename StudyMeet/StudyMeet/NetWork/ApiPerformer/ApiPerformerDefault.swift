@@ -15,7 +15,6 @@ final class ApiPerformerDefault: ApiPerformer {
     
     // MARK: - Token Refresh
     private func refreshToken() async throws {
-        print("refreshToken in apipefrormer")
         guard let refreshToken = keychainService.getRefreshToken() else {
             throw ApiPerformerError.unauthorized
         }
@@ -23,7 +22,7 @@ final class ApiPerformerDefault: ApiPerformer {
             method: "POST",
             path: "/auth/refresh",
             query: nil,
-            body: ["refresh_token": refreshToken],
+            body: RefreshTokenRequest(refresh_token: refreshToken),
             headers: nil
         )
         
@@ -146,6 +145,15 @@ final class ApiPerformerDefault: ApiPerformer {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = try JSONEncoder().encode(body)
         }
+        
+        print("access: ", keychainService.getAccessToken())
+        print("refresh: ", keychainService.getRefreshToken())
         return request
+    }
+}
+
+private extension ApiPerformerDefault {
+    struct RefreshTokenRequest: Encodable {
+        let refresh_token: String
     }
 }

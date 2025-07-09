@@ -1,13 +1,20 @@
+//
+//  RegistrationView.swift
+//  StudyMeet
+//
+//  Created by Данила Шабанов
+//
 import SwiftUI
-
 
 struct RegistrationView: View {
     
+    // MARK: - Properties
     @StateObject private var viewModel = RegistrationViewModel()
     @Binding var path: NavigationPath
     @Binding var currentScreen: CurrentScreen
     @EnvironmentObject private var userSession: UserSession
     
+    // MARK: - Body
     var body: some View {
         RegistrationWindowView(viewModel: viewModel, navigateToMain:navigateToMainPage,
                                navigateToLogin: navigateToLoginPage)
@@ -31,27 +38,34 @@ struct RegistrationView: View {
             }
             .ignoresSafeArea(.keyboard)
     }
+    
+    // MARK: - Navigation Methods
     private func navigateToMainPage() {
-        path = NavigationPath()
-        path.append(PathNavigator.main)
+        path.removeLast(path.count)
     }
     private func navigateToLoginPage() {
-//        if !path.isEmpty {
-//            path.removeLast()
-//        }
         path = NavigationPath()
         path.append(PathNavigator.login)
     }
 }
 
 private struct RegistrationWindowView: View {
+    
+    // MARK: - Focus Field Enum
+    enum Field: Hashable {
+        case username, name, email
+    }
+    
+    // MARK: - Properties
     @ObservedObject var viewModel: RegistrationViewModel
     var navigateToMain: () -> Void
     var navigateToLogin: () -> Void
+    @FocusState private var focusedField: Field?
     
+    // MARK: - Body
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            HStack{
+            HStack {
                 (Text("Study")
                     .foregroundColor(Color.darkBlueSM)
                     .font(.custom("MontserratAlternates-Bold", size: 20))
@@ -66,67 +80,26 @@ private struct RegistrationWindowView: View {
                 .font(.custom("Montserrat-Bold", size: 18))
                 .padding(.top, 29)
             
-            Group {
-                fields()
-            }
-            .frame(width: 323, height: 40)
-            .clipShape(RoundedRectangle(cornerRadius: 30))
-            .overlay(
-                RoundedRectangle(cornerRadius: 30)
-                    .stroke(Color.graySM, lineWidth: 1)
-            )
-            .padding(.top, 15)
-            
-            // Чекбокс соглашения
-            HStack(spacing: 0) {
-                CheckBox(
-                    cornerRadius: 5,
-                    frame: 20,
-                    action: { viewModel.selectionCheckBox.toggle() },
-                    isSelected: viewModel.selectionCheckBox
+            fields()
+                .frame(maxWidth: .infinity)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.graySM, lineWidth: 1)
                 )
-                Text("Вы соглашаетесь с Политикой Конфиденциальности")
-                    .foregroundColor(.black)
-                    .font(.custom("Montserrat-Regular", size: 10))
-                    .padding(.leading, 5)
-            }
-            .padding(.top, 15)
-            .offset(x: -9)
+                .padding([.top, .horizontal], 15)
             
-            // Кнопка регистрации
+            termsCheckBox
+            
             if viewModel.isLoading {
                 ProgressView()
                     .padding(.top, 15)
             } else {
-                Button(action: {
-                    Task {
-                        if await viewModel.register() {
-                            navigateToMain()
-                        }
-                        else {
-                            print(11111)
-                        }
-                    }
-                }) {
-                    Text("Регистрация")
-                        .frame(width: 200)
-                        .padding(.vertical, 12)
-                        .background(Color.lightBlueSM)
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                }
-                .padding(.top, 15)
+                registrationButton
+                    .padding(.top, 15)
             }
             
-            // Кнопка входа
-            Button("Войти") {
-                withAnimation(.none) {
-                    navigateToLogin()
-                }
-            }
-            .foregroundColor(Color.darkBlueSM)
-            .font(.custom("Montserrat-Medium", size: 14))
-            .padding(.top, 15)
+            loginButton
+                .padding(.top, 15)
         }
         .padding(.horizontal)
         .frame(width: 363, height: 600)
@@ -134,29 +107,101 @@ private struct RegistrationWindowView: View {
         .clipShape(RoundedRectangle(cornerRadius: 30))
     }
     
+    // MARK: - Fields View
     @ViewBuilder
     private func fields() -> some View {
         Group {
             TextField("Логин", text: $viewModel.username)
+                .focused($focusedField, equals: .username)
+                .submitLabel(.next)
+                .onSubmit {
+                    focusedField = .name
+                }
+
             TextField("Имя и фамилия", text: $viewModel.name)
+                .focused($focusedField, equals: .name)
+                .submitLabel(.next)
+                .onSubmit {
+                    focusedField = .email
+                }
+
             TextField("Email", text: $viewModel.email)
-                .keyboardType(.emailAddress)
+                .focused($focusedField, equals: .email)
+                .submitLabel(.next)
+
             SecureField("Пароль", text: $viewModel.password)
+
             SecureField("Повторите пароль", text: $viewModel.checkPassword)
+                .onSubmit {
+                    Task {
+                        if await viewModel.register() {
+                            navigateToMain()
+                        }
+                    }
+                }
         }
-        .autocapitalization(.none)
+        .textInputAutocapitalization(.never)
+        .autocorrectionDisabled(true)
         .registrationTextFieldStyle()
     }
     
+    // MARK: - Terms Checkbox
+    private var termsCheckBox: some View {
+        HStack(spacing: 0) {
+            CheckBox(
+                cornerRadius: 5,
+                frame: 20,
+                action: { viewModel.selectionCheckBox.toggle() },
+                isSelected: viewModel.selectionCheckBox
+            )
+            Text("Вы соглашаетесь с Политикой Конфиденциальности")
+                .foregroundColor(.black)
+                .font(.custom("Montserrat-Regular", size: 10))
+                .padding(.leading, 5)
+        }
+        .padding(.top, 15)
+        .offset(x: -9)
+    }
+    
+    // MARK: - Registration Button
+    private var registrationButton: some View {
+        Button(action: {
+            Task {
+                if await viewModel.register() {
+                    navigateToMain()
+                }
+            }
+        }) {
+            Text("Регистрация")
+                .frame(width: 200)
+                .padding(.vertical, 12)
+                .background(Color.lightBlueSM)
+                .foregroundColor(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+        }
+    }
+    
+    // MARK: - Login Button
+    private var loginButton: some View {
+        Button("Войти") {
+            withTransaction(Transaction(animation: nil)) {
+                navigateToLogin()
+            }
+        }
+        .foregroundColor(Color.darkBlueSM)
+        .font(.custom("Montserrat-Medium", size: 14))
+    }
 }
 
 private struct CheckBox: View {
     
+    // MARK: - Properties
     let cornerRadius: CGFloat
     let frame: CGFloat
     let action: () -> Void
     let isSelected: Bool
     
+    // MARK: - Body
     var body: some View {
         Button(action: action) {
             if (!isSelected) {
@@ -164,9 +209,9 @@ private struct CheckBox: View {
                     .frame(width: frame, height: frame)
                     .foregroundColor(Color.white)
                     .overlay {
-                            RoundedRectangle(cornerRadius: cornerRadius)
+                        RoundedRectangle(cornerRadius: cornerRadius)
                             .strokeBorder(Color.graySM, lineWidth: 1)
-                        }
+                    }
             } else {
                 ZStack(alignment: .center) {
                     RoundedRectangle(cornerRadius: cornerRadius)

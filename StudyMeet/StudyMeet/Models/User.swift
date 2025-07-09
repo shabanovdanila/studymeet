@@ -19,4 +19,3 @@ struct User: Codable {
     let birthday: String?
     let created_at: String?
 }
-

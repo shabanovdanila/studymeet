@@ -23,6 +23,7 @@ final class UserSession: ObservableObject {
         self.currentUser = user
         self.isAuthenticated = true
         try? keychain.saveUser(user)
+        ChatSocketService.shared.connect(token: keychain.getAccessToken() ?? nil)
     }
     
     func updateUser(name: String? = nil, location: String? = nil, gender: Bool? = nil, birtday: String? = nil, description: String? = nil, created_at: String? = nil) {

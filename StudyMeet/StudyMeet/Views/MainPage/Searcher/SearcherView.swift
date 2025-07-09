@@ -54,3 +54,8 @@ struct SearcherView: View {
         }
     }
 }
+
+#Preview {
+    @State var s: String = "ASDasd"
+    return SearcherView(searchText: $s)
+}

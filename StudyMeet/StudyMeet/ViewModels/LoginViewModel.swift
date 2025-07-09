@@ -12,11 +12,21 @@ final class LoginViewModel: ObservableObject {
     private let authClient: AuthClient
     private let userSession: UserSession = .shared
     
-    @Published var usernameOrEmail: String = ""
-    @Published var password: String = ""
+    @Published var usernameOrEmail: String = "" {
+        didSet {
+            usernameError = nil
+        }
+    }
+    @Published var password: String = "" {
+        didSet {
+            passwordError = nil
+        }
+    }
     
     @Published var isLoading: Bool = false
     @Published var error: Error?
+    @Published var usernameError: String?
+    @Published var passwordError: String?
     
     init(authClient: AuthClient = DependencyContainer.shared.makeAuthClient()) {
         self.authClient = authClient
@@ -48,33 +58,25 @@ final class LoginViewModel: ObservableObject {
         }
     }
     
-    private func validateFields() -> Bool {
-        error = nil
+    func validateFields() -> Bool {
+        usernameError = nil
+        passwordError = nil
         
-        guard !usernameOrEmail.isEmpty else {
-            error = LoginError.emptyLogin
-            return false
+        var isValid = true
+        
+        if usernameOrEmail.isEmpty || usernameOrEmail.count < 4 {
+            usernameError = LoginError.emptyLogin.rawValue
+            isValid = false
         }
-        
-        guard !password.isEmpty, password.count >= 6 else {
-            error = LoginError.shortPassword
-            return false
+        if password.isEmpty || password.count < 6 {
+            passwordError = LoginError.shortPassword.rawValue
+            isValid = false
         }
-        
-        return true
+        return isValid
     }
 }
 
-private enum LoginError: LocalizedError {
-    case emptyLogin
-    case shortPassword
-    
-    var errorDescription: String? {
-        switch self {
-        case .emptyLogin:
-            return "Пожалуйста, введите корректный логин"
-        case .shortPassword:
-            return "Пароль должен содержать минимум 6 символов"
-        }
-    }
+private enum LoginError: String {
+    case emptyLogin = "Аккаунт не найден"
+    case shortPassword = "Пароль должен содержать минимум 6 символов"
 }

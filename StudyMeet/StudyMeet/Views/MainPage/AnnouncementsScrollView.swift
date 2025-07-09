@@ -61,10 +61,6 @@ struct AnnouncementsScrollView: View {
                     await viewModel.refreshAnnouncements()
                 }
             }
-//            .task {
-//                print("TOO MANY")
-//                await viewModel.loadAnnounces()
-//            }
             .alert("Error", isPresented: .constant(viewModel.error != nil)) {
                 Button("OK", role: .cancel) { }
                 Button("Retry") {

@@ -7,8 +7,11 @@ enum PathNavigator: Hashable {
     case ownAnnounce(announcementId: Int)
     case userAnother(userId: Int)
     case anotherAnnounce(announcementId: Int, userId: Int)
+    case chatList
+    case chatDetail(chatId: Int)
     case login
     case registration
+    //case forgotPassword
 }
 
 enum CurrentScreen {
@@ -17,6 +20,8 @@ enum CurrentScreen {
     case ownAnnounce
     case userAnother
     case anotherAnnounce
+    case chatList
+    case chatDetail
     case login
     case registration
 }
@@ -27,15 +32,13 @@ struct ContentView: View {
     @State private var currentScreen: CurrentScreen = .main
     @EnvironmentObject var userSession: UserSession
     
-    @State var isLogin: Bool = true
-    
     var body: some View {
         
         NavigationStack(path: $path) {
             
             Group {
                 if userSession.isAuthenticated {
-                    MainPageView(path: $path, currentScreen: $currentScreen)
+                    MainTabView(path: $path, currentScreen: $currentScreen)
                 } else {
                     RegistrationView(path: $path, currentScreen: $currentScreen)
                 }
@@ -56,6 +59,10 @@ struct ContentView: View {
                     RegistrationView(path: $path, currentScreen: $currentScreen)
                 case .anotherAnnounce(let announcementId, let userId):
                     AnnounceAnotherPageView(path: $path, currentScreen: $currentScreen, announcementId: announcementId, userId: userId)
+                case .chatList:
+                    ChatListView(path: $path, currentScreen: $currentScreen)
+                case .chatDetail(let chatId):
+                    ChatDetailView(chatId: chatId)
                 }
             }
         }

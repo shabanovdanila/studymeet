@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateAnnouncementModal: View {
-    @ObservedObject var viewModel: CreateAnnouncementViewModel
+    @StateObject var viewModel = CreateAnnouncementViewModel()
     @Environment(\.dismiss) private var dismiss
     
     

@@ -40,15 +40,6 @@ final class CreateAnnouncementViewModel: ObservableObject {
         tags.removeAll { $0 == tag }
     }
     
-
-    @MainActor
-    func logoutt() async {
-        do {
-            try await auth.logout()
-        } catch {
-            
-        }
-    }
     
     @MainActor
     func createAnnouncement() async {
